@@ -6,4 +6,8 @@ lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "edad": 20, "sexo": 
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
 
+#Definir funcion para mostrar a todos los empleados
+def mostrar_empleados():
+    for empleados in lista_empleados: #Bucle para recorrer la lista
+        print(f"|{empleados["nombre"]}|, |{empleados["edad"]}|, |{empleados["sexo"]}|, |{empleados["numero telefonico"]}|, |{empleados["cargo"]}|") #Imprimir la informacion de cada empleado por consola
 
