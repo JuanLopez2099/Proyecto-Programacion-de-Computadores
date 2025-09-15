@@ -1,0 +1,40 @@
+Pseudocodigo proyecto
+
+Inicio
+
+Definir lista de empleados
+Agregar diccionario a la lista para cada empleado
+Cada diccionario debe contener 5 claves especificos
+nombre como cadena
+edad como entero
+sexo como cadena
+numero telefonico como cadena
+cargo como cadena
+
+
+Definir Funcion para mostrar empleados
+        Por cada empleado dentro de lista de empleados
+           imprimir empleado[nombre]
+                    empleado[edad]
+                    empleado[sexo]
+                    empleado[numero telefonico]
+                    empleado[cargo]
+
+Definir funcion para buscar empleados con parametros de entrada(nombre, edad, sexo, numero telefonico, cargo)
+       Definir lista para almacenar coincidencias
+       por cada empleado dentro de la lista
+       se almacena cada clave del diccionario dentro de una variable
+       Si los parametros de entrada coinciden con las claves de los diccionarios iterados
+              se añade el diccionario que coincidio a la lista que las almacena
+    Si la lista para almacentar coincidencias permanece vacia
+        No hay coincidencias para el trabajador buscado
+
+    Retorna la lista para almacenar coincidencias
+
+    
+Definir funcion de menu
+    imprimir opcion 1 lista de empleados
+             opcion 2 buscar empleado
+             opcion 3 registrar empleado
+             opcion 0 salir
+
