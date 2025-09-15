@@ -9,7 +9,7 @@ lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "edad": 20, "sexo": 
 #Definir funcion para mostrar a todos los empleados
 def mostrar_empleados():
     for empleados in lista_empleados: #Bucle para recorrer la lista
-        print(f"|{empleados["nombre"]}|, |{empleados["edad"]}|, |{empleados["sexo"]}|, |{empleados["numero telefonico"]}|, |{empleados["cargo"]}|") #Imprimir la informacion de cada empleado por consola
+        print(f"|{empleados['nombre']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero telefonico']}|, |{empleados['cargo']}|") #Imprimir la informacion de cada empleado por consola
     if lista_empleados == []:
         print("No hay empleados") 
 
@@ -19,18 +19,19 @@ def buscar_empleados(nombre, edad, sexo, numero, cargo): #Definimos la funcion c
     coincidencias_busqueda = [] #Dentro de esta lista se almacenara el trabajador que coincida con la busqueda
     for empleado in lista_empleados:
         nombre_empleado = empleado["nombre"].lower()
-        edad_empleado = empleado["edad"]
+        edad_empleado = str(empleado["edad"])                #Edad y numero se transforman a cadena para poder itearlos
         sexo_empleado = empleado["sexo"].lower()             #Dentro de cada variable se guarda por separado la clave de los diccionarios iterados         
-        numero_empleado = empleado["numero telefonico"]
+        numero_empleado = str(empleado["numero telefonico"])
         cargo_empleado = empleado["cargo"].lower()
+
         #El usuario debe digitar la informacion del empleado y se evalua si coincide con las claves del diccionario iterado
         if nombre in nombre_empleado and edad in edad_empleado and sexo in sexo_empleado and numero in numero_empleado and cargo in cargo_empleado:
             coincidencias_busqueda.append(empleado) #Si esto resulta ser True se añade el diccionario que coincide a la lista de coincidencias             
-
+            return coincidencias_busqueda #Retorna la lista
     if coincidencias_busqueda == []: #Si la lista de coincidencias permanece vacia, no existen el trabajador
         print("No existen coincidencias para el trabajador buscado")
 
-    return coincidencias_busqueda #Retorna la lista
+     
 
 #Definir funcion para registrar nuevos empleados
 def registrar_empleado(nombre, edad, sexo, numerotelefonico, cargo): #Se ingresan los parametros de entrada
@@ -46,5 +47,42 @@ def registrar_empleado(nombre, edad, sexo, numerotelefonico, cargo): #Se ingresa
 def eliminar_empleado():
     pass
 
+    
+def menu():  #Se define el menu dentru de una funcion para reutilizarlo
+    print("""
+1. Mostrar lista de todos los empleados
+2. Buscar empleado
+3. Registrar empleado
+0. Salir
+""")
+
+print("\n Bienvenido al menu de JackDRipper Software") #Se imprime el titulo del menu fuera del bucle para que no se imprima en cada vuelta
+while True:  
+    menu()    #Se llama a la funcion del menu
+
+    opcion = int(input("Digite una opcion 1-4: "))  #Se solicita la opcion al usuario, se le pide en numero entero
+
+    match opcion:
+        case 1:
+            mostrar_empleados() #Opcion numero uno, se llama a la funcion para mostrar la lista de empleados
+        case 2:
+            nombre = input("Digite los nombres y apellidos del trabajdor: ").lower().strip()
+            edad = input("Digite la edad del trabajador en años: ")             #Se le solicitan los parametros de entrada al usuario
+            sexo = input("Digite el sexo del trabajador: ").lower().strip()     #Se lleva todo a minusculas y se quitan espacios para evitar errores
+            numero =  input("Digite el numero del trabajador: ")
+            cargo = input("Digite el cargo del trabajador: ").lower().strip()
+            print(buscar_empleados(nombre, edad, sexo, numero, cargo))   #Se imprime la funcion ya que esta retorna un valor
+        case 3:
+            nombre = input("Digite los nombres y apellidos del trabajdor: ").lower().strip()
+            edad = input("Digite la edad del trabajador en años: ")
+            sexo = input("Digite el sexo del trabajador: ").lower().strip()
+            numerotelefonico =  input("Digite el numero del trabajador: ")          #Se solicitan los datos de nuevo empleado
+            cargo = input("Digite el cargo del trabajador: ").lower().strip()
+            print(registrar_empleado(nombre, edad, sexo, numerotelefonico, cargo))   #Se imprime la funcion
+        case 0: 
+            print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
+            break
+        case _:
+            print("Digite una opcion valida")  #Si el usuario digita una opcion no contemplada se imprime mensaje de error
     
 
