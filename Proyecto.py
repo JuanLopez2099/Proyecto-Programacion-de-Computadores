@@ -32,10 +32,19 @@ def buscar_empleados(nombre, edad, sexo, numero, cargo): #Definimos la funcion c
 
     return coincidencias_busqueda #Retorna la lista
 
+#Definir funcion para registrar nuevos empleados
+def registrar_empleado(nombre, edad, sexo, numerotelefonico, cargo): #Se ingresan los parametros de entrada
+    nuevo_empleado = {"nombre": nombre , "edad": edad, "sexo": sexo , "numero telefonico": numerotelefonico , "cargo": cargo } #Se crea un diccionario para almacenar al nuevo empleado
+    if nombre == "" or edad == "" or sexo == "" or numerotelefonico == "" or cargo == "": #Si el usuario no ingresa un dato la entrada es invalida
+        return "Debe ingresar todos los datos solicitados" #Retorna mensaje de error
+    if nombre != "" and edad != "" and sexo != "" and numerotelefonico != "" and cargo != "": #Si la entrada del usuario es diferente de ""
+        print("Todos los datos ingresados correctamente") #Se imprimie un mensaje de confirmacion
+        lista_empleados.append(nuevo_empleado)
+        return nuevo_empleado #Imprime el diccionario con los datos ingresados
 
 
-
-
+def eliminar_empleado():
+    pass
 
     
 
