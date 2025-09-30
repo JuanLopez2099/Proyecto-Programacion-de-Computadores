@@ -6,19 +6,32 @@ Definir lista de empleados
 Agregar diccionario a la lista para cada empleado
 Cada diccionario debe contener 5 claves especificos
 nombre como cadena
+numero de identificacion como entero
+fecha de nacimiento como cadena
 edad como entero
 sexo como cadena
 numero telefonico como cadena
 cargo como cadena
-
+fecha de ingreso como cadena
+tiene hijos como cadena
+tipo de contrato como cadena
+RH como cadena
+estado civil como cadena
 
 Definir Funcion para mostrar empleados
         Por cada empleado dentro de lista de empleados
            imprimir empleado[nombre]
+                    empleado[numero de identificacion]
+                    empleado[fecha de nacimiento]
                     empleado[edad]
                     empleado[sexo]
                     empleado[numero telefonico]
                     empleado[cargo]
+                    empleado[fecha de ingreso]
+                    empleado[tiene hijos]
+                    empleado[tipo de contrato]
+                    empleado[RH]
+                    empleado[estado civil]
 
 Definir funcion para buscar empleados con parametros de entrada(nombre, edad, sexo, numero telefonico, cargo)
        Definir lista para almacenar coincidencias
