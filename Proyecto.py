@@ -15,21 +15,14 @@ def mostrar_empleados():
 
 
 #Definir funcion para buscar empleados
-def buscar_empleados(nombre, edad, sexo, numero, cargo): #Definimos la funcion con los parametros que se solicitaran para la busqueda
-    coincidencias_busqueda = [] #Dentro de esta lista se almacenara el trabajador que coincida con la busqueda
+def buscar_empleados(numero_de_identificacion): #Definimos la funcion con los parametros que se solicitaran para la busqueda
     for empleado in lista_empleados:
-        nombre_empleado = empleado["nombre"].lower()
-        edad_empleado = str(empleado["edad"])                #Edad y numero se transforman a cadena para poder itearlos
-        sexo_empleado = empleado["sexo"].lower()             #Dentro de cada variable se guarda por separado la clave de los diccionarios iterados         
-        numero_empleado = str(empleado["numero telefonico"])
-        cargo_empleado = empleado["cargo"].lower()
+        if numero_de_identificacion == empleado["numero_identificacion"]:
+            return empleado
+    if not numero_de_identificacion == empleado["numero_identificacion"]:
+        return "El empleado no existe"
 
-        #El usuario debe digitar la informacion del empleado y se evalua si coincide con las claves del diccionario iterado
-        if nombre in nombre_empleado and edad in edad_empleado and sexo in sexo_empleado and numero in numero_empleado and cargo in cargo_empleado:
-            coincidencias_busqueda.append(empleado) #Si esto resulta ser True se añade el diccionario que coincide a la lista de coincidencias             
-            return coincidencias_busqueda #Retorna la lista
-    if coincidencias_busqueda == []: #Si la lista de coincidencias permanece vacia, no existen el trabajador
-        print("No existen coincidencias para el trabajador buscado")
+        
 
      
 
@@ -47,7 +40,7 @@ def registrar_empleado(nombre, edad, sexo, numerotelefonico, cargo): #Se ingresa
 def eliminar_empleado():
     pass
 
-    
+   
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
 1. Mostrar lista de todos los empleados
@@ -66,12 +59,8 @@ while True:
         case 1:
             mostrar_empleados() #Opcion numero uno, se llama a la funcion para mostrar la lista de empleados
         case 2:
-            nombre = input("Digite los nombres y apellidos del trabajdor: ").lower().strip()
-            edad = input("Digite la edad del trabajador en años: ")             #Se le solicitan los parametros de entrada al usuario
-            sexo = input("Digite el sexo del trabajador: ").lower().strip()     #Se lleva todo a minusculas y se quitan espacios para evitar errores
-            numero =  input("Digite el numero del trabajador: ")
-            cargo = input("Digite el cargo del trabajador: ").lower().strip()
-            print(buscar_empleados(nombre, edad, sexo, numero, cargo))   #Se imprime la funcion ya que esta retorna un valor
+            numero_de_identificacion = int(input("Digite el numero de identificacion del empleado: "))
+            print(buscar_empleados(numero_de_identificacion))
         case 3:
             nombre = input("Digite los nombres y apellidos del trabajdor: ").lower().strip()
             edad = input("Digite la edad del trabajador en años: ")
