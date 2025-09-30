@@ -40,7 +40,40 @@ Definir funcion para buscar empleados con parametro de entrada(numero de identif
         Si no
            Retorna que el empleado no existe
 
+Definir funcion registrar_empleado con parametros(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil)
     
+
+    Si nombre está vacío 
+        O numero_identificacion está vacío o no es número
+        O fecha_nacimiento está vacío
+        O edad está vacía o no es número
+        O numero_telefonico está vacío o no es número
+        O cargo está vacío
+        O fecha_ingreso está vacío
+             Retornar "Las opciones deben ser válidas"
+
+    Convertir numero_identificacion, edad y numero_telefonico a enteros
+
+    Si numero_identificacion <= 0 O edad <= 0 O numero_telefonico <= 0 Entonces
+        Retornar "Las opciones deben ser válidas"
+     sexo es igual a la clave digitada en opciones_sexo_empleado
+     tiene_hijos es igual a la clave digitada en opciones_tiene_hijos
+     tipo_contrato es igual a la clave digitada en opciones_tipo_contrato
+     RH es igual an la clave digitada en opciones_RH
+     estado_civil es igual a la clave digitada en opciones_estado_civil
+
+    Crear nuevo_empleado como diccionario con todos los datos validados
+
+    Por cada empleado en lista_empleados
+        Si la clave nombre en nuevo_empleado  es igual a la clave nombre en empleado
+           O nuevo_empleado.numero_identificacion es igual a empleado.numero_identificacion
+           O nuevo_empleado.numero_telefonico es igual a empleado.numero_telefonico
+               Retornar "No puede haber empleados con la misma informacion nombre/id/numero telefonico"
+
+    Agregar nuevo_empleado a lista_empleados
+    Imprimir "El empleado se ha registrado con éxito!"
+    Retornar nuevo_empleado
+
 Definir funcion de menu
     imprimir opcion 1 lista de empleados
              opcion 2 buscar empleado
