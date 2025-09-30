@@ -33,16 +33,12 @@ Definir Funcion para mostrar empleados
                     empleado[RH]
                     empleado[estado civil]
 
-Definir funcion para buscar empleados con parametros de entrada(nombre, edad, sexo, numero telefonico, cargo)
-       Definir lista para almacenar coincidencias
-       por cada empleado dentro de la lista
-       se almacena cada clave del diccionario dentro de una variable
-       Si los parametros de entrada coinciden con las claves de los diccionarios iterados
-              se añade el diccionario que coincidio a la lista que las almacena
-    Si la lista para almacentar coincidencias permanece vacia
-        No hay coincidencias para el trabajador buscado
-
-    Retorna la lista para almacenar coincidencias
+Definir funcion para buscar empleados con parametro de entrada(numero de identifiacion)
+        por cada empleado dentro de la lista de empleados
+            Si el numero de indentificacion se encuentra en la clave numero_identificacion
+                  retorna el diccionario del empleado buscado
+        Si no
+           Retorna que el empleado no existe
 
     
 Definir funcion de menu
