@@ -1,15 +1,15 @@
 #Definir lista de empleados
 
-lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "edad": 20, "sexo": "hombre", "numero telefonico": 123456789, "cargo": "desarrollador"},
-                   {"nombre": "Estefania Rodriguez", "edad": 18, "sexo": "mujer", "numero telefonico": 987654321, "cargo": "analista"},
-                   {"nombre": "Sarah Ulloque", "edad": 21, "sexo": "mujer", "numero telefonico": 543219876, "cargo": "gerente"}
+lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": 2025-2005 , "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_de_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero"},
+                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": 2025-2007, "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_de_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero"},
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad": 2025-2004, "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_de_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado" }
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
 
 #Definir funcion para mostrar a todos los empleados
 def mostrar_empleados():
     for empleados in lista_empleados: #Bucle para recorrer la lista
-        print(f"|{empleados['nombre']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero telefonico']}|, |{empleados['cargo']}|") #Imprimir la informacion de cada empleado por consola
+        print(f"|{empleados['nombre']}|, |{empleados['numero_identificacion']}|, |{empleados['fecha_nacimiento']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero_telefonico']}|, |{empleados['cargo']}|, |{empleados['fecha_ingreso']}|, |{empleados['tiene_hijos']}|, |{empleados['tipo_de_contrato']}|, |{empleados['RH']}|, |{empleados['estado_civil']}|") #Imprimir la informacion de cada empleado por consola
     if lista_empleados == []:
         print("No hay empleados") 
 
