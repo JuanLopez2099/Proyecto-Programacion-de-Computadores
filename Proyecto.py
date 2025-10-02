@@ -1,12 +1,24 @@
-#Definir lista de empleados
+import datetime as datetime #Se importa la libreria datetime
 
-lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": 20 , "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero"},
-                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": 18, "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero"},
-                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad": 21, "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado" }
+#Funcion para calcular edad de las personas 
+def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que se le solicitara al usuario
+    fecha_nac = datetime.datetime.strptime(fecha_nacimiento.strip(), "%d/%m/%Y") #Usando la libreria datetime convertimos la fecha de nacimiento de string a formato datetime
+    fecha_actual = datetime.datetime.today()  #Usando la libreria datetime se llama a la fecha actual
+
+    edad = fecha_actual.year - fecha_nac.year   #Al año actual se le resta el año de nacimiento del empleado
+
+    return edad  #Retorna la edad
+
+
+
+#Definir lista de empleados
+lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "Discapacidad:": "No", "Poblacion_vulnerable": "No"},
+                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "Discapacidad:": "No", "Poblacion_vulnerable": "No"},
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "Discapacidad:": "Si", "Poblacion_vulnerable": "Si"}
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
 
-#Definir funcion para mostrar a todos los empleados
+#Crear funcion para mostrar a todos los empleados
 def mostrar_empleados():
     for empleados in lista_empleados: #Bucle para recorrer la lista
         print(f"|{empleados['nombre']}|, |{empleados['numero_identificacion']}|, |{empleados['fecha_nacimiento']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero_telefonico']}|, |{empleados['cargo']}|, |{empleados['fecha_ingreso']}|, |{empleados['tiene_hijos']}|, |{empleados['tipo_contrato']}|, |{empleados['RH']}|, |{empleados['estado_civil']}|") #Imprimir la informacion de cada empleado por consola
@@ -15,7 +27,7 @@ def mostrar_empleados():
 
 
 #Definir funcion para buscar empleados
-def buscar_empleados(numero_de_identificacion): #Definimos la funcion con los parametros que se solicitaran para la busqueda
+def buscar_empleados(numero_de_identificacion): #Se define la funcion con los parametros que se solicitaran para la busqueda
     for empleado in lista_empleados:
         if numero_de_identificacion == empleado["numero_identificacion"]:  #Se compara si el numero de identificacion ingresado por el usuario es esta en la clave 'numero_identificacion'
             return empleado  #Si lo esta retorna el diccionario con toda la informacion del empleado
@@ -24,14 +36,17 @@ def buscar_empleados(numero_de_identificacion): #Definimos la funcion con los pa
 
 
 #Definir funcion para registrar nuevos empleados
-def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil): #Se crea la funcion con los parametros que se solicitaran al usuario
-    if nombre == "" or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == "" or edad == "" or not edad.isdigit() or numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
+def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable): #Se define la funcion con los parametros que se solicitaran al usuario
+    if nombre == "" or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == ""  or  numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
         return "las opciones deben ser validas" #En caso de que cierta informacion este vacia o no solo contenga numeros la funcion devuelve un mensaje indicandolo
-    numero_identificacion = int(numero_identificacion)
-    edad = int(edad)                                            #Se transforman las cadenas numericas a enteros
+    numero_identificacion = int(numero_identificacion) #Se transforman las cadenas a enteros
     numero_telefonico = int(numero_telefonico)
-    if numero_identificacion <= 0 or edad <= 0 or numero_telefonico <= 0:  #Una vez convertidas a enteros se verifica si algun valor es menor o igual a 0
+    if numero_identificacion <= 0  or numero_telefonico <= 0:  #Una vez convertidas a enteros se verifica si algun valor es menor o igual a 0
         return "Las opciones deben ser validas"   #En caso de que si la funcion devuelve un mensaje indicandolo
+    if fecha_nacimiento.count("/") < 2 or fecha_nacimiento.count("/") > 2: #Se verifica mediante count que la cadena ingresada por el usuario contenga el formato especificado usando /
+        return "La fecha de nacimiento debe estar separado por /" #Si no lo tiene se envia un mensaje indicandolo
+    if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:
+        return "La fecha de ingreso debe estar separado por /"
     opciones_sexo_empleado = {1: "Hombre", 2: "Mujer", 3: "Otro"}
     sexo = opciones_sexo_empleado[sexo]
     opciones_tiene_hijos = {1: "Si", 2: "No"}                         #Se crean diccionarios que contengan las opciones que digite el usuario usando claves
@@ -42,7 +57,11 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, edad, se
     RH = opciones_RH[RH]
     opciones_estado_civil = {1: "Soltero", 2: "Casado", 3: "Union Libre", 4: "Divorciado", 5: "Viudo"}
     estado_civil = opciones_estado_civil[estado_civil]
-    nuevo_empleado = {"nombre": nombre, "numero_identificacion": numero_identificacion, "fecha_nacimiento": fecha_nacimiento, "edad": edad, "sexo": sexo, "numero_telefonico": numero_telefonico, "cargo": cargo, "fecha_ingreso": fecha_ingreso, "tiene_hijos": tiene_hijos, "tipo_contrato":tipo_contrato, "RH": RH, "estado_civil": estado_civil} #Una vez que se hacen las comprobaciones se guardan los valores en este diccionario con su respectiva clave
+    opciones_discapacidad = {1: "Si", 2: "No"}
+    discapacidad = opciones_discapacidad[discapacidad]
+    opciones_poblacion_vulnerable = {1: "Si", 2: "No"}
+    poblacion_vulnerable = opciones_poblacion_vulnerable[poblacion_vulnerable]
+    nuevo_empleado = {"nombre": nombre, "numero_identificacion": numero_identificacion, "fecha_nacimiento": fecha_nacimiento, "edad": calcular_edad(fecha_nacimiento), "sexo": sexo, "numero_telefonico": numero_telefonico, "cargo": cargo, "fecha_ingreso": fecha_ingreso, "tiene_hijos": tiene_hijos, "tipo_contrato":tipo_contrato, "RH": RH, "estado_civil": estado_civil, "discapacidad": discapacidad, "poblacion_vulnerable": poblacion_vulnerable } #Una vez que se hacen las comprobaciones se guardan los valores en este diccionario con su respectiva clave
     for empleado in lista_empleados: 
         if nuevo_empleado["nombre"] == empleado["nombre"] or nuevo_empleado["numero_identificacion"] == empleado["numero_identificacion"] or  nuevo_empleado["numero_telefonico"] == empleado["numero_telefonico"]: #Se recorre la lista de empleados y se comprueba que el nuevo empleado no tenga la misma informacion que un empleado ya existente 
             return "No puede haber empleados con la misma informacion nombre/id/numero telefonico" #En caso de que la tenga la funcion retorna indicandolo
@@ -78,8 +97,7 @@ while True:
         case 3:
             nombre = input("Digite el nombre del nuevo empleado: ").capitalize().strip() #Se solicita al usuario el nombre del nuevo empleado, se eliminan espacios y se ponen las iniciales en mayusculas
             numero_identificacion = input("Digite el numero de identificacion del nuevo empleado: ") #Se pide el id como cadena
-            fecha_nacimiento = input("Digite la fecha de nacimiento Dia/Mes/Año: ") #Se solicita la fecha de nacimiento
-            edad = input("Digite la edad del nuevo empleado en años: ") #Se solicita la edad
+            fecha_nacimiento = input("Digite la fecha de nacimiento Dia/Mes/Año: ") #Se pide la fecha de nacimiento 
             while True:  #Se crea un bucle para mostrar las opciones de este parametro
                 print("Indique el sexo del empleado: \n "
                 "1. Hombre \n" 
@@ -92,7 +110,7 @@ while True:
                     print("Digite una opcion valida")  #Si no se indica y se repite el bucle hasta que elija una opcion valida
             numero_telefonico = input("Digite el numero telefonico del nuevo empleado: ") #Se solicita el numero telefonico como cadena
             cargo = input("Digite el cargo del nuevo empleado: ")  #Se solicita el cargo del nuevo empleado
-            fecha_ingreso = input("Digite la fecha de ingreso: ")  #Se solicita la fecha de ingreso
+            fecha_ingreso = input("Digite la fecha de ingreso Dia/Mes/Año: ")  #Se solicita la fecha de ingreso
             while True:   #Bucle para mostrar las opciones del parametro 'tiene_hijos'
                 print("""Tiene hijos?
                       1. Si
@@ -141,7 +159,25 @@ while True:
                         break #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                     else:
                         print("Digite una opcion valida") #Si no se indica y el bucle se repite hasta escojer una opcion valida
-            print(registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil)) #Se llama a la funcion
+            while True: 
+                print("""El empleado cuenta con alguna discapacidad:
+                      1. Si
+                      2.No""")
+                discapacidad = int(input("Digite una opcion 1-2: "))
+                if discapacidad == 1 or discapacidad == 2:
+                    break
+                else:
+                    print("Digite una opcion valida")
+            while True:
+                print("""El empleado pertenece a alguna poblacion vulnerable:
+                      1. Si
+                      2. No""")
+                poblacion_vulnerable = int(input("Digite una opcion 1-2: "))
+                if poblacion_vulnerable == 1 or poblacion_vulnerable == 2:
+                    break
+                else:
+                    print("Digite una opcoon valida")
+            print(registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)) #Se llama a la funcion
 
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
