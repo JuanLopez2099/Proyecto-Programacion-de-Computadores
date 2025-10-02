@@ -12,9 +12,9 @@ def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que
 
 
 #Definir lista de empleados
-lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad:": "No", "poblacion_vulnerable": "No"},
-                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad:": "No", "polacion_vulnerable": "No"},
-                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad:": "Si", "poblacion_vulnerable": "Si"}
+lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
+                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"}
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
 
@@ -70,8 +70,36 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
     return nuevo_empleado  #Imprime el diccionario con la informacion del nuevo empleado
 
 
-def eliminar_empleado():
-    pass
+def eliminar_empleado(): #verificar si hay empleados
+    if lista_empleados == []: #verificar si la lista esta vacia
+        print("No hay empleados para eliminar")
+        return #sale de la funcion si no hay empleados
+    
+    print("\n--- Lista de empleados ---") #mostrar la lista actual
+    mostrar_empleados() #llama a la funcion mostrar_empleado
+    
+    nombre = input("Digite el nombre del trabajador a eliminar: ").lower().strip() #pedir nombre del empleado que va a ser eliminado
+    
+    empleado_encontrado = None #Guarda el diccionario del empleado si se encuentra
+    posicion = -1 #Guardar el indice del empleado en la lista
+    
+    for i, empleado in enumerate(lista_empleados): #Recorre la lista de empleados para buscar coincidencias
+        if empleado["nombre"].lower() == nombre: #Compara el nombre ingresado con el nombre del empleado actual
+            empleado_encontrado = empleado #si hay coincidencia guarda el empleado y su posicion
+            posicion = i #Guarda el indice donde esta el empleado
+            break #salimos del bucle porque ya encontro el empleado
+    
+    if empleado_encontrado: #verifica si se encontro un empleado con ese nombre
+        print(f"\nEmpleado encontrado: {empleado_encontrado['nombre']}") #muestra los datos del empleado encontrado
+        confirmacion = input("¿Está seguro que desea eliminar este empleado? (si/no): ").lower().strip() #Pide confirmacion
+        
+        if confirmacion == "si": #Eliminar empleado de la lista usando su posicion
+            lista_empleados.pop(posicion) #elimina el elemento en esa posicion
+            print("Empleado eliminado")
+        else: #Si el usuario no confirma se cancela la eliminacion
+            print("Eliminación cancelada") #si el usuario no confirma se cancela
+    else:
+        print("No se encontró un empleado con ese nombre") #si no se encontro ningun empleado con ese nombre
 
    
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
@@ -79,6 +107,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 1. Mostrar lista de todos los empleados
 2. Buscar empleado
 3. Registrar empleado
+4. Eliminar empleado
 0. Salir
 """)
 
@@ -179,10 +208,13 @@ while True:
                     print("Digite una opcoon valida")
             print(registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)) #Se llama a la funcion
 
+        case 4:
+            eliminar_empleado() #llamar a la funcion eliminar empleado
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
         case _:
             print("Digite una opcion valida")  #Si el usuario digita una opcion no contemplada se imprime mensaje de error
     
+
 
