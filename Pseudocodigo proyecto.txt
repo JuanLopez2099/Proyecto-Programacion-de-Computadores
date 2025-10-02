@@ -1,6 +1,12 @@
 Pseudocodigo proyecto
 
-Inicio
+importar datetime como datetime
+
+definir funcion para calcular edad(fecha_nacimiento)
+    Convertir fecha_nacimiento de cadena a formato fecha y guardar en fecha_nac
+    Obtener la fecha actual y guardar en fecha_actual
+    Restar fecha_actual entre fecha_nacimiento y guardar en edad
+    retornar edad
 
 Definir lista de empleados
 Agregar diccionario a la lista para cada empleado
@@ -17,6 +23,8 @@ tiene hijos como cadena
 tipo de contrato como cadena
 RH como cadena
 estado civil como cadena
+discapacidad como cadena
+poblacion vulnerable como cadena
 
 Definir Funcion para mostrar empleados
         Por cada empleado dentro de lista de empleados
@@ -32,6 +40,10 @@ Definir Funcion para mostrar empleados
                     empleado[tipo de contrato]
                     empleado[RH]
                     empleado[estado civil]
+                    empleado[discapacidad]
+                    empleado[poblacion_vulnerable]
+        Si lista de empleados vacia
+             imprimir la lista de empleados esta vacia
 
 Definir funcion para buscar empleados con parametro de entrada(numero de identifiacion)
         por cada empleado dentro de la lista de empleados
@@ -40,7 +52,7 @@ Definir funcion para buscar empleados con parametro de entrada(numero de identif
         Si no
            Retorna que el empleado no existe
 
-Definir funcion registrar_empleado con parametros(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil)
+Definir funcion registrar_empleado con parametros(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)
     
 
     Si nombre está vacío 
@@ -56,11 +68,16 @@ Definir funcion registrar_empleado con parametros(nombre, numero_identificacion,
 
     Si numero_identificacion <= 0 O edad <= 0 O numero_telefonico <= 0 Entonces
         Retornar "Las opciones deben ser válidas"
+    Si el conteo de "/" en fecha_nacimiento < 2 O > 2
+        Retornar  La fecha de nacimiento debe estar separado por /
+    Si el conteo de "/" en fecha_ingreso < 2 O > 2
+        Retornar la fehca de ingreso debe estar separada por /
      sexo es igual a la clave digitada en opciones_sexo_empleado
      tiene_hijos es igual a la clave digitada en opciones_tiene_hijos
      tipo_contrato es igual a la clave digitada en opciones_tipo_contrato
      RH es igual an la clave digitada en opciones_RH
      estado_civil es igual a la clave digitada en opciones_estado_civil
+
 
     Crear nuevo_empleado como diccionario con todos los datos validados
 
@@ -73,6 +90,8 @@ Definir funcion registrar_empleado con parametros(nombre, numero_identificacion,
     Agregar nuevo_empleado a lista_empleados
     Imprimir "El empleado se ha registrado con éxito!"
     Retornar nuevo_empleado
+
+    
 
 Definir funcion de menu
     imprimir opcion 1 lista de empleados
