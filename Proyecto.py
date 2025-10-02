@@ -12,16 +12,16 @@ def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que
 
 
 #Definir lista de empleados
-lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "Discapacidad:": "No", "Poblacion_vulnerable": "No"},
-                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "Discapacidad:": "No", "Poblacion_vulnerable": "No"},
-                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "Discapacidad:": "Si", "Poblacion_vulnerable": "Si"}
+lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad:": "No", "poblacion_vulnerable": "No"},
+                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad:": "No", "polacion_vulnerable": "No"},
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad:": "Si", "poblacion_vulnerable": "Si"}
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
 
 #Crear funcion para mostrar a todos los empleados
 def mostrar_empleados():
     for empleados in lista_empleados: #Bucle para recorrer la lista
-        print(f"|{empleados['nombre']}|, |{empleados['numero_identificacion']}|, |{empleados['fecha_nacimiento']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero_telefonico']}|, |{empleados['cargo']}|, |{empleados['fecha_ingreso']}|, |{empleados['tiene_hijos']}|, |{empleados['tipo_contrato']}|, |{empleados['RH']}|, |{empleados['estado_civil']}|") #Imprimir la informacion de cada empleado por consola
+        print(f"|{empleados['nombre']}|, |{empleados['numero_identificacion']}|, |{empleados['fecha_nacimiento']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero_telefonico']}|, |{empleados['cargo']}|, |{empleados['fecha_ingreso']}|, |{empleados['tiene_hijos']}|, |{empleados['tipo_contrato']}|, |{empleados['RH']}|, |{empleados['estado_civil']}|, |{empleados['discapacidad']}|, |{empleados['poblacion_vulnerable']}|") #Imprimir la informacion de cada empleado por consola
     if lista_empleados == []:
         print("No hay empleados") 
 
