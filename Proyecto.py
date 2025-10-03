@@ -14,7 +14,7 @@ def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que
 #Definir lista de empleados
 lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
-                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220242033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"}
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 11101322210, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "gerente", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"}
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
 
@@ -30,9 +30,8 @@ def mostrar_empleados():
 def buscar_empleados(numero_de_identificacion): #Se define la funcion con los parametros que se solicitaran para la busqueda
     for empleado in lista_empleados:
         if numero_de_identificacion == empleado["numero_identificacion"]:  #Se compara si el numero de identificacion ingresado por el usuario es esta en la clave 'numero_identificacion'
-            return empleado  #Si lo esta retorna el diccionario con toda la informacion del empleado
-    if not numero_de_identificacion == empleado["numero_identificacion"]:
-        return "El empleado no existe" #Si no retorna mensaje de señalando que el empleado buscado no existe
+            return empleado  #Si lo esta retorna el diccionario con toda la informacion del emplead
+    return "El empleado no existe" #Si no retorna mensaje de señalando que el empleado buscado no existe
 
 
 #Definir funcion para registrar nuevos empleados
@@ -100,6 +99,10 @@ def eliminar_empleado(): #verificar si hay empleados
             print("Eliminación cancelada") #si el usuario no confirma se cancela
     else:
         print("No se encontró un empleado con ese nombre") #si no se encontro ningun empleado con ese nombre
+
+#Definir funcion para modificar informacion de los empleados:
+def modificar_informacion():
+    pass
 
    
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
