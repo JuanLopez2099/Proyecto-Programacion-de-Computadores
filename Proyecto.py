@@ -36,12 +36,12 @@ def buscar_empleados(numero_de_identificacion): #Se define la funcion con los pa
 
 #Definir funcion para registrar nuevos empleados
 def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable): #Se define la funcion con los parametros que se solicitaran al usuario
-    if nombre == "" or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == ""  or  numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
-        return "las opciones deben ser validas" #En caso de que cierta informacion este vacia o no solo contenga numeros la funcion devuelve un mensaje indicandolo
+    if not nombre.replace(" ", "").isalpha() or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == ""  or  numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
+        return "las entradas deben ser validas" #En caso de que cierta informacion este vacia o no solo contenga numeros la funcion devuelve un mensaje indicandolo
     numero_identificacion = int(numero_identificacion) #Se transforman las cadenas a enteros
     numero_telefonico = int(numero_telefonico)
     if numero_identificacion <= 0  or numero_telefonico <= 0:  #Una vez convertidas a enteros se verifica si algun valor es menor o igual a 0
-        return "Las opciones deben ser validas"   #En caso de que si la funcion devuelve un mensaje indicandolo
+        return "Las entradas deben ser validas"   #En caso de que si la funcion devuelve un mensaje indicandolo
     if fecha_nacimiento.count("/") < 2 or fecha_nacimiento.count("/") > 2: #Se verifica mediante count que la cadena ingresada por el usuario contenga el formato especificado usando /
         return "La fecha de nacimiento debe estar separado por /" #Si no lo tiene se envia un mensaje indicandolo
     if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:
@@ -101,8 +101,232 @@ def eliminar_empleado(): #verificar si hay empleados
         print("No se encontró un empleado con ese nombre") #si no se encontro ningun empleado con ese nombre
 
 #Definir funcion para modificar informacion de los empleados:
-def modificar_informacion():
-    pass
+def modificar_empleado(numero_identificacion): #Se crea la funcion con el parametro que se le pedira al usuario
+    for empleado in lista_empleados:  #Se recorre la lista de empleados y se guarda el diccionario de cada empleado en la variable empleado
+        if numero_identificacion == empleado["numero_identificacion"]: #Si el numero de identificacion ingresado por el usuario coincide con un numero de identificacion dentro del diccionario de empleados
+            while True:        #Mediante un bucle while se despliega el meenu de todos los parametros modificables
+                print("""Escoja el dato que desea modificar:
+                      1. Nombre
+                      2. Numero de identificacion
+                      3. Fecha de nacimiento
+                      4. Cambiar sexo
+                      5. Numero telefonico                                        
+                      6. Cargo
+                      7. Fecha de ingreso
+                      8. Tiene hijos
+                      9. Tipo de contrato
+                      10. RH
+                      11. Estado civil
+                      12. Discapacidad
+                      13. Poblacion vulnerable
+                      0. Guardar y salir"""
+                      )
+                opcion = int(input("Digite una opcion 1: "))   #Se pide la opcion como numero entero
+                match opcion:  #Mediante un switchcase
+                    case 1:  #Reemplazar nombre
+                        nombre = input("Digite el nuevo nombre: ").strip().title() #Se pide el nuevo nombre al usuario
+                        if nombre.replace(" ", "").isalpha():   #Se quitan los espacios dentro del nombre y se comprueba si solo contiene caracteres alfabeticos
+                            empleado["nombre"] = nombre    #Si se valida la condicin se remplaza la clave nombre dentro del diccionario con el nuevo nombre
+                        else:
+                            print("El nombre debe contener solo letras y no debe estar vacio")  #Si no se envia un mensaje avisando que el nombre debe contener solo letras y no se debe dejar vacio
+                    case 2: #Reemplazar numero de identificacion
+                        empleado_actual = empleado #Se guarda el empleado actual digitado por el usuario para diferenciarlo de los demas
+                        numero_id = input("Digite el nuevo numero de identificacion: ").strip() #Se piede el nuevo numero de identificacion
+                        numero_isdigit = False  
+                        numero_mayor_0 = False                #Usando banderas se hacen validaciones
+                        numero_no_repetido = False
+                        if numero_id.isdigit(): #Si el numero de identificacion solo contiene digitos
+                            numero_isdigit = True   #La bandera se convierte en true
+                            numero_id = int(numero_id)   #Se convierte el numero de identificacion a entero
+                        else:
+                            print("El numero de id solo debe contener numeros y no debe tener espacios")  #Si los caracteres no son unicamente digitos se envia un mensaje indicandolo
+                        if numero_isdigit and numero_id > 0: #Si el la bandera isdigit es True y el numero de identificacion es mayor a 0
+                            numero_mayor_0 = True  #La bandera mayor a 0 se convierte a true
+                        else:
+                            print("El numero no puede ser menor o igual a 0")  #Si las condiciones anteriores no se cumplen se imprime un mensaje indicandolo
+                        if numero_isdigit and numero_mayor_0:  #Si las banderas isdigit y numero mayor a 0 son true
+                            repetido = False #Se crea una bandera local dentro del if
+                            for emp in lista_empleados: #Se reocorre la lista nuevamente
+                                if emp != empleado_actual and numero_id == emp["numero_identificacion"]: #Si el empleado es diferente al empleado que se esta modificando 
+                                    print("El numero de identificacion ya existe")                       #Y el numero de identificacion del empleado iterado es igual al numero de id del empleado ingresado por el usuario
+                                    repetido = True                                                      #Se imprime un mensaje indicando que el numero de id ya existe
+                                    break                                                                #La bandera repetido se convierte a true y se rompe el bucle
+                            if not repetido:               #Si la bandera repetido es False 
+                                numero_no_repetido = True  #La bandera de numero de id no repetido se convierte a true
+                        if numero_isdigit and numero_mayor_0 and numero_no_repetido:  #Si todas las banderas son True
+                            empleado["numero_identificacion"] = numero_id            #Se remplaza la clave numero de identificacion con el numero de id ingresado por el usuario
+                    case 3: #Remplazar fecha de nacimiento
+                        fecha_nacimiento = input("Digite la nueva fecha de nacimiento Dia/Mes/Año: ").strip() #Se pide la fecha de nacimiento al usuario
+                        if fecha_nacimiento.count("/") < 2 or fecha_nacimiento.count("/") > 2: #Se comprueba que el usuario siga la estructura de fechas contando el numero de /
+                            print("La fecha de nacimiento debe estar separada por /")  #Si no lo sigue se imprime un mensaje indicandolo
+                        else:
+                            empleado["fecha_nacimiento"] = fecha_nacimiento  #Si la fecha pasa las validaciones se remplaza en el diccionario
+                            empleado["edad"] = calcular_edad(fecha_nacimiento) #Se recalcula la edad con la nueva fecha de nacimiento
+                    case 4: #Reemplazar sexo
+                        print("""Escoja una opcion:  
+                              1. Hombre
+                              2. Mujer         
+                              3. Otro """) #Se despliega un menu con las opciones disponibles
+                        sexo = int(input("Digite una opcion 1-3: "))   #Se pide la opcion como numero entero
+                        match sexo:  #Usando un switchcase
+                            case 1:
+                                empleado["sexo"] = "Hombre"  #Caso 1 se remplaza la clave sexo con hombre
+                            case 2:
+                                empleado["sexo"] = "Mujer" #Caso 2 se remplaza la clave sexo con mujer
+                            case 3:
+                                empleado["sexo"] = "Otro"  #Caso 3 se remplaza la clave sexo con otro
+                            case _:
+                                print("Escoja una opcion valida")  #Si el usuario coloca una opcion no contemplada se imprime un mensaje indicandolo
+                    case 5: #Reemplazar numero telefonico
+                        empleado_actual = empleado #Se guarda el empleado ingresado por el usuario en empleado actual
+                        numero_telefonico = input("Digite el nuevo numero de telefono: ").strip() #Se solicita el nuevo numero telefonico
+                        telefono_solo_numeros = False  
+                        telefono_mayor_0 = False         #Mediante el uso de banderas se hacen las validaciones
+                        telefono_no_repetido = False
+                        if numero_telefonico.isdigit():  #Se comprueba que solo contenga digitos 
+                            telefono_solo_numeros = True   #Si pasa la validacion la bandera de solo numeros se convierte a True
+                            numero_telefonico = int(numero_telefonico)  #El numero telefonico se convierte a entero
+                        else:
+                            print("El numero telefonico debe contener solo numeros y no debe tener espacios") #Si no pasa la validacion se imprime un mensaje indicandolo
+                        if telefono_solo_numeros and numero_telefonico > 0: #Si solo numeros es true y el numero telefoncio es mayor a 0
+                            telefono_mayor_0 = True #La bandera mayor a 0 se convierte a true
+                        else:
+                            print("El numero debe ser mayor a 0")  #En caso de que no se imprime un mensaje indicandolo
+                        if telefono_solo_numeros and telefono_mayor_0:
+                            repetido = False     #Si el telefono ingresado solo contiene numeros y es mayor a 0 se crea una nueva bandera repetido
+                            for emp in lista_empleados:  #Se recorre la lista nuevamente
+                                if emp != empleado_actual and numero_telefonico == emp["numero_telefonico"]:  #Si el empleado iterado es diferente al ingresado por el usuario
+                                    print("El numero de telefono ingresado ya existe")                        #Y el numero telefonico ingreado por el usuario es igual a uno ya existente
+                                    repetido = True                           #Repetido se convierte en true y se rompe el bucle
+                                    break
+                            if not repetido:  #Si repetido es false
+                                telefono_no_repetido = True  #Telefono no repedito se convierte a True
+                        if telefono_solo_numeros and telefono_mayor_0 and telefono_no_repetido: #Si todas las validaciones anteriores son True
+                            empleado["numero_telefonico"] = numero_telefonico   #El numero ingresado por el usuario remplaza al valor dentro de la clave del diccionario
+                    case 6: #Reemplazar cargo
+                        cargo = input("Digite el nuevo cargo: ") #Se solicita el nuevo cargo al usuario
+                        if not cargo.replace(" ", "").isalpha():   #Se eliminan los espacios para comprobar si solo contiene caracteres alfabeticos
+                            print("El cargo digitado debe contener solo letras")  #Si lo anterior es False se envia un mensaje indicandolo
+                        else:
+                            empleado["cargo"] = cargo  #En caso de que pase la comprobacion se remplaza el valor con la clave cargo dentro del diccionario del empleado
+                    case 7: #Reemplazar fecha de ingreso
+                        fecha_ingreso = input("Diigte la nueva fecha de ingreso Dia/Mes/Año: ") #Se solicita la nueva fecha de ingreso al usuario
+                        if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:  #Se valida que siga el formato estabelcido
+                            print("La fecha de ingreso debe estar separada por /")  #En caso de no seguir el formato se envia un mensaje indicandolo
+                        else:
+                            empleado["fecha_ingreso"] = fecha_ingreso   #Si pasa la validacion se reemplaza el valor de la clave fecha de ingreso con la nueva fecha de ingreso
+                    case 8: #Cambiar si tiene hijos o no
+                        print("""Escoja un opcion: 
+                              1. Si
+                              2. No""")  #Se despliega un menu con las opciones
+                        tiene_hijos = int(input("Digite una opcion 1-2: ")) #Se solicita la opcion como numero entero
+                        match tiene_hijos:  #Mediante un switchcase
+                            case 1:
+                                empleado["tiene_hijos"] = "Si" #Caso 1 se reemplaza el valor de tiene hijos con un Si
+                            case 2:
+                                empleado["tiene_hijos"] = "No"  #Caso 2 Se reemplaza el valor de tiene hojos con un No
+                            case _:
+                                print("Escoja una opcion valida")  #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+                    case 9:  #Cambiar tipo de contrato
+                        print("""Tipo de contrato:
+                      1. Definido
+                      2. Indefinido
+                      3. Obra labor
+                      4. Aprendizaje""")  #Se imprimen todos los tipos de contrato
+                        tipo_contrato = int(input("Escoja una opcion 1-4: "))  #Se solicita una opcion como numero entero
+                        match tipo_contrato:   
+                            case 1:
+                                empleado["tipo_contrato"] = "Definido"
+                            case 2:
+                                empleado["tipo_contrato"] = "Indefinido"    #Se remplaza el valor de la clave tipo de contrato dependiendo de la opcion escojida
+                            case 3: 
+                                empleado["tipo_contrato"] = "Obra labor"
+                            case 4:
+                                empleado["tipo_contrato"] = "Aprendizaje"
+                            case _:
+                                print("Escoja una opcion valida")  #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+                    case 10: #Reemplazar tipo de RH
+                        print("""Tipo de RH:
+                      1. A+
+                      2. A-
+                      3. B+
+                      4. B-
+                      5. AB+
+                      6. AB-
+                      7. O+  
+                      8. O-""") #Se imprime un menu con todos los tipos de RH
+                        RH = int(input("Digite una opcion 1-8: ")) #Se solicita la opcion como numero entero
+                        match RH:
+                            case 1:
+                                empleado["RH"] = "A+"
+                            case 2:
+                                empleado["RH"] = "A-"
+                            case 3:
+                                empleado["RH"] = "B+"
+                            case 4:
+                                empleado["RH"] = "B-"      #Se reemplaza el valor de la clave RH dependiendo de la opcion ingresada
+                            case 5:
+                                empleado["RH"] = "AB+"
+                            case 6:
+                                empleado["RH"] = "AB-"
+                            case 7:
+                                empleado["RH"] = "O+"
+                            case 8:
+                                empleado["RH"] = "O-"
+                            case _:
+                                print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+                    case 11:
+                        print("""Indique estado civil:
+                          1. Soltero
+                          2. Casado
+                          3. Union libre
+                          4. Divorciado
+                          5. Viudo""")  # Se imprime un menu con todas las opciones de estado civil
+                        estado_civil = int(input("Digite una opcion 1-5: "))  #Se solicita una opcion como numero entero
+                        match estado_civil:
+                            case 1:
+                                empleado["estado_civil"] = "Soltero"
+                            case 2:
+                                empleado["estado_civil"] = "Casado"
+                            case 3:                                                      #Se reemplaza el valor de la clave estado civil dependiendo de la opcion escogida
+                                empleado["estado_civil"] = "Union libre"
+                            case 4:
+                                empleado["estado_civil"] = "Divorciado"
+                            case 5:
+                                empleado["estado_civil"] = "Viudo"
+                            case _:
+                                print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+                    case 12:
+                        print("""El empleado cuenta con alguna discapacidad:
+                      1. Si
+                      2.No""") # Se imprime un menu con todas las opciones de discapacidad
+                        discapacidad = int(input("Digite una opcion 1-2: ")) #Se solicita una opcion como numero entero
+                        match discapacidad:
+                            case 1:
+                                empleado["discapacidad"] = "Si"   #Caso 1 se reemplaza el valor de la clave discapacidad con Si
+                            case 2:
+                                empleado["discapacidad"] = "No"   #Caso 2 se reemplaza el valor de la clave discapacidad con No
+                            case _:
+                                print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+                    case 13:
+                        print("""El empleado pertenece a alguna poblacion vulnerable:
+                      1. Si
+                      2. No""") #Se imprime un menu con todas las opciones de poblacion vulnerable
+                        poblacion_vulnerable = int(input("Digite una opcion 1-2: ")) #Se solicita una opcion como numero entero
+                        match poblacion_vulnerable:
+                            case 1:
+                                empleado["poblacion_vulnerable"] = "Si" #Caso 1 se reemplaza el valor de la clave poblacion vulnerable con Si
+                            case 2:
+                                empleado["poblacion_vulnerable"] = "No" #Caso 2 se reemplaza el valor de la clave discapacidad con No
+                            case _:
+                                print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+                    case 0:
+                        print("Los cambios se han realizado con exito")  #Una vez que los cambios se han realizado se sale del menu
+                        return empleado  #Retorna el diccionario del empleado modificado con todos los cambios hechos para comprobar que todo este correcto
+                    case _:
+                        print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+
+    return "El empleado buscado no existe"  #En caso de ingresar el numero de identifiacion que no exista la funcion retorna indicandolo
 
    
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
@@ -111,6 +335,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 2. Buscar empleado
 3. Registrar empleado
 4. Eliminar empleado
+5. Modificar informacion de empleado
 0. Salir
 """)
 
@@ -127,7 +352,7 @@ while True:
             numero_de_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Solicita al usuario el numero de identificacion como entero
             print(buscar_empleados(numero_de_identificacion)) #Llama a la funcion y devuelve el resultado
         case 3:
-            nombre = input("Digite el nombre del nuevo empleado: ").capitalize().strip() #Se solicita al usuario el nombre del nuevo empleado, se eliminan espacios y se ponen las iniciales en mayusculas
+            nombre = input("Digite el nombre del nuevo empleado: ").title().strip() #Se solicita al usuario el nombre del nuevo empleado, se eliminan espacios y se ponen las iniciales en mayusculas
             numero_identificacion = input("Digite el numero de identificacion del nuevo empleado: ") #Se pide el id como cadena
             fecha_nacimiento = input("Digite la fecha de nacimiento Dia/Mes/Año: ") #Se pide la fecha de nacimiento 
             while True:  #Se crea un bucle para mostrar las opciones de este parametro
@@ -213,6 +438,9 @@ while True:
 
         case 4:
             eliminar_empleado() #llamar a la funcion eliminar empleado
+        case 5:
+            numero_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Pedir numero de identificacion del empleado a modificar
+            print(modificar_empleado(numero_identificacion))  #Se llama a la funcion modificar empleado
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
