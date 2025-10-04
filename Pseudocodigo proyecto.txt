@@ -2,7 +2,7 @@ Pseudocodigo proyecto
 
 importar datetime como datetime
 
-definir funcion para calcular edad(fecha_nacimiento)
+Definir funcion para calcular edad(fecha_nacimiento)
     Convertir fecha_nacimiento de cadena a formato fecha y guardar en fecha_nac
     Obtener la fecha actual y guardar en fecha_actual
     Restar fecha_actual entre fecha_nacimiento y guardar en edad
@@ -90,6 +90,194 @@ Definir funcion registrar_empleado con parametros(nombre, numero_identificacion,
     Agregar nuevo_empleado a lista_empleados
     Imprimir "El empleado se ha registrado con éxito!"
     Retornar nuevo_empleado
+
+Definir funcion para eliminar empleado
+
+
+
+Definir funcion modificar_empleado(numero_identificacion)
+
+    Para cada empleado dentro de lista_empleados
+        Si numero_identificacion = empleado[numero_identificacion] Entonces
+
+            Mientras Verdadero
+                Imprimir "Escoja el dato que desea modificar:
+                        1. Nombre
+                        2. Numero de identificacion
+                        3. Fecha de nacimiento
+                        4. Cambiar sexo
+                        5. Numero telefonico
+                        6. Cargo
+                        7. Fecha de ingreso
+                        8. Tiene hijos
+                        9. Tipo de contrato
+                        10. RH
+                        11. Estado civil
+                        12. Discapacidad
+                        13. Poblacion vulnerable
+                        0. Guardar y salir"
+                
+                Solicitar opcion al usuario y guardar en opcion
+
+                Segun opcion Hacer
+                    Caso 1: 
+                        Solicitar nuevo nombre
+                        Si el nombre contiene solo letras Entonces
+                            empleado[nombre] = nuevo nombre
+                        Sino
+                            Imprimir "El nombre debe contener solo letras y no debe estar vacio"
+                        
+
+                    Caso 2:
+                        Guardar empleado_actual = empleado
+                        Solicitar nuevo numero de identificacion
+                        Inicializar banderas numero_isdigit, numero_mayor_0, numero_no_repetido en False
+                        Si numero solo contiene digitos Entonces
+                            numero_isdigit = Verdadero
+                            Convertir numero a entero
+                        Sino
+                            Imprimir "El numero de id solo debe contener numeros y no debe tener espacios"
+                        
+                        Si numero_isdigit y numero > 0 Entonces
+                            numero_mayor_0 = Verdadero
+                        Sino
+                            Imprimir "El numero no puede ser menor o igual a 0"
+                        
+                        Para cada emp en lista_empleados Hacer
+                            Si emp != empleado_actual y numero = emp[numero_identificacion] Entonces
+                                Imprimir "El numero de identificacion ya existe"
+                                repetido = Verdadero
+                                Romper
+                            
+                        FinPara
+                        Si no repetido Entonces
+                            numero_no_repetido = Verdadero
+                        
+                        Si numero_isdigit y numero_mayor_0 y numero_no_repetido Entonces
+                            empleado[numero_identificacion] = numero
+                        
+
+                    Caso 3:
+                        Solicitar nueva fecha de nacimiento
+                        Si formato incorrecto Entonces
+                            Imprimir "La fecha de nacimiento debe estar separada por /"
+                        Sino
+                            empleado[fecha_nacimiento] = nueva fecha
+                            empleado[edad] = calcular_edad(nueva fecha)
+                        
+
+                    Caso 4:
+                        Imprimir menu sexo
+                        Solicitar opcion sexo
+                        Segun sexo Hacer
+                            Caso 1: empleado[sexo] = "Hombre"
+                            Caso 2: empleado[sexo] = "Mujer"
+                            Caso 3: empleado[sexo] = "Otro"
+                            Caso _: Imprimir "Escoja una opcion valida"
+                        
+
+                    Caso 5:
+                        Guardar empleado_actual = empleado
+                        Solicitar nuevo numero telefonico
+                        Inicializar banderas telefono_solo_numeros, telefono_mayor_0, telefono_no_repetido en False
+                        Validar que solo tenga digitos y > 0
+                        Comprobar que no se repita en otros empleados
+                        Si todas las validaciones son verdaderas Entonces
+                            empleado[numero_telefonico] = numero
+                        
+
+                    Caso 6:
+                        Solicitar nuevo cargo
+                        Si solo contiene letras Entonces
+                            empleado[cargo] = cargo
+                        Sino
+                            Imprimir "El cargo digitado debe contener solo letras"
+                        
+
+                    Caso 7:
+                        Solicitar nueva fecha de ingreso
+                        Si formato incorrecto Entonces
+                            Imprimir "La fecha de ingreso debe estar separada por /"
+                        Sino
+                            empleado[fecha_ingreso] = nueva fecha
+                        
+
+                    Caso 8:
+                        Imprimir menu tiene hijos
+                        Solicitar opcion tiene_hijos
+                        Segun opcion Hacer
+                            Caso 1: empleado[tiene_hijos] = "Si"
+                            Caso 2: empleado[tiene_hijos] = "No"
+                            Caso _: Imprimir "Escoja una opcion valida"
+                        
+
+                    Caso 9:
+                        Imprimir menu tipo de contrato
+                        Solicitar opcion tipo_contrato
+                        Segun opcion Hacer
+                            Caso 1: empleado[tipo_contrato] = "Definido"
+                            Caso 2: empleado[tipo_contrato] = "Indefinido"
+                            Caso 3: empleado[tipo_contrato] = "Obra labor"
+                            Caso 4: empleado[tipo_contrato] = "Aprendizaje"
+                            Caso _: Imprimir "Escoja una opcion valida"
+                        
+
+                    Caso 10:
+                        Imprimir menu RH
+                        Solicitar opcion RH
+                        Segun opcion Hacer
+                            Caso 1: empleado[RH] = "A+"
+                            Caso 2: empleado[RH] = "A-"
+                            Caso 3: empleado[RH] = "B+"
+                            Caso 4: empleado[RH] = "B-"
+                            Caso 5: empleado[RH] = "AB+"
+                            Caso 6: empleado[RH] = "AB-"
+                            Caso 7: empleado[RH] = "O+"
+                            Caso 8: empleado[RH] = "O-"
+                            Caso _: Imprimir "Digite una opcion valida"
+                        
+
+                    Caso 11:
+                        Imprimir menu estado civil
+                        Solicitar opcion estado_civil
+                        Segun opcion Hacer
+                            Caso 1: empleado[estado_civil] = "Soltero"
+                            Caso 2: empleado[estado_civil] = "Casado"
+                            Caso 3: empleado[estado_civil] = "Union libre"
+                            Caso 4: empleado[estado_civil] = "Divorciado"
+                            Caso 5: empleado[estado_civil] = "Viudo"
+                            Caso _: Imprimir "Digite una opcion valida"
+                        
+
+                    Caso 12:
+                        Imprimir menu discapacidad
+                        Solicitar opcion discapacidad
+                        Segun opcion Hacer
+                            Caso 1: empleado[discapacidad] = "Si"
+                            Caso 2: empleado[discapacidad] = "No"
+                            Caso _: Imprimir "Digite una opcion valida"
+                        
+
+                    Caso 13:
+                        Imprimir menu poblacion vulnerable
+                        Solicitar opcion poblacion_vulnerable
+                        Segun opcion Hacer
+                            Caso 1: empleado[poblacion_vulnerable] = "Si"
+                            Caso 2: empleado[poblacion_vulnerable] = "No"
+                            Caso _: Imprimir "Digite una opcion valida"
+                        
+
+                    Caso 0:
+                        Imprimir "Los cambios se han realizado con exito"
+                        Retornar empleado
+
+                    Caso _:
+                        Imprimir "Digite una opcion valida"
+
+    Retornar "El empleado buscado no existe"
+
+
+
 
     
 
