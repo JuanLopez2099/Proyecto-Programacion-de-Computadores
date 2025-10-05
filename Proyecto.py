@@ -86,36 +86,52 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
     return nuevo_empleado  #Imprime el diccionario con la informacion del nuevo empleado
 
 
-def eliminar_empleado(): #verificar si hay empleados
-    if lista_empleados == []: #verificar si la lista esta vacia
+def eliminar_empleado():  # Verificar si hay empleados
+    if lista_empleados == []:  # Verificar si la lista está vacía
         print("No hay empleados para eliminar")
-        return #sale de la funcion si no hay empleados
+        return  # Sale de la función si no hay empleados
     
-    print("\n--- Lista de empleados ---") #mostrar la lista actual
-    mostrar_empleados() #llama a la funcion mostrar_empleado
+
+    numero_identificacion = input("Digite el número de identificación del trabajador a eliminar: ").strip() # Pedir número de identificación del empleado que va a ser eliminado
     
-    nombre = input("Digite el nombre del trabajador a eliminar: ").lower().strip() #pedir nombre del empleado que va a ser eliminado
+    # Validar que sea un número
+    if not numero_identificacion.isdigit():
+        print("El número de identificación debe contener solo dígitos")
+        return
     
-    empleado_encontrado = None #Guarda el diccionario del empleado si se encuentra
-    posicion = -1 #Guardar el indice del empleado en la lista
+    numero_identificacion = int(numero_identificacion)  # Convertir a entero
     
-    for i, empleado in enumerate(lista_empleados): #Recorre la lista de empleados para buscar coincidencias
-        if empleado["nombre"].lower() == nombre: #Compara el nombre ingresado con el nombre del empleado actual
-            empleado_encontrado = empleado #si hay coincidencia guarda el empleado y su posicion
-            posicion = i #Guarda el indice donde esta el empleado
-            break #salimos del bucle porque ya encontro el empleado
+    empleado_encontrado = None  # Guarda el diccionario del empleado si se encuentra
+    posicion = -1  # Guardar el índice del empleado en la lista
     
-    if empleado_encontrado: #verifica si se encontro un empleado con ese nombre
-        print(f"\nEmpleado encontrado: {empleado_encontrado['nombre']}") #muestra los datos del empleado encontrado
-        confirmacion = input("¿Está seguro que desea eliminar este empleado? (si/no): ").lower().strip() #Pide confirmacion
+    # Recorre la lista de empleados para buscar coincidencias
+    for i, empleado in enumerate(lista_empleados):
+        if empleado["numero_identificacion"] == numero_identificacion:  # Compara el número ingresado
+            empleado_encontrado = empleado  # Si hay coincidencia guarda el empleado y su posición
+            posicion = i  # Guarda el índice donde está el empleado
+            break  # Salimos del bucle porque ya encontró el empleado
+    
+    if empleado_encontrado:  # Verifica si se encontró un empleado con ese número
+        # Muestra los datos del empleado encontrado
+        print(f"\nEmpleado encontrado:")
+        print(f"Nombre: {empleado_encontrado['nombre']}")
+        print(f"Cédula: {empleado_encontrado['numero_identificacion']}")
+        print(f"Cargo: {empleado_encontrado['cargo']}")
         
-        if confirmacion == "si": #Eliminar empleado de la lista usando su posicion
-            lista_empleados.pop(posicion) #elimina el elemento en esa posicion
-            print("Empleado eliminado")
-        else: #Si el usuario no confirma se cancela la eliminacion
-            print("Eliminación cancelada") #si el usuario no confirma se cancela
+        print("""\n¿Está seguro que desea eliminar este empleado?
+              1. Si
+              2. No""")
+        confirmacion = int(input("Digite una opción 1-2: "))
+        
+        if confirmacion == 1:
+            lista_empleados.pop(posicion)  # Elimina el elemento en esa posición
+            print("Empleado eliminado exitosamente")
+        elif confirmacion == 2:
+            print("Eliminación cancelada")
+        else:
+            print("Opción inválida. Eliminación cancelada")
     else:
-        print("No se encontró un empleado con ese nombre") #si no se encontro ningun empleado con ese nombre
+        print("No se encontró un empleado con ese número de identificación")
 
 #Definir funcion para modificar informacion de los empleados:
 def modificar_empleado(numero_identificacion): #Se crea la funcion con el parametro que se le pedira al usuario
