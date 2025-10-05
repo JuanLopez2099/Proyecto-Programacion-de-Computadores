@@ -345,6 +345,44 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
 
     return "El empleado buscado no existe"  #En caso de ingresar el numero de identifiacion que no exista la funcion retorna indicandolo
 
+#Funcion para filtrar empleados por edad especifica
+def filtrar_edad_especifica(edad): #Se crea la funcion con el parametro solicitado 
+    if edad.isdigit():
+        edad = int(edad)
+    else:
+        return "La edad no puede contener letras"    #Se valida mediante condicionales que la edad solo contenga numeros y no sea menor o igual a 0
+    if edad <= 0:
+        return "La edad debe ser mayor a 0"
+    coincidencias = []        #Se crea una lista para guardar las coincidencias
+    for empleado in lista_empleados:    #Se recorre la lista de empleados
+        if edad == empleado["edad"]:   #Si la edad ingresada coincide con edades dentro de la lista de empleados
+            coincidencias.append(empleado)   #Se guardan los diccionarios que coincidan en la lista de coincidencias
+    if coincidencias != []:    #Si la lista de coincidencias no esta vacia se imprime
+        return coincidencias
+    elif coincidencias == []:
+        return"No existen empleados con la edad ingresada"  #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
+#Funcion para filtrar empleados por rango de edad
+def filtrar_edad_rango(edad_min, edad_max):   #Se crea la funcion con los parametros solicitados
+    if edad_min.isdigit() and edad_max.isdigit():
+        edad_min = int(edad_min)
+        edad_max = int(edad_max)                         
+    else:
+        return "Las edades ingresadas no pueden contener letras"     #Mediante condicionales se valida que las edades sean solo numeros, no menores a 0 y que la edad minima no sea mayor a la maxima
+    
+    if edad_min <= 0 or edad_max <= 0:
+        return "las edades ingresadas deben ser mayores a 0"
+    if edad_max <= edad_min:
+        return "La edad maxima no puede ser menor a la edad minima"
+    coincidencias = []
+    for empleado in lista_empleados:    #Se recorre la lista de empleados
+        if empleado["edad"] in range(edad_min, edad_max + 1 ):   #Si hay edades en el diccionario de empleados que esten dentro del rango de la edad minima y maxima ingresada
+            coincidencias.append(empleado)   #Se añaden a la lista de coincidencias
+    
+    if coincidencias != []:  
+        return coincidencias  #Si la lista de coincidencias no esta vacia se imprime
+    elif coincidencias == []:
+        return "No existen empleados en los rangos de edad ingresados" #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
+
    
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
@@ -353,6 +391,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 3. Registrar empleado
 4. Eliminar empleado
 5. Modificar informacion de empleado
+6. Filtrar empleados por edad
 0. Salir
 """)
 
@@ -458,6 +497,20 @@ while True:
         case 5:
             numero_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Pedir numero de identificacion del empleado a modificar
             print(modificar_empleado(numero_identificacion))  #Se llama a la funcion modificar empleado
+        case 6:
+            print("""Filtrar edad por:
+                  1. Edad especifica
+                  2. Rango de edad       
+                  """)    #Se imprime menu indicando con opciones de filtrado
+            opcion = int(input("Escoja una opcion 1-2: "))
+            match opcion:
+                case 1:
+                    edad = input("Digite la edad del empleado en años: ")
+                    print(filtrar_edad_especifica(edad))                  #En el primer caso se pide la edad especifica y se llama a la funcion
+                case 2:
+                    edad_min = input("Digire la edad minima: ")
+                    edad_max = input("Digite la edad maxima: ")
+                    print(filtrar_edad_rango(edad_min, edad_max))      #En el segundo caso se solicitan las dos edades y se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
