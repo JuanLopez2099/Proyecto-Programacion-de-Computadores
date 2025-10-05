@@ -277,6 +277,57 @@ Definir funcion modificar_empleado(numero_identificacion)
     Retornar "El empleado buscado no existe"
 
 
+Definir funcion filtrar_edad_especifica(edad)
+    
+    Si edad contiene solo digitos Entonces
+        Convertir edad a entero
+        Retornar "La edad no puede contener letras"
+
+    Si edad <= 0 Entonces
+        Retornar "La edad debe ser mayor a 0"
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si edad = empleado[edad] Entonces
+            Agregar empleado a coincidencias
+
+    FinPara
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados con la edad ingresada"
+
+Definir funcion filtrar_edad_rango(edad_min, edad_max)
+
+    Si edad_min y edad_max contienen solo digitos Entonces
+        Convertir edad_min a entero
+        Convertir edad_max a entero
+    Sino
+        Retornar "Las edades ingresadas no pueden contener letras"
+
+    Si edad_min <= 0 o edad_max <= 0 Entonces
+        Retornar "Las edades ingresadas deben ser mayores a 0"
+
+    Si edad_max <= edad_min Entonces
+        Retornar "La edad maxima no puede ser menor a la edad minima"
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si empleado[edad] esta entre edad_min y edad_max Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados en los rangos de edad ingresados"
+
+
+
+
+
 
 
     
