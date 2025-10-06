@@ -494,7 +494,18 @@ def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará
             coincidencias.append(empleado)
     if coincidencias != []:
         return coincidencias # Se retorna la lista con los empleados que cumplen la condición
-    
+
+# Definir función para filtrar empleados según su estado civil
+def filtrar_estado_civil(estado_civil): # Se define la función con el parámetro que se solicitará al usuario
+    opciones_estado_civil = {1: "Soltero", 2: "Casado", 3: "Union libre", 4: "Divorciado", 5: "Viudo"} # Se crea un diccionario con las opciones disponibles para estado civil
+    estado_civil = opciones_estado_civil[estado_civil] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
+    coincidencias = []
+    for empleado in lista_empleados:
+        if estado_civil == empleado["estado_civil"]: # Se compara el estado civil del empleado con el valor ingresad
+            coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
+
+    if coincidencias != []:
+        return coincidencias  #Se retorna la lista con los empleados que cumplen la condición
 
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
@@ -508,6 +519,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 8. Filtrar empleados por sexo
 9. Filtrar por hijos Si/No
 10. Filtrar por RH
+11. Filtrar por estado civil
 0. Salir
 """)
 
@@ -676,6 +688,15 @@ while True:
                       8. O-""") #Se imprime un menu con todas las opciones para filtrar
             RH = int(input("Digite una opcion 1-8: "))
             print(filtrar_rh(RH)) #Se llama a la funcion
+        case 11:
+            print("""Filtrar por estado civil:
+                          1. Soltero
+                          2. Casado
+                          3. Union libre
+                          4. Divorciado
+                          5. Viudo""")
+            estado_civil = int(input("Digite una opcion 1-5: ")) #Se imprime un menu con todas las opciones para filtrar
+            print(filtrar_estado_civil(estado_civil)) #Se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
