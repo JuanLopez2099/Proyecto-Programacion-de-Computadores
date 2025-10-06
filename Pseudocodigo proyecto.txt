@@ -466,7 +466,25 @@ Definir funcion filtrar_estado_civil(opcion_estado_civil)
     Si coincidencias no esta vacia Entonces
         Retornar coincidencias
     Sino
-        Retornar "No existen empleados con el estado civil indicado"   
+        Retornar "No existen empleados con el estado civil indicado"
+
+Definir funcion filtrar_poblacion_vulnerable(opcion_poblacion_vulnerable)
+
+    Definir diccionario opciones_poblacion_vulnerable con valores {1: "Si", 2: "No"}
+
+    poblacion_vulnerable = opciones_poblacion_vulnerable[opcion_poblacion_vulnerable]
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si poblacion_vulnerable = empleado[poblacion_vulnerable] Entonces
+            Agregar empleado a coincidencias
+  
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados en la poblacion vulnerable indicada"  
 
 Definir funcion de menu
     imprimir opcion 1 lista de empleados
