@@ -26,6 +26,40 @@ estado civil como cadena
 discapacidad como cadena
 poblacion vulnerable como cadena
 
+Definir funcion imprimir_tablas(lista)
+
+    Definir diccionario anchos como vacio
+
+    Definir lista campos con valores ["nombre", "numero_identificacion", "fecha_nacimiento", "edad", "sexo", "numero_telefonico", "cargo", "fecha_ingreso", "tiene_hijos", "tipo_contrato", "RH", "estado_civil", "discapacidad", "poblacion_vulnerable"]
+
+    Para cada campo dentro de campos
+        ancho = longitud(campo)
+        Para cada empleado dentro de lista
+            valor = longitud(convertir a cadena empleado[campo])
+            Si valor > ancho Entonces
+                ancho = valor
+   
+        anchos[campo] = ancho
+    
+
+    resultado = "" # Inicializar cadena vacía para construir la tabla
+
+    # Construir fila de encabezados
+    Para cada campo dentro de campos
+        resultado += alinear a la izquierda(campo, anchos[campo]) + " "
+    
+    resultado += salto de linea
+
+    # Construir filas de datos
+    Para cada empleado dentro de lista
+        Para cada campo dentro de campos
+            resultado += alinear a la izquierda(convertir a cadena empleado[campo], anchos[campo]) + " "
+        
+        resultado += salto de linea
+    
+
+    Retornar resultado
+
 Definir Funcion para mostrar empleados
         Por cada empleado dentro de lista de empleados
            imprimir empleado[nombre]
@@ -149,7 +183,7 @@ Definir funcion modificar_empleado(numero_identificacion)
                                 repetido = Verdadero
                                 Romper
                             
-                        FinPara
+                        
                         Si no repetido Entonces
                             numero_no_repetido = Verdadero
                         
