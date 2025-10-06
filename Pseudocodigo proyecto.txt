@@ -292,8 +292,6 @@ Definir funcion filtrar_edad_especifica(edad)
         Si edad = empleado[edad] Entonces
             Agregar empleado a coincidencias
 
-    FinPara
-
     Si coincidencias no esta vacia Entonces
         Retornar coincidencias
     Sino
@@ -324,6 +322,83 @@ Definir funcion filtrar_edad_rango(edad_min, edad_max)
     Sino
         Retornar "No existen empleados en los rangos de edad ingresados"
 
+
+Definir funcion filtrar_fecha_ingreso_especifica(fecha_ingreso)
+
+    Si el numero de "/" en fecha_ingreso es menor a 2 o mayor a 2 Entonces
+        Retornar "La fecha ingresada debe seguir el formato indicado"
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si fecha_ingreso = empleado[fecha_ingreso] Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados con la fecha de ingreso ingresada"
+
+
+Definir funcion filtrar_fecha_ingreso_dia(dia)
+
+    Si dia no contiene solo digitos Entonces
+        Retornar "Los parametros ingresados deben contener unicamente numeros"
+    Sino
+        Convertir dia a entero
+    FinSi
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Convertir empleado[fecha_ingreso] de string a formato datetime y guardar en fecha_ingreso_lista
+        Si dia = fecha_ingreso_lista.dia Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados ingresados en el dia indicado"
+
+Definir funcion filtrar_fecha_ingreso_mes(mes)
+
+    Si mes no contiene solo digitos Entonces
+        Retornar "Los parametros ingresados deben contener unicamente numeros"
+    Sino
+        Convertir mes a entero
+    FinSi
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Convertir empleado[fecha_ingreso] de string a formato datetime y guardar en fecha_ingreso_lista
+        Si mes = fecha_ingreso_lista.mes Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados ingresados en el mes indicado"
+
+Definir funcion filtrar_fecha_ingreso_año(año)
+
+    Si año no contiene solo digitos Entonces
+        Retornar "Los parametros ingresados deben contener unicamente numeros"
+    Sino
+        Convertir año a entero
+    FinSi
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Convertir empleado[fecha_ingreso] de string a formato datetime y guardar en fecha_ingreso_lista
+        Si año = fecha_ingreso_lista.año Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados ingresados en el año indicado"
 
 
 
