@@ -450,7 +450,23 @@ Si coincidencias no esta vacia Entonces
 Sino
     Retornar "No existen empleados con el tipo de sangre indicado"
 
-    
+Definir funcion filtrar_estado_civil(opcion_estado_civil)
+
+    Definir diccionario opciones_estado_civil con valores {1: "Soltero", 2: "Casado", 3: "Union libre", 4: "Divorciado", 5: "Viudo"}
+
+    estado_civil = opciones_estado_civil[opcion_estado_civil]
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si estado_civil = empleado[estado_civil] Entonces
+            Agregar empleado a coincidencias
+   
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No existen empleados con el estado civil indicado"   
 
 Definir funcion de menu
     imprimir opcion 1 lista de empleados
