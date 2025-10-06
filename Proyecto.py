@@ -461,7 +461,7 @@ def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que
         return "No existen empleados ingresados en el año indicado"
 
 # Definir función para filtrar empleados según su sexo
-def filtrar_fecha_ingreso(sexo): # Se crea la función con el parámetro que se pedirá al usuario
+def filtrar_sexo(sexo): # Se crea la función con el parámetro que se pedirá al usuario
     opciones_sexo = {1: "hombre", 2: "mujer", 3: "otro"} # Se define un diccionario con las opciones disponibles para sexo
     sexo = opciones_sexo[sexo]
     coincidencias = []
@@ -472,6 +472,17 @@ def filtrar_fecha_ingreso(sexo): # Se crea la función con el parámetro que se 
         return coincidencias # Se retorna la lista con los empleados que cumplen la condición
     elif coincidencias == []:
         return "No hay empleados del sexo indicado"
+    
+# Definir función para filtrar empleados según si tienen hijos o no
+def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá al usuario
+    opciones_hijos = {1: "Si", 2: "No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene hijos
+    hijos = opciones_hijos[hijos] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
+    coincidencias = []
+    for empleado in lista_empleados:
+        if hijos == empleado["tiene_hijos"]: # Se compara la opción seleccionada con el valor del empleado
+            coincidencias.append(empleado) # Si coincide se agrega el diccionario del empleado a la lista de coincidencias
+    if coincidencias != []:
+        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
 
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
@@ -483,6 +494,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 6. Filtrar empleados por edad
 7. Filtrar empleados por fecha de ingreso
 8. Filtrar empleados por sexo
+9. Filtrar por hijos Si/No
 0. Salir
 """)
 
@@ -630,9 +642,15 @@ while True:
             print("""Filtrar por:
                   1. Hombre
                   2. Mujer
-                  3. Otro""")   #Se imprime un menu con todas las opciones para filtraar
+                  3. Otro""")   #Se imprime un menu con todas las opciones para filtrar
             sexo = int(input("Digite una opcion 1-3: "))
-            print(filtrar_fecha_ingreso(sexo))   #Se llama a la funcion
+            print(filtrar_sexo(sexo))   #Se llama a la funcion
+        case 9:
+            print("""Tiene hijos:
+                  1. Si
+                  2. No""") #Se imprime un menu con todas las opciones para filtrar
+            hijos = int(input("Digite una opcion 1-2: "))
+            print(filtrar_hijos(hijos)) #Se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
