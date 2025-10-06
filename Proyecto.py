@@ -507,6 +507,17 @@ def filtrar_estado_civil(estado_civil): # Se define la función con el parámetr
     if coincidencias != []:
         return coincidencias  #Se retorna la lista con los empleados que cumplen la condición
 
+# Definir función para filtrar empleados según si pertenecen o no a una población vulnerable
+def filtrar_poblacion_vulnerable(poblacion_vulnerable): # Se define la función con el parámetro que se solicitará al usuario
+    opciones_poblacion_vulnerable = {1: "Si", 2: "No"}   # Se crea un diccionario con las opciones disponibles: Sí o No
+    poblacion_vulnerable = opciones_poblacion_vulnerable[poblacion_vulnerable] # Se convierte la opción numérica ingresada por el usuario a su valor correspondiente en texto
+    coincidencias = []
+    for empleado in lista_empleados:
+        if poblacion_vulnerable == empleado["poblacion_vulnerable"]: # Se compara el valor de la clave 'poblacion_vulnerable' del empleado con el ingresado por el usuario
+            coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
+    if coincidencias != []:
+        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
 1. Mostrar lista de todos los empleados
@@ -520,6 +531,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 9. Filtrar por hijos Si/No
 10. Filtrar por RH
 11. Filtrar por estado civil
+12. Filtrar por poblacion vulnerable
 0. Salir
 """)
 
@@ -697,6 +709,12 @@ while True:
                           5. Viudo""")
             estado_civil = int(input("Digite una opcion 1-5: ")) #Se imprime un menu con todas las opciones para filtrar
             print(filtrar_estado_civil(estado_civil)) #Se llama a la funcion
+        case 12:
+            print("""Filtrar por poblacion vulnerable:
+                          1. Si
+                          2. No""")  #Se imprime un menu con todas las opciones para filtrar
+            poblacion_vulnerable = int(input("Digite una opcion 1-2: ")) 
+            print(filtrar_poblacion_vulnerable(poblacion_vulnerable)) #Se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
