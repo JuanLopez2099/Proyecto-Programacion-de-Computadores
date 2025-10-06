@@ -63,7 +63,7 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
         return "La fecha de nacimiento debe estar separado por /" #Si no lo tiene se envia un mensaje indicandolo
     if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:
         return "La fecha de ingreso debe estar separado por /"
-    opciones_sexo_empleado = {1: "Hombre", 2: "Mujer", 3: "Otro"}
+    opciones_sexo_empleado = {1: "hombre", 2: "mujer", 3: "otro"}
     sexo = opciones_sexo_empleado[sexo]
     opciones_tiene_hijos = {1: "Si", 2: "No"}                         #Se crean diccionarios que contengan las opciones que digite el usuario usando claves
     tiene_hijos = opciones_tiene_hijos[tiene_hijos]                   #La variable se convierte al valor de la clave del diccionario que dijite el usuario                                        
@@ -203,11 +203,11 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                         sexo = int(input("Digite una opcion 1-3: "))   #Se pide la opcion como numero entero
                         match sexo:  #Usando un switchcase
                             case 1:
-                                empleado["sexo"] = "Hombre"  #Caso 1 se remplaza la clave sexo con hombre
+                                empleado["sexo"] = "hombre"  #Caso 1 se remplaza la clave sexo con hombre
                             case 2:
-                                empleado["sexo"] = "Mujer" #Caso 2 se remplaza la clave sexo con mujer
+                                empleado["sexo"] = "mujer" #Caso 2 se remplaza la clave sexo con mujer
                             case 3:
-                                empleado["sexo"] = "Otro"  #Caso 3 se remplaza la clave sexo con otro
+                                empleado["sexo"] = "otro"  #Caso 3 se remplaza la clave sexo con otro
                             case _:
                                 print("Escoja una opcion valida")  #Si el usuario coloca una opcion no contemplada se imprime un mensaje indicandolo
                     case 5: #Reemplazar numero telefonico
@@ -460,6 +460,19 @@ def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que
     elif coincidencias == []:
         return "No existen empleados ingresados en el año indicado"
 
+# Definir función para filtrar empleados según su sexo
+def filtrar_fecha_ingreso(sexo): # Se crea la función con el parámetro que se pedirá al usuario
+    opciones_sexo = {1: "hombre", 2: "mujer", 3: "otro"} # Se define un diccionario con las opciones disponibles para sexo
+    sexo = opciones_sexo[sexo]
+    coincidencias = []
+    for empleado in lista_empleados: # Se recorre la lista de empleados
+        if sexo == empleado["sexo"]:
+            coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
+    if coincidencias != []: 
+        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+    elif coincidencias == []:
+        return "No hay empleados del sexo indicado"
+
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
 1. Mostrar lista de todos los empleados
@@ -469,6 +482,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 5. Modificar informacion de empleado
 6. Filtrar empleados por edad
 7. Filtrar empleados por fecha de ingreso
+8. Filtrar empleados por sexo
 0. Salir
 """)
 
@@ -611,7 +625,14 @@ while True:
                     año = input("Digite un año: ") #Se solicita al usuario el año para filtrar
                     print(filtrar_fecha_ingreso_año(año)) #Se llama a la funcion para filtrar por año y se imprime el resultado
                 case _:
-                    print("Digite una opcion valida")   
+                    print("Digite una opcion valida")
+        case 8:
+            print("""Filtrar por:
+                  1. Hombre
+                  2. Mujer
+                  3. Otro""")   #Se imprime un menu con todas las opciones para filtraar
+            sexo = int(input("Digite una opcion 1-3: "))
+            print(filtrar_fecha_ingreso(sexo))   #Se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
