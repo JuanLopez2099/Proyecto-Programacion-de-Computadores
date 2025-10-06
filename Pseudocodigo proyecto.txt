@@ -417,7 +417,22 @@ Definir funcion filtrar_sexo(sexo_opcion)
     Sino
         Retornar "No hay empleados del sexo indicado"
 
+Definir funcion filtrar_hijos(opcion_hijos)
 
+    Definir diccionario opciones_hijos con valores {1: "Si", 2: "No"}
+
+    hijos = opciones_hijos[opcion_hijos]
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si hijos = empleado[tiene_hijos] Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No hay empleados que cumplan la condición de hijos"
 
 
     
