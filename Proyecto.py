@@ -398,8 +398,68 @@ def filtrar_edad_rango(edad_min, edad_max):   #Se crea la funcion con los parame
         return coincidencias  #Si la lista de coincidencias no esta vacia se imprime
     elif coincidencias == []:
         return "No existen empleados en los rangos de edad ingresados" #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
+    
+#Definir funcion para filtrar empleados por una fecha de ingreso especifica
+def filtrar_fecha_ingreso_especifica(fecha_ingreso): #Se define la funcion con el parametro que se solicitara al usuario
+    if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2: #Se valida que la fecha siga el formato Dia/Mes/Año contando el numero de "/"
+        return "La fecha ingresada debe seguir el formato indicado" #Si no sigue el formato se retorna un mensaje indicandolo
+    coincidencias = [] #Se crea una lista vacia para guardar los empleados que coincidan con la fecha de ingreso
+    for empleado in lista_empleados:
+        if fecha_ingreso == empleado["fecha_ingreso"]:   #Si la fecha ingresada coincide con la fecha de ingreso del empleado
+            coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
+    if coincidencias != []:
+        return coincidencias    #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+    elif coincidencias == []:
+        return "No existen empleados con la fecha de ingreso ingresada"
+    
+#Definir funcion para filtrar empleados por el dia de su fecha de ingreso    
+def filtrar_fecha_ingreso_dia(dia):  #Se define la funcion con el parametro que se solicitara al usuario
+    if not dia.isdigit(): #Se valida que el dia ingresado contenga solo numeros
+        return "Los parametros ingresados deben contener unicamente numeros"
+    else:
+        dia = int(dia)  #Si es valido, se convierte el valor de dia a entero
+    coincidencias = []
+    for empleado in lista_empleados: 
+        fecha_ingreso_lista = datetime.datetime.strptime(empleado["fecha_ingreso"], "%d/%m/%Y") #Se convierte la fecha de ingreso del empleado de string a datetime
+        if dia == fecha_ingreso_lista.day:  #Si el dia ingresado coincide con el dia de la fecha de ingreso del empleado
+            coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
+    if coincidencias != []:
+        return coincidencias    #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+    elif coincidencias == []:
+        return "No existen empleados ingresados en el dia indicado"
+    
+#Definir funcion para filtrar empleados por el mes de su fecha de ingreso
+def filtrar_fecha_ingreso_mes(mes): #Se define la funcion con el parametro que se solicitara al usuario
+    if not mes.isdigit(): #Se valida que el mes ingresado contenga solo numeros
+        return "Los parametros ingresados deben contener unicamente numeros"
+    else:
+        mes = int(mes)
+    coincidencias = []
+    for empleado in lista_empleados:
+        fecha_ingreso_lista = datetime.datetime.strptime(empleado["fecha_ingreso"], "%d/%m/%Y") #Se convierte la fecha de ingreso del empleado de string a datetime
+        if mes == fecha_ingreso_lista.month:  #Si el mes ingresado coincide con el mes de la fecha de ingreso del empleado
+            coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
+    if coincidencias != []:
+        return coincidencias #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+    elif coincidencias == []:
+        return "No existen empleados ingresados en el mes indicado"
 
-   
+#Definir funcion para filtrar empleados por el año de su fecha de ingreso
+def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que se solicitara al usuario
+    if not año.isdigit():  #Se valida que el año ingresado contenga solo numeros
+        return "Los parametros ingresados deben contener unicamente numeros" 
+    else:
+        año = int(año)
+    coincidencias = []
+    for empleado in lista_empleados:
+        fecha_ingreso_lista = datetime.datetime.strptime(empleado["fecha_ingreso"], "%d/%m/%Y")  #Se convierte la fecha de ingreso del empleado de string a datetime
+        if año == fecha_ingreso_lista.year:
+            coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
+    if coincidencias != []:
+        return coincidencias   #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+    elif coincidencias == []:
+        return "No existen empleados ingresados en el año indicado"
+
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
 1. Mostrar lista de todos los empleados
@@ -408,6 +468,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 4. Eliminar empleado
 5. Modificar informacion de empleado
 6. Filtrar empleados por edad
+7. Filtrar empleados por fecha de ingreso
 0. Salir
 """)
 
@@ -525,8 +586,32 @@ while True:
                     print(filtrar_edad_especifica(edad))                  #En el primer caso se pide la edad especifica y se llama a la funcion
                 case 2:
                     edad_min = input("Digire la edad minima: ")
-                    edad_max = input("Digite la edad maxima: ")
-                    print(filtrar_edad_rango(edad_min, edad_max))      #En el segundo caso se solicitan las dos edades y se llama a la funcion
+                    edad_max = input("Digite la edad maxima: ")      #En el segundo caso se solicitan las dos edades y se llama a la funcion
+                    print(filtrar_edad_rango(edad_min, edad_max))
+                case _:
+                    print("Digite una opcion valida")
+        case 7:
+            print("""Filtrar fecha de ingreso por:
+                  1. Fecha especifica
+                  2. Dia
+                  3. Mes
+                  4. Año""")  #Se imprime el menu con las opciones disponibles para filtrar empleados por fecha de ingreso
+            opcion = int(input("Digite una opcion 1-4: "))
+            match opcion:
+                case 1:   
+                    fecha_ingreso = input("Digite una fecha de ingreso: ") #Se solicita al usuario la fecha completa para filtrar
+                    print(filtrar_fecha_ingreso_especifica(fecha_ingreso)) #Se llama a la funcion para filtrar por fecha especifica y se imprime el resultado
+                case 2:
+                    dia = input("Digite un dia: ") #Se solicita al usuario el dia para filtrar
+                    print(filtrar_fecha_ingreso_dia(dia)) #Se llama a la funcion para filtrar por dia y se imprime el resultado
+                case 3:
+                    mes = input("Digite un mes: ")  #Se solicita al usuario el mes para filtrar
+                    print(filtrar_fecha_ingreso_mes(mes)) #Se llama a la funcion para filtrar por mes y se imprime el resultado
+                case 4:
+                    año = input("Digite un año: ") #Se solicita al usuario el año para filtrar
+                    print(filtrar_fecha_ingreso_año(año)) #Se llama a la funcion para filtrar por año y se imprime el resultado
+                case _:
+                    print("Digite una opcion valida")   
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
