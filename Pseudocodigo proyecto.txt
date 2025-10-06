@@ -400,7 +400,22 @@ Definir funcion filtrar_fecha_ingreso_año(año)
     Sino
         Retornar "No existen empleados ingresados en el año indicado"
 
+Definir funcion filtrar_sexo(sexo_opcion)
 
+    Definir diccionario opciones_sexo con valores {1: "hombre", 2: "mujer", 3: "otro"}
+
+    sexo = opciones_sexo[sexo_opcion]
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si sexo = empleado[sexo] Entonces
+            Agregar empleado a coincidencias
+
+    Si coincidencias no esta vacia Entonces
+        Retornar coincidencias
+    Sino
+        Retornar "No hay empleados del sexo indicado"
 
 
 
