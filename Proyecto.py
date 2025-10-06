@@ -1,5 +1,4 @@
 import datetime as datetime #Se importa la libreria datetime
-
 #Funcion para calcular edad de las personas 
 def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que se le solicitara al usuario
     fecha_nac = datetime.datetime.strptime(fecha_nacimiento.strip(), "%d/%m/%Y") #Usando la libreria datetime convertimos la fecha de nacimiento de string a formato datetime
@@ -9,17 +8,17 @@ def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que
 
     return edad  #Retorna la edad
 
-
+ 
 
 #Definir lista de empleados
-lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 123456789, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
-                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "03/06/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 987654321, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
-                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220222033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 543219876, "cargo": "psicologa", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"},
+lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 1234567899, "cargo": "desarrollador", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
+                   {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "03/06/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 9876543211, "cargo": "analista", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220222033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 5432198767, "cargo": "psicologa", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"},
                    {"nombre": "Jack El Destripador", "numero_identificacion": 2223335556, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "hombre", "numero_telefonico": 3054637387, "cargo": "CEO", "fecha_ingreso": "01/01/2025",  "tiene_hijos": "No", "tipo_contrato": "Idenfinido", "RH": "B+",  "estado_civil": "Viudo", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Alex Sandro Silva Pereira", "numero_identificacion": 1330115133, "fecha_nacimiento": "07/07/1987", "edad": calcular_edad("07/07/1987") , "sexo": "hombre", "numero_telefonico": 3105550123, "cargo": "jefe de seguridad", "fecha_ingreso": "20/07/2025",  "tiene_hijos": "Si", "tipo_contrato": "Idenfinido", "RH": "AB+",  "estado_civil": "Casado", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Thomas Paul Aspinall", "numero_identificacion": 4623812222, "fecha_nacimiento": "11/04/1993", "edad": calcular_edad("11/04/1993") , "sexo": "hombre", "numero_telefonico": 3012314512, "cargo": "ingeniero de telecomunicaciones", "fecha_ingreso": "13/07/2025",  "tiene_hijos": "Si", "tipo_contrato": "Definido", "RH": "O+",  "estado_civil": "Casado", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Khamzat Khizarovich Chimaev", "numero_identificacion": 5712943456, "fecha_nacimiento": "01/05/1994", "edad": calcular_edad("01/05/1994") , "sexo": "hombre", "numero_telefonico": 3054560278, "cargo": "Analista de datos", "fecha_ingreso": "19/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Obra labor", "RH": "O-",  "estado_civil": "Viudo", "discapacidad": "No", "poblacion_vulnerable": "Si"},
-                   {"nombre": "Jack Della Madalena", "numero_identificacion": 99323346673, "fecha_nacimiento": "10/09/1996", "edad": calcular_edad("10/09/1996") , "sexo": "hombre", "numero_telefonico": 3023210391, "cargo": "Tecnico de hardware", "fecha_ingreso": "08/08/2025",  "tiene_hijos": "No", "tipo_contrato": "Aprendizaje", "RH": "A+",  "estado_civil": "Union libre", "discapacidad": "No", "poblacion_vulnerable": "No"},
+                   {"nombre": "Jack Della Madalena", "numero_identificacion": 9932334667, "fecha_nacimiento": "10/09/1996", "edad": calcular_edad("10/09/1996") , "sexo": "hombre", "numero_telefonico": 3023210391, "cargo": "Tecnico de hardware", "fecha_ingreso": "08/08/2025",  "tiene_hijos": "No", "tipo_contrato": "Aprendizaje", "RH": "A+",  "estado_civil": "Union libre", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Ilia Topuria Bendeliani", "numero_identificacion": 1216080617, "fecha_nacimiento": "21/01/1997", "edad": calcular_edad("21/01/1997") , "sexo": "hombre", "numero_telefonico": 3114037721, "cargo": "Tecnico de seguridad", "fecha_ingreso": "20/08/2025",  "tiene_hijos": "Si", "tipo_contrato": "Definido", "RH": "AB-",  "estado_civil": "Casado", "discapacidad": "No", "poblacion_vulnerable": "Si"},
                    {"nombre": "Alexander Volkanovski", "numero_identificacion": 2415022999, "fecha_nacimiento": "29/09/1988", "edad": calcular_edad("29/09/1988") , "sexo": "hombre", "numero_telefonico": 3207774410, "cargo": "Cafeteria", "fecha_ingreso": "13/08/2025",  "tiene_hijos": "Si", "tipo_contrato": "Definido", "RH": "O+",  "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Merab Dvalishvili", "numero_identificacion": 2019040323, "fecha_nacimiento": "10/01/1991", "edad": calcular_edad("10/01/1991") , "sexo": "hombre", "numero_telefonico": 3126582093, "cargo": "Diseñador grafico", "fecha_ingreso": "16/08/2025",  "tiene_hijos": "No", "tipo_contrato": "Obra labor", "RH": "B-",  "estado_civil": "Soltero", "discapacidad": "Si", "poblacion_vulnerable": "No"},
@@ -34,25 +33,62 @@ lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificaci
                    {"nombre": "Ronda Jean Rousey", "numero_identificacion": 1521080215, "fecha_nacimiento": "01/02/1987" ,"edad": calcular_edad("01/02/1987"), "sexo": "mujer", "numero_telefonico": 3105597743, "cargo": "auxiliar de contabilidad", "fecha_ingreso": "04/09/2025", "tiene_hijos": "No", "tipo_contrato": "Aprendizaje", "RH": "O-", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
+# Definir función para imprimir una lista de empleados en formato de tabla
+def imprimir_tablas(lista): # Se define la función con el parámetro que se solicitará, que es la lista de empleados a mostrar
+    anchos = {} # Se crea un diccionario vacío para almacenar el ancho máximo de cada columna
+    campos = ["nombre", "numero_identificacion", "fecha_nacimiento", "edad", "sexo", 
+              "numero_telefonico", "cargo", "fecha_ingreso", "tiene_hijos", "tipo_contrato",   # Se define la lista de claves que se mostrarán como columnas
+              "RH", "estado_civil", "discapacidad", "poblacion_vulnerable"]
+    
+     
+    for campo in campos: # Se recorre cada campo de la lista de columnas
+        ancho = len(campo)  # Se asigna el ancho con la longitud del nombre del campo
+        for empleado in lista: # Se recorre cada empleado en la lista
+            valor = len(str(empleado[campo])) # Se calcula la longitud del valor del campo convertido a cadena
+            if valor > ancho: # Si el valor es más largo que el nombre del campo
+                ancho = valor # Se actualiza el ancho máximo
+        anchos[campo] = ancho # Se guarda el ancho máximo de cada campo en el diccionario
+    
+    
+    resultado = "" # Se inicializa una cadena vacía donde se construirá la tabla
+    
+    # Construir la fila de encabezados con alineación basada en el ancho de cada columna
+    for campo in campos: # Se recorre cada campo para crear los encabezados
+        resultado += f"{campo:<{anchos[campo]}} " # Se agrega el nombre del campo alineado a la izquierda
+    resultado += "\n" # Se agrega un salto de línea después de los encabezados
+     
+    # Construir las filas con los datos de cada empleado
+    for emp in lista: # Se recorre cada empleado en la lista 
+        for campo in campos:  # Se recorre cada campo para obtener los valores
+            resultado += f"{str(emp[campo]):<{anchos[campo]}} " # Se agrega el valor alineado según el ancho de la columna
+        resultado += "\n" # Se agrega un salto de línea al final de cada fila
+    
+    return resultado # Se retorna la tabla completa como cadena
+
+
+
 
 #Crear funcion para mostrar a todos los empleados
 def mostrar_empleados():
-    for empleados in lista_empleados: #Bucle para recorrer la lista
-        print(f"|{empleados['nombre']}|, |{empleados['numero_identificacion']}|, |{empleados['fecha_nacimiento']}|, |{empleados['edad']}|, |{empleados['sexo']}|, |{empleados['numero_telefonico']}|, |{empleados['cargo']}|, |{empleados['fecha_ingreso']}|, |{empleados['tiene_hijos']}|, |{empleados['tipo_contrato']}|, |{empleados['RH']}|, |{empleados['estado_civil']}|, |{empleados['discapacidad']}|, |{empleados['poblacion_vulnerable']}|") #Imprimir la informacion de cada empleado por consola
+    if lista_empleados != []:
+        print(imprimir_tablas(lista_empleados))
     if lista_empleados == []:
         print("No hay empleados") 
 
 
 #Definir funcion para buscar empleados
 def buscar_empleados(numero_de_identificacion): #Se define la funcion con los parametros que se solicitaran para la busqueda
+    emp = []
     for empleado in lista_empleados:
         if numero_de_identificacion == empleado["numero_identificacion"]:  #Se compara si el numero de identificacion ingresado por el usuario es esta en la clave 'numero_identificacion'
-            return empleado  #Si lo esta retorna el diccionario con toda la informacion del emplead
+            emp.append(empleado)
+            return imprimir_tablas(emp)  #Si lo esta retorna el diccionario con toda la informacion del emplead
     return "El empleado no existe" #Si no retorna mensaje de señalando que el empleado buscado no existe
 
 
 #Definir funcion para registrar nuevos empleados
 def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable): #Se define la funcion con los parametros que se solicitaran al usuario
+    emp = []
     if not nombre.replace(" ", "").isalpha() or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == ""  or  numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
         return "las entradas deben ser validas" #En caso de que cierta informacion este vacia o no solo contenga numeros la funcion devuelve un mensaje indicandolo
     numero_identificacion = int(numero_identificacion) #Se transforman las cadenas a enteros
@@ -82,8 +118,11 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
         if nuevo_empleado["nombre"] == empleado["nombre"] or nuevo_empleado["numero_identificacion"] == empleado["numero_identificacion"] or  nuevo_empleado["numero_telefonico"] == empleado["numero_telefonico"]: #Se recorre la lista de empleados y se comprueba que el nuevo empleado no tenga la misma informacion que un empleado ya existente 
             return "No puede haber empleados con la misma informacion nombre/id/numero telefonico" #En caso de que la tenga la funcion retorna indicandolo
     lista_empleados.append(nuevo_empleado) #Una vez hechas todas las comprobaciones se agrega el diccionario que contiene al nuevo empleado a la lista de empleados
+    emp.append(nuevo_empleado)
+    print()
     print("El empleado se ha registrado con exito!") #Se indica que se ha añadido con exito
-    return nuevo_empleado  #Imprime el diccionario con la informacion del nuevo empleado
+    print()
+    return imprimir_tablas(emp)  #Imprime el diccionario con la informacion del nuevo empleado
 
 
 def eliminar_empleado():  # Verificar si hay empleados
@@ -135,10 +174,12 @@ def eliminar_empleado():  # Verificar si hay empleados
 
 #Definir funcion para modificar informacion de los empleados:
 def modificar_empleado(numero_identificacion): #Se crea la funcion con el parametro que se le pedira al usuario
+    tabla = []
     for empleado in lista_empleados:  #Se recorre la lista de empleados y se guarda el diccionario de cada empleado en la variable empleado
         if numero_identificacion == empleado["numero_identificacion"]: #Si el numero de identificacion ingresado por el usuario coincide con un numero de identificacion dentro del diccionario de empleados
             while True:        #Mediante un bucle while se despliega el meenu de todos los parametros modificables
-                print("""Escoja el dato que desea modificar:
+                print()
+                print("""Escoja el dato que desea modificar: \n
                       1. Nombre
                       2. Numero de identificacion
                       3. Fecha de nacimiento
@@ -154,7 +195,9 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                       13. Poblacion vulnerable
                       0. Guardar y salir"""
                       )
-                opcion = int(input("Digite una opcion 1: "))   #Se pide la opcion como numero entero
+                print()
+                opcion = int(input("Digite una opcion 1-13: "))   #Se pide la opcion como numero entero
+                print()
                 match opcion:  #Mediante un switchcase
                     case 1:  #Reemplazar nombre
                         nombre = input("Digite el nuevo nombre: ").strip().title() #Se pide el nuevo nombre al usuario
@@ -266,6 +309,7 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                       2. Indefinido
                       3. Obra labor
                       4. Aprendizaje""")  #Se imprimen todos los tipos de contrato
+                        print()
                         tipo_contrato = int(input("Escoja una opcion 1-4: "))  #Se solicita una opcion como numero entero
                         match tipo_contrato:   
                             case 1:
@@ -288,6 +332,7 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                       6. AB-
                       7. O+  
                       8. O-""") #Se imprime un menu con todos los tipos de RH
+                        print()
                         RH = int(input("Digite una opcion 1-8: ")) #Se solicita la opcion como numero entero
                         match RH:
                             case 1:
@@ -330,9 +375,10 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                             case _:
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
                     case 12:
-                        print("""El empleado cuenta con alguna discapacidad:
-                      1. Si
+                        print("""El empleado cuenta con alguna discapacidad: \n
+                      1.Si
                       2.No""") # Se imprime un menu con todas las opciones de discapacidad
+                        print()
                         discapacidad = int(input("Digite una opcion 1-2: ")) #Se solicita una opcion como numero entero
                         match discapacidad:
                             case 1:
@@ -342,9 +388,10 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                             case _:
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
                     case 13:
-                        print("""El empleado pertenece a alguna poblacion vulnerable:
+                        print("""El empleado pertenece a alguna poblacion vulnerable: \n
                       1. Si
                       2. No""") #Se imprime un menu con todas las opciones de poblacion vulnerable
+                        print()
                         poblacion_vulnerable = int(input("Digite una opcion 1-2: ")) #Se solicita una opcion como numero entero
                         match poblacion_vulnerable:
                             case 1:
@@ -355,7 +402,10 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
                     case 0:
                         print("Los cambios se han realizado con exito")  #Una vez que los cambios se han realizado se sale del menu
-                        return empleado  #Retorna el diccionario del empleado modificado con todos los cambios hechos para comprobar que todo este correcto
+                        print()
+                        tabla.append(empleado)
+                        print()
+                        return imprimir_tablas(tabla)  #Retorna el diccionario del empleado modificado con todos los cambios hechos para comprobar que todo este correcto
                     case _:
                         print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
 
@@ -373,8 +423,8 @@ def filtrar_edad_especifica(edad): #Se crea la funcion con el parametro solicita
     for empleado in lista_empleados:    #Se recorre la lista de empleados
         if edad == empleado["edad"]:   #Si la edad ingresada coincide con edades dentro de la lista de empleados
             coincidencias.append(empleado)   #Se guardan los diccionarios que coincidan en la lista de coincidencias
-    if coincidencias != []:    #Si la lista de coincidencias no esta vacia se imprime
-        return coincidencias
+    if coincidencias != []:   #Si la lista de coincidencias no esta vacia se imprime
+        return imprimir_tablas(coincidencias)   
     elif coincidencias == []:
         return"No existen empleados con la edad ingresada"  #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
 #Funcion para filtrar empleados por rango de edad
@@ -395,7 +445,7 @@ def filtrar_edad_rango(edad_min, edad_max):   #Se crea la funcion con los parame
             coincidencias.append(empleado)   #Se añaden a la lista de coincidencias
     
     if coincidencias != []:  
-        return coincidencias  #Si la lista de coincidencias no esta vacia se imprime
+        return imprimir_tablas(coincidencias)  #Si la lista de coincidencias no esta vacia se imprime
     elif coincidencias == []:
         return "No existen empleados en los rangos de edad ingresados" #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
     
@@ -408,7 +458,7 @@ def filtrar_fecha_ingreso_especifica(fecha_ingreso): #Se define la funcion con e
         if fecha_ingreso == empleado["fecha_ingreso"]:   #Si la fecha ingresada coincide con la fecha de ingreso del empleado
             coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
     if coincidencias != []:
-        return coincidencias    #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+        return imprimir_tablas(coincidencias)    #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
     elif coincidencias == []:
         return "No existen empleados con la fecha de ingreso ingresada"
     
@@ -424,7 +474,7 @@ def filtrar_fecha_ingreso_dia(dia):  #Se define la funcion con el parametro que 
         if dia == fecha_ingreso_lista.day:  #Si el dia ingresado coincide con el dia de la fecha de ingreso del empleado
             coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
     if coincidencias != []:
-        return coincidencias    #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+        return imprimir_tablas(coincidencias)    #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
     elif coincidencias == []:
         return "No existen empleados ingresados en el dia indicado"
     
@@ -440,7 +490,7 @@ def filtrar_fecha_ingreso_mes(mes): #Se define la funcion con el parametro que s
         if mes == fecha_ingreso_lista.month:  #Si el mes ingresado coincide con el mes de la fecha de ingreso del empleado
             coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
     if coincidencias != []:
-        return coincidencias #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+        return imprimir_tablas(coincidencias) #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
     elif coincidencias == []:
         return "No existen empleados ingresados en el mes indicado"
 
@@ -456,7 +506,7 @@ def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que
         if año == fecha_ingreso_lista.year:
             coincidencias.append(empleado)  #Se añade el empleado a la lista de coincidencias
     if coincidencias != []:
-        return coincidencias   #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
+        return imprimir_tablas(coincidencias)   #Si no esta vacia se imprimen todas las coinidencias, si lo esta se indica que no hay empleados con la fecha ingresada
     elif coincidencias == []:
         return "No existen empleados ingresados en el año indicado"
 
@@ -469,7 +519,7 @@ def filtrar_sexo(sexo): # Se crea la función con el parámetro que se pedirá a
         if sexo == empleado["sexo"]:
             coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
     if coincidencias != []: 
-        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+        return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
     elif coincidencias == []:
         return "No hay empleados del sexo indicado"
     
@@ -482,7 +532,7 @@ def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá
         if hijos == empleado["tiene_hijos"]: # Se compara la opción seleccionada con el valor del empleado
             coincidencias.append(empleado) # Si coincide se agrega el diccionario del empleado a la lista de coincidencias
     if coincidencias != []:
-        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+        return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
     
 # Definir función para filtrar empleados según su tipo de sangre
 def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará al usuario
@@ -493,7 +543,7 @@ def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará
         if RH == empleado["RH"]:  #Se compara el tipo de sangre del empleado con el valor ingresado
             coincidencias.append(empleado)
     if coincidencias != []:
-        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+        return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
 
 # Definir función para filtrar empleados según su estado civil
 def filtrar_estado_civil(estado_civil): # Se define la función con el parámetro que se solicitará al usuario
@@ -505,7 +555,7 @@ def filtrar_estado_civil(estado_civil): # Se define la función con el parámetr
             coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
 
     if coincidencias != []:
-        return coincidencias  #Se retorna la lista con los empleados que cumplen la condición
+        return imprimir_tablas(coincidencias)  #Se retorna la lista con los empleados que cumplen la condición
 
 # Definir función para filtrar empleados según si pertenecen o no a una población vulnerable
 def filtrar_poblacion_vulnerable(poblacion_vulnerable): # Se define la función con el parámetro que se solicitará al usuario
@@ -516,7 +566,7 @@ def filtrar_poblacion_vulnerable(poblacion_vulnerable): # Se define la función 
         if poblacion_vulnerable == empleado["poblacion_vulnerable"]: # Se compara el valor de la clave 'poblacion_vulnerable' del empleado con el ingresado por el usuario
             coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
     if coincidencias != []:
-        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+        return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
 
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
@@ -535,27 +585,30 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 0. Salir
 """)
 
-print("\n Bienvenido al menu de JackDRipper Software") #Se imprime el titulo del menu fuera del bucle para que no se imprima en cada vuelta
+print("\n ========== Bienvenido al menu de JackDRipper Software ==========") #Se imprime el titulo del menu fuera del bucle para que no se imprima en cada vuelta
 while True:  
     menu()    #Se llama a la funcion del menu
 
     opcion = int(input("Digite una opcion 1-4: "))  #Se solicita la opcion al usuario, se le pide en numero entero
+    print()
 
     match opcion:
         case 1:
             mostrar_empleados() #Opcion numero uno, se llama a la funcion para mostrar la lista de empleados
         case 2:
             numero_de_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Solicita al usuario el numero de identificacion como entero
+            print()
             print(buscar_empleados(numero_de_identificacion)) #Llama a la funcion y devuelve el resultado
         case 3:
             nombre = input("Digite el nombre del nuevo empleado: ").title().strip() #Se solicita al usuario el nombre del nuevo empleado, se eliminan espacios y se ponen las iniciales en mayusculas
             numero_identificacion = input("Digite el numero de identificacion del nuevo empleado: ") #Se pide el id como cadena
             fecha_nacimiento = input("Digite la fecha de nacimiento Dia/Mes/Año: ") #Se pide la fecha de nacimiento 
             while True:  #Se crea un bucle para mostrar las opciones de este parametro
-                print("Indique el sexo del empleado: \n "
-                "1. Hombre \n" 
-                "2. Mujer \n" 
-                "3. Otro \n")
+                print("""Indique el sexo del empleado: \n 
+                 1. Hombre  
+                 2. Mujer  
+                 3. Otro""")
+                print()
                 sexo = int(input("Digite una opcion 1-3: "))  #Se le solicita al usuario elegir una opcion numerica
                 if sexo == 1 or sexo == 2 or sexo == 3:
                     break     #Si las opcion es valida se rompe el bulce y se pasa al siguiente parametro
@@ -580,6 +633,7 @@ while True:
                       2. Indefinido
                       3. Obra labor
                       4. Aprendizaje""")
+                print()
                 tipo_contrato = int(input("Digite una opcion 1-4: "))  #Se le solicita al usuario que digite una opcion numerica
                 if tipo_contrato == 1 or tipo_contrato == 2 or tipo_contrato == 3 or tipo_contrato == 4: 
                     break    #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
@@ -595,6 +649,7 @@ while True:
                       6. AB-
                       7. O+
                       8. O-""")
+                print()
                 RH = int(input("Digite una opcion 1-8: "))
                 if RH == 1 or RH == 2 or RH == 3 or RH == 4 or RH == 5 or RH == 6 or RH == 7 or RH == 8: #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                     break
@@ -607,24 +662,27 @@ while True:
                           3. Union libre
                           4. Divorciado
                           5. Viudo""")
+                    print()
                     estado_civil = int(input("Escoja una opcion 1-5: ")) #Se le solicita al usuario que digite una opcion numerica
                     if estado_civil == 1 or estado_civil == 2 or estado_civil == 3 or estado_civil == 4 or estado_civil == 5: 
                         break #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                     else:
                         print("Digite una opcion valida") #Si no se indica y el bucle se repite hasta escojer una opcion valida
             while True: 
-                print("""El empleado cuenta con alguna discapacidad:
+                print("""El empleado cuenta con alguna discapacidad: \n
                       1. Si
-                      2.No""")
+                      2. No""")
+                print()
                 discapacidad = int(input("Digite una opcion 1-2: "))
                 if discapacidad == 1 or discapacidad == 2:
                     break
                 else:
                     print("Digite una opcion valida")
             while True:
-                print("""El empleado pertenece a alguna poblacion vulnerable:
+                print("""El empleado pertenece a alguna poblacion vulnerable: \n
                       1. Si
                       2. No""")
+                print()
                 poblacion_vulnerable = int(input("Digite una opcion 1-2: "))
                 if poblacion_vulnerable == 1 or poblacion_vulnerable == 2:
                     break
@@ -636,6 +694,7 @@ while True:
             eliminar_empleado() #llamar a la funcion eliminar empleado
         case 5:
             numero_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Pedir numero de identificacion del empleado a modificar
+            print()
             print(modificar_empleado(numero_identificacion))  #Se llama a la funcion modificar empleado
         case 6:
             print("""Filtrar edad por:
@@ -645,33 +704,40 @@ while True:
             opcion = int(input("Escoja una opcion 1-2: "))
             match opcion:
                 case 1:
-                    edad = input("Digite la edad del empleado en años: ")
-                    print(filtrar_edad_especifica(edad))                  #En el primer caso se pide la edad especifica y se llama a la funcion
+                    edad = input("Digite la edad del empleado en años: ") #En el primer caso se pide la edad especifica y se llama a la funcion
+                    print()
+                    print(filtrar_edad_especifica(edad))             
                 case 2:
-                    edad_min = input("Digire la edad minima: ")
-                    edad_max = input("Digite la edad maxima: ")      #En el segundo caso se solicitan las dos edades y se llama a la funcion
+                    edad_min = input("Digire la edad minima: ")     #En el segundo caso se solicitan las dos edades y se llama a la funcion
+                    edad_max = input("Digite la edad maxima: ")
+                    print()      
                     print(filtrar_edad_rango(edad_min, edad_max))
                 case _:
                     print("Digite una opcion valida")
         case 7:
-            print("""Filtrar fecha de ingreso por:
+            print("""Filtrar fecha de ingreso por: \n
                   1. Fecha especifica
                   2. Dia
                   3. Mes
                   4. Año""")  #Se imprime el menu con las opciones disponibles para filtrar empleados por fecha de ingreso
+            print()
             opcion = int(input("Digite una opcion 1-4: "))
             match opcion:
                 case 1:   
                     fecha_ingreso = input("Digite una fecha de ingreso: ") #Se solicita al usuario la fecha completa para filtrar
+                    print()
                     print(filtrar_fecha_ingreso_especifica(fecha_ingreso)) #Se llama a la funcion para filtrar por fecha especifica y se imprime el resultado
                 case 2:
                     dia = input("Digite un dia: ") #Se solicita al usuario el dia para filtrar
+                    print()
                     print(filtrar_fecha_ingreso_dia(dia)) #Se llama a la funcion para filtrar por dia y se imprime el resultado
                 case 3:
                     mes = input("Digite un mes: ")  #Se solicita al usuario el mes para filtrar
+                    print()
                     print(filtrar_fecha_ingreso_mes(mes)) #Se llama a la funcion para filtrar por mes y se imprime el resultado
                 case 4:
                     año = input("Digite un año: ") #Se solicita al usuario el año para filtrar
+                    print()
                     print(filtrar_fecha_ingreso_año(año)) #Se llama a la funcion para filtrar por año y se imprime el resultado
                 case _:
                     print("Digite una opcion valida")
@@ -680,13 +746,17 @@ while True:
                   1. Hombre
                   2. Mujer
                   3. Otro""")   #Se imprime un menu con todas las opciones para filtrar
+            print()
             sexo = int(input("Digite una opcion 1-3: "))
+            print()
             print(filtrar_sexo(sexo))   #Se llama a la funcion
         case 9:
             print("""Tiene hijos:
                   1. Si
                   2. No""") #Se imprime un menu con todas las opciones para filtrar
+            print()
             hijos = int(input("Digite una opcion 1-2: "))
+            print()
             print(filtrar_hijos(hijos)) #Se llama a la funcion
         case 10:
             print("""Filtrar por RH:
@@ -698,7 +768,9 @@ while True:
                       6. AB-
                       7. O+  
                       8. O-""") #Se imprime un menu con todas las opciones para filtrar
+            print()
             RH = int(input("Digite una opcion 1-8: "))
+            print()
             print(filtrar_rh(RH)) #Se llama a la funcion
         case 11:
             print("""Filtrar por estado civil:
@@ -708,12 +780,16 @@ while True:
                           4. Divorciado
                           5. Viudo""")
             estado_civil = int(input("Digite una opcion 1-5: ")) #Se imprime un menu con todas las opciones para filtrar
+            print()
             print(filtrar_estado_civil(estado_civil)) #Se llama a la funcion
+            print()
         case 12:
-            print("""Filtrar por poblacion vulnerable:
+            print("""Filtrar por poblacion vulnerable: \n
                           1. Si
                           2. No""")  #Se imprime un menu con todas las opciones para filtrar
-            poblacion_vulnerable = int(input("Digite una opcion 1-2: ")) 
+            print()
+            poblacion_vulnerable = int(input("Digite una opcion 1-2: "))
+            print() 
             print(filtrar_poblacion_vulnerable(poblacion_vulnerable)) #Se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
@@ -721,5 +797,9 @@ while True:
         case _:
             print("Digite una opcion valida")  #Si el usuario digita una opcion no contemplada se imprime mensaje de error
     
+
+
+
+            
 
 
