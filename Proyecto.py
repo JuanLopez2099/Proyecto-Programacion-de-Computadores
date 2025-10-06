@@ -483,6 +483,18 @@ def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá
             coincidencias.append(empleado) # Si coincide se agrega el diccionario del empleado a la lista de coincidencias
     if coincidencias != []:
         return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+    
+# Definir función para filtrar empleados según su tipo de sangre
+def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará al usuario
+    opciones_RH = {1: "A+", 2: "A-", 3: "B+", 4: "B-", 5: "AB+", 6: "AB-", 7: "O+", 8: "O-"} # Se crea un diccionario con las opciones disponibles para el tipo de sangre
+    RH = opciones_RH[RH] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
+    coincidencias = []
+    for empleado in lista_empleados:
+        if RH == empleado["RH"]:  #Se compara el tipo de sangre del empleado con el valor ingresado
+            coincidencias.append(empleado)
+    if coincidencias != []:
+        return coincidencias # Se retorna la lista con los empleados que cumplen la condición
+    
 
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
     print("""
@@ -495,6 +507,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 7. Filtrar empleados por fecha de ingreso
 8. Filtrar empleados por sexo
 9. Filtrar por hijos Si/No
+10. Filtrar por RH
 0. Salir
 """)
 
@@ -651,6 +664,18 @@ while True:
                   2. No""") #Se imprime un menu con todas las opciones para filtrar
             hijos = int(input("Digite una opcion 1-2: "))
             print(filtrar_hijos(hijos)) #Se llama a la funcion
+        case 10:
+            print("""Filtrar por RH:
+                      1. A+
+                      2. A-
+                      3. B+
+                      4. B-
+                      5. AB+
+                      6. AB-
+                      7. O+  
+                      8. O-""") #Se imprime un menu con todas las opciones para filtrar
+            RH = int(input("Digite una opcion 1-8: "))
+            print(filtrar_rh(RH)) #Se llama a la funcion
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
