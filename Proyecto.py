@@ -33,6 +33,20 @@ lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificaci
                    {"nombre": "Ronda Jean Rousey", "numero_identificacion": 1521080215, "fecha_nacimiento": "01/02/1987" ,"edad": calcular_edad("01/02/1987"), "sexo": "mujer", "numero_telefonico": 3105597743, "cargo": "auxiliar de contabilidad", "fecha_ingreso": "04/09/2025", "tiene_hijos": "No", "tipo_contrato": "Aprendizaje", "RH": "O-", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    ] #Se agrupan diccionarios dentro de la lista con la informacion de cada empleado usando claves para acceder a los valores
 
+#Definir lista de tablero kanban
+tablero_kanban = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "numero_telefonico": 1234567899, "cargo": "jefe de desarrollo", "tarea_actual": "proyecto gestion de recursos humanos", "estado": "InProgress"},
+                  {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "numero_telefonico": 9876543211, "cargo": "jefe de analistas", "tarea_actual": "gestionar filtrado de datos", "estado": "InProgress"},
+                  {"nombre": "Thomas Paul Aspinall", "numero_identificacion": 4623812222, "numero_telefonico": 3012314512, "cargo": "ingeniero de telecomunicaciones", "tarea_actual": "optimizar red interna", "estado": "ToDo"},
+                  {"nombre": "Khamzat Khizarovich Chimaev", "numero_identificacion": 5712943456, "numero_telefonico": 3054560278, "cargo": "analista de datos", "tarea_actual": "elaborar informe de rendimiento", "estado": "InProgress"},
+                  {"nombre": "Jack Della Madalena", "numero_identificacion": 9932334667, "numero_telefonico": 3023210391, "cargo": "tecnico de hardware", "tarea_actual": "revisar mantenimiento de servidores", "estado": "Done"},
+                  {"nombre": "Zhang Weili", "numero_identificacion": 3317060823, "numero_telefonico": 3205549810, "cargo": "desarrollador", "tarea_actual": "crear módulo de autenticación", "estado": "ToDo"},
+                  {"nombre": "Islam Ramazanovich Makhachev", "numero_identificacion": 2224090925, "numero_telefonico": 3116675248, "cargo": "tecnico de hardware", "tarea_actual": "instalar equipo en sala de pruebas", "estado": "Done"},
+                  {"nombre": "Merab Dvalishvili", "numero_identificacion": 2019040323, "numero_telefonico": 3126582093, "cargo": "diseñador grafico", "tarea_actual": "diseño de interfaz grafica", "estado": "ToDo"},
+                  {"nombre": "Kayla Jean Harrison", "numero_identificacion": 4223050728, "numero_telefonico": 3104827714, "cargo": "analista de datos", "tarea_actual": "analizar tendencias de clientes", "estado": "InProgress"},
+                  {"nombre": "Alexandre Pantoja Passidomo", "numero_identificacion": 1330081235, "numero_telefonico": 3154049901, "cargo": "marketing", "tarea_actual": "ofertar el proyecto a empresas", "estado": "ToDo"}
+                  ] #Se agrupan diccionarios dentro de la lista con la informacion de contacto de cada empleado, tarea y estado de la tarea
+
+
 # Definir función para imprimir una lista de empleados en formato de tabla
 def imprimir_tablas(lista): # Se define la función con el parámetro que se solicitará, que es la lista de empleados a mostrar
     anchos = {} # Se crea un diccionario vacío para almacenar el ancho máximo de cada columna
