@@ -180,6 +180,18 @@ Para cada empleado en tablero_kanban Hacer
 Retornar "No existe el empleado"
 
 
+Definir lista coincidencias como vacía
+
+Para cada empleado en tablero_kanban Hacer
+    Si empleado["estado"] es igual a "ToDo" Entonces
+        Agregar empleado a coincidencias
+    FinSi
+FinPara
+
+Retornar imprimir_kanban_tablas(coincidencias)
+
+
+
 Definir funcion registrar_empleado con parametros(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)
     
 
