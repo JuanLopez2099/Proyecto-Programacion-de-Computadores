@@ -126,6 +126,27 @@ Definir funcion para buscar empleados con parametro de entrada(numero de identif
         Si no
            Retorna que el empleado no existe
 
+Definir función asignar_tarea(numero_de_id)
+Si numero_de_id no contiene solo dígitos Entonces
+    Retornar "El numero de id solo debe contener numeros"
+Sino
+    Convertir numero_de_id a entero
+
+Para cada empleado dentro de tablero_kanban
+    Si numero_de_id = empleado[numero_identificacion] Entonces
+        Imprimir "Empleado encontrado exitosamente:"
+        Imprimir "Nombre: ", empleado[nombre]
+        Imprimir "Numero de identificacion: ", empleado[numero_identificacion]
+        Imprimir "Tarea actual: ", empleado[tarea_actual]
+        
+        Solicitar nueva_tarea al usuario
+        empleado[tarea_actual] = nueva_tarea
+        empleado[estado] = "ToDo"
+        
+        Retornar "Cambio exitoso"
+
+Retornar "No existe el empleado"
+
 Definir funcion registrar_empleado con parametros(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)
     
 
