@@ -73,7 +73,7 @@ Definir funcion imprimir_tablas(lista)
 
     Retornar resultado
 
-Definir funcion imprimir_tablas(lista)
+Definir funcion imprimir_tablas_kanban(lista)
 
     Definir diccionario anchos como vacio
 
@@ -146,6 +146,39 @@ Para cada empleado dentro de tablero_kanban
         Retornar "Cambio exitoso"
 
 Retornar "No existe el empleado"
+
+Definir función eliminar_tarea(numero_de_id)
+Si numero_de_id contiene caracteres que no son dígitos Entonces
+    Retornar "El numero de id solo debe contener numeros"
+Sino
+    Convertir numero_de_id a número entero
+FinSi
+
+Para cada empleado en tablero_kanban Hacer
+    Si numero_de_id es igual a empleado["numero_identificacion"] Entonces
+        Imprimir "Empleado encontrado exitosamente:"
+        Imprimir "Nombre:", empleado["nombre"]
+        Imprimir "Numero de identificacion:", empleado["numero_identificacion"]
+        Imprimir "Tarea actual:", empleado["tarea_actual"]
+        
+        Imprimir "Seguro que desea eliminar la tarea actual:"
+        Imprimir "1. Si"
+        Imprimir "2. No"
+        
+        Leer eliminar_tarea desde el usuario
+        
+        Segun eliminar_tarea Hacer
+            Caso 1:
+                Asignar "Tarea sin asignar" a empleado["tarea_actual"]
+                Asignar "Tarea sin asignar" a empleado["estado"]
+                Retornar "Tarea eliminada exitosamente"
+            Caso 2:
+                Retornar "Saliendo..."
+            De otro modo:
+                Retornar "Ingrese una opcion valida"
+
+Retornar "No existe el empleado"
+
 
 Definir funcion registrar_empleado con parametros(nombre, numero_identificacion, fecha_nacimiento, edad, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)
     
