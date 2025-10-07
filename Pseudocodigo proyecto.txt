@@ -10,7 +10,7 @@ Definir funcion para calcular edad(fecha_nacimiento)
 
 Definir lista de empleados
 Agregar diccionario a la lista para cada empleado
-Cada diccionario debe contener 5 claves especificos
+Cada diccionario debe contener 14 claves especificos
 nombre como cadena
 numero de identificacion como entero
 fecha de nacimiento como cadena
@@ -25,6 +25,19 @@ RH como cadena
 estado civil como cadena
 discapacidad como cadena
 poblacion vulnerable como cadena
+
+
+Definir lista de tablero_kanban
+Agregar diccionario a la lista para cada empleado
+Cada diccionario debe contener 6 claves específicas:
+nombre como cadena
+numero de identificacion como entero
+numero_telefonico como entero
+cargo como cadena
+tarea_actual como cadena
+estado como cadena
+
+
 
 Definir funcion imprimir_tablas(lista)
 
@@ -60,24 +73,51 @@ Definir funcion imprimir_tablas(lista)
 
     Retornar resultado
 
-Definir Funcion para mostrar empleados
-        Por cada empleado dentro de lista de empleados
-           imprimir empleado[nombre]
-                    empleado[numero de identificacion]
-                    empleado[fecha de nacimiento]
-                    empleado[edad]
-                    empleado[sexo]
-                    empleado[numero telefonico]
-                    empleado[cargo]
-                    empleado[fecha de ingreso]
-                    empleado[tiene hijos]
-                    empleado[tipo de contrato]
-                    empleado[RH]
-                    empleado[estado civil]
-                    empleado[discapacidad]
-                    empleado[poblacion_vulnerable]
-        Si lista de empleados vacia
-             imprimir la lista de empleados esta vacia
+Definir funcion imprimir_tablas(lista)
+
+    Definir diccionario anchos como vacio
+
+    Definir lista campos con valores ["nombre", "numero_identificacion", "numero_telefonico", "cargo", "tarea_actual", "estado"]
+
+    Para cada campo dentro de campos
+        ancho = longitud(campo)
+        Para cada empleado dentro de lista
+            valor = longitud(convertir a cadena empleado[campo])
+            Si valor > ancho Entonces
+                ancho = valor
+   
+        anchos[campo] = ancho
+    
+
+    resultado = "" # Inicializar cadena vacía para construir la tabla
+
+    # Construir fila de encabezados
+    Para cada campo dentro de campos
+        resultado += alinear a la izquierda(campo, anchos[campo]) + " "
+    
+    resultado += salto de linea
+
+    # Construir filas de datos
+    Para cada empleado dentro de lista
+        Para cada campo dentro de campos
+            resultado += alinear a la izquierda(convertir a cadena empleado[campo], anchos[campo]) + " "
+        
+        resultado += salto de linea
+    
+
+    Retornar resultado
+
+Definir función mostrar_tablero_kanban()
+Si tablero_kanban no está vacía Entonces
+    Retornar imprimir_kanban_tablas(tablero_kanban)  # Llama a la función que imprime la lista en formato de tabla
+Sino
+    Retornar "No hay empleados dentro del tablero kanban"
+
+Definir función mostrar_empleados()
+Si lista_empleados no está vacía Entonces
+    Imprimir imprimir_tablas(lista_empleados)  # Llama a la función que imprime la lista en formato de tabla
+Sino
+    Imprimir "No hay empleados"
 
 Definir funcion para buscar empleados con parametro de entrada(numero de identifiacion)
         por cada empleado dentro de la lista de empleados
