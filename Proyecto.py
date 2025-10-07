@@ -165,6 +165,15 @@ def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que s
     else:
         return "No existe el empleado"  #Si el numero de identificacion no coincide con ningun empleado se indica mediante un mensaje
 
+#Definir funcion para filtrar las tareas ToDo
+def filtrar_tareas_todo():
+    coincidencias = [] # Se crea una lista vacía para almacenar los empleados que cumplan la condición
+    for empleado in tablero_kanban:
+        if empleado["estado"] == "ToDo": # Se compara si el estado de la tarea es "ToDo"
+            coincidencias.append(empleado) # Si coincide, se agrega el empleado a la lista de coincidencias
+    
+    return imprimir_kanban_tablas(coincidencias) # Se retorna la impresión de la lista filtrada en formato tabla
+
 
 #Definir funcion para mostrar a todos los empleados
 def mostrar_empleados():
@@ -921,7 +930,10 @@ while True:
                         print()
                         numero_de_id = input("Digite el numero de identificacion del empleado: ").strip() #Se solicita el numero de identificacion del empleado
                         print()
-                        print(eliminar_tarea(numero_de_id))  #Se llama a la funcion para quitarle una tarea 
+                        print(eliminar_tarea(numero_de_id))  #Se llama a la funcion para quitarle una tarea
+                    case 5:
+                        print()
+                        print(filtrar_tareas_todo()) #Se llama a la funcion para filtrar empleados por ToDo
                     case 0:
                         print()
                         print("Saliendo del tablero kanban...") #Se rompe el bucle y se sale del menu imprimiendo un mensaje
