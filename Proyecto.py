@@ -116,27 +116,57 @@ def mostrar_tablero_kanban():
         return "No hay empleados dentro del tablero kanban"  #Si lo esta se indica imprimiendo un mensaje
 
 # Definir función para asignar una nueva tarea a un empleado en el tablero Kanban
-def asignar_tarea(numero_de_id):  # Se define la función con el parámetro que se solicitará al usuario
+def asignar_tarea(numero_de_id):  #Se define la función con el parámetro que se solicitará al usuario
     if not numero_de_id.isdigit():
-        return "El numero de id solo debe contener numeros"    # Se valida si el número de identificación ingresado contiene solo numeros
+        return "El numero de id solo debe contener numeros"    #Se valida si el número de identificación ingresado contiene solo numeros
     else:
         numero_de_id = int(numero_de_id) 
     for empleado in tablero_kanban:  # Se recorre la lista del tablero Kanban
-        if numero_de_id == empleado["numero_identificacion"]: # Se compara el número de identificación con el de cada empleado
-            print("Empleado encontrado exitosamente: \n")  # Se indica que se ha encontrado el empleado y se imprime informacion
+        if numero_de_id == empleado["numero_identificacion"]: #Se compara el número de identificación con el de cada empleado
+            print("Empleado encontrado exitosamente: \n")  #Se indica que se ha encontrado el empleado y se imprime informacion
             print("Nombre: ", empleado["nombre"])
             print("Numero de identificacion: ", empleado["numero_identificacion"])
             print("Tarea actual: ", empleado["tarea_actual"])
             print()
             nueva_tarea = input("Digite la nueva tarea a desempeñar: ")  # Se solicita la nueva tarea a desempeñar
-            empleado["tarea_actual"] = nueva_tarea  # Se reemplaza el valor dentro del diccionario con la nueva tarea
-            empleado["estado"] = "ToDo"  # Se asigna autoamticamente a ToDo
+            empleado["tarea_actual"] = nueva_tarea  #Se reemplaza el valor dentro del diccionario con la nueva tarea
+            empleado["estado"] = "ToDo"  #Se asigna autoamticamente a ToDo
             return "Cambio exitoso"  #Retora un mensaje indicando que el cambio ha sido exitoso
     else:
         return "No existe el empleado" #Si no se encuentra el numero de identificacion se imprime un mensaje indicandolo
 
+#Definir funcion para eliminar tareas
+def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que se solicitará al usuario
+    if not numero_de_id.isdigit(): #Se valida que el numero de identtificacion ingresado sea solo numerico
+        return "El numero de id solo debe contener numeros"   
+    else:
+        numero_de_id = int(numero_de_id)
+    for empleado in tablero_kanban:  #Se recorre la lista del tablero kanban
+        if numero_de_id == empleado["numero_identificacion"]:  #Si el numero de identificacion ingresado coincide
+            print("Empleado encontrado exitosamente: \n")
+            print("Nombre: ", empleado["nombre"])
+            print("Numero de identificacion: ", empleado["numero_identificacion"])    #Se imprime la informacion del empleado 
+            print("Tarea actual: ", empleado["tarea_actual"])
+            print()
+            print("""Seguro que desea eliminar la tarea actual: \n   
+                  1. Si
+                  2. No
+                  """)  #Se imprime un mensaje para validar que el usuario esta seguro de eliminar la tarea
+            eliminar_tarea = int(input("Digite una opcion 1-2: "))
+            match eliminar_tarea:
+                case 1:
+                    empleado["tarea_actual"] = "Tarea sin asignar"   #Si digita que si se reemplaza la tarea actual por una sin asignar de igual forma el estado
+                    empleado["estado"] = "Tarea sin asignar"
+                    return "Tarea eliminada exitosamente"
+                case 2:
+                    return "Saliendo..."  #Si digita no sale del menu y queda intacto
+                case _:
+                    return "Ingrese una opcion valida"
+    else:
+        return "No existe el empleado"  #Si el numero de identificacion no coincide con ningun empleado se indica mediante un mensaje
 
-#Crear funcion para mostrar a todos los empleados
+
+#Definir funcion para mostrar a todos los empleados
 def mostrar_empleados():
     if lista_empleados != []:  #Si el la lista no esta vacia
         print(imprimir_tablas(lista_empleados)) #Se llama a la funcion para imprimir la lista como tabla
@@ -876,24 +906,29 @@ while True:
                       6. Filtrar tareas InProgress
                       7. Filtrar tareas Done
                       0. Salir
-                      """)
-                opcion = int(input("Escoja una opcion: "))
+                      """)   #Se imprime un menu con las opciones del tablero kanban
+                opcion = int(input("Escoja una opcion: ")) #Se solicita una opcion al usuario
                 match opcion:
                     case 1:
                         print()
-                        print(mostrar_tablero_kanban())
+                        print(mostrar_tablero_kanban())  #Se llama a la funcion para mostrar el tablero kanban
                     case 2:
                         print()
-                        numero_de_id = input("Digite el numero de identificacion del empleado: ")
+                        numero_de_id = input("Digite el numero de identificacion del empleado: ") #Se pide el numero de identificacion del empleado
                         print()
-                        print(asignar_tarea(numero_de_id))
+                        print(asignar_tarea(numero_de_id)) #Se llama a la funcion para asignarle una nueva tarea
+                    case 4:
+                        print()
+                        numero_de_id = input("Digite el numero de identificacion del empleado: ").strip() #Se solicita el numero de identificacion del empleado
+                        print()
+                        print(eliminar_tarea(numero_de_id))  #Se llama a la funcion para quitarle una tarea 
                     case 0:
                         print()
-                        print("Saliendo del tablero kanban...")
+                        print("Saliendo del tablero kanban...") #Se rompe el bucle y se sale del menu imprimiendo un mensaje
                         break
                     case _:
                         print()
-                        print("Digite una opcion valida")
+                        print("Digite una opcion valida")  #Si se digita una opcion no valida se indica mediante un mensaje
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
