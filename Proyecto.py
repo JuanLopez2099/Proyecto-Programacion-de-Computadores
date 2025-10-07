@@ -169,10 +169,19 @@ def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que s
 def filtrar_tareas_todo():
     coincidencias = [] # Se crea una lista vacía para almacenar los empleados que cumplan la condición
     for empleado in tablero_kanban:
-        if empleado["estado"] == "ToDo": # Se compara si el estado de la tarea es "ToDo"
-            coincidencias.append(empleado) # Si coincide, se agrega el empleado a la lista de coincidencias
+        if empleado["estado"] == "ToDo": #Se compara si el estado de la tarea es "ToDo"
+            coincidencias.append(empleado) #Si coincide, se agrega el empleado a la lista de coincidencias
     
-    return imprimir_kanban_tablas(coincidencias) # Se retorna la impresión de la lista filtrada en formato tabla
+    return imprimir_kanban_tablas(coincidencias) #Se retorna la impresión de la lista filtrada en formato tabla
+
+#Definir funcion para filtrar las tareas ToDo
+def filtrar_tareas_Done():
+    coincidencias = [] #Se crea una lista vacía para almacenar los empleados que cumplan la condición
+    for empleado in tablero_kanban:
+        if empleado["estado"] == "Done": #Se compara si el estado de la tarea es "Done"
+            coincidencias.append(empleado) #Si coincide, se agrega el empleado a la lista de coincidencias
+    
+    return imprimir_kanban_tablas(coincidencias) #Se retorna la impresión de la lista filtrada en formato tabla
 
 
 #Definir funcion para mostrar a todos los empleados
@@ -933,7 +942,10 @@ while True:
                         print(eliminar_tarea(numero_de_id))  #Se llama a la funcion para quitarle una tarea
                     case 5:
                         print()
-                        print(filtrar_tareas_todo()) #Se llama a la funcion para filtrar empleados por ToDo
+                        print(filtrar_tareas_todo()) #Se llama a la funcion para filtrar tareas por ToDo
+                    case 7:
+                        print()
+                        print(filtrar_tareas_Done()) #Se llama a la funcion para filtrar tareas por Done
                     case 0:
                         print()
                         print("Saliendo del tablero kanban...") #Se rompe el bucle y se sale del menu imprimiendo un mensaje
