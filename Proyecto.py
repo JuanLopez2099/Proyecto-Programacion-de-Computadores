@@ -79,15 +79,49 @@ def imprimir_tablas(lista): # Se define la función con el parámetro que se sol
     
     return resultado # Se retorna la tabla completa como cadena
 
+# Definir función para imprimir tabla kanban en formato de tabla
+def imprimir_kanban_tablas(lista):
+    anchos = {} 
+    campos = ["nombre", "numero_identificacion", "numero_telefonico", "cargo", "tarea_actual", "estado"] 
+     
+    for campo in campos: 
+        ancho = len(campo)  
+        for empleado in lista: 
+            valor = len(str(empleado[campo])) 
+            if valor > ancho: 
+                ancho = valor 
+        anchos[campo] = ancho 
+    
+    
+    resultado = "" 
+    
+    
+    for campo in campos:
+        resultado += f"{campo:<{anchos[campo]}}   " 
+    resultado += "\n" 
+     
+   
+    for emp in lista: 
+        for campo in campos:  
+            resultado += f"{str(emp[campo]):<{anchos[campo]}}   " 
+        resultado += "\n" 
+    
+    return resultado
 
+#Crear funcion para mostrar a los empleados dentro del tablero kanban
+def mostrar_tablero_kanban():
+    if tablero_kanban != []:  #Si el la lista no esta vacia
+        return imprimir_kanban_tablas(tablero_kanban)  #Se llama a la funcion para imprimir la lista como tabla
+    if tablero_kanban == []:
+        return "No hay empleados dentro del tablero kanban"  #Si lo esta se indica imprimiendo un mensaje
 
 
 #Crear funcion para mostrar a todos los empleados
 def mostrar_empleados():
-    if lista_empleados != []:
-        print(imprimir_tablas(lista_empleados))
+    if lista_empleados != []:  #Si el la lista no esta vacia
+        print(imprimir_tablas(lista_empleados)) #Se llama a la funcion para imprimir la lista como tabla
     if lista_empleados == []:
-        print("No hay empleados") 
+        print("No hay empleados")  #Si lo esta se indica imprimiendo un mensaje
 
 
 #Definir funcion para buscar empleados
@@ -600,6 +634,7 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 10. Filtrar por RH
 11. Filtrar por estado civil
 12. Filtrar por poblacion vulnerable
+13. Gestion de proyectos kanban
 0. Salir
 """)
 
@@ -809,6 +844,31 @@ while True:
             poblacion_vulnerable = int(input("Digite una opcion 1-2: "))
             print() 
             print(filtrar_poblacion_vulnerable(poblacion_vulnerable)) #Se llama a la funcion
+        case 13:
+            while True:
+                print()
+                print("""Bienvenido al menu de gestion Kanban: \n
+                      1. Mostrar tablero kanban
+                      2. Asignar tarea
+                      3. Gestionar estado de tarea
+                      4. Eliminar tarea
+                      5. Filtrar tareas ToDo
+                      6. Filtrar tareas InProgress
+                      7. Filtrar tareas Done
+                      0. Salir
+                      """)
+                opcion = int(input("Escoja una opcion: "))
+                match opcion:
+                    case 1:
+                        print()
+                        print(mostrar_tablero_kanban())
+                    case 0:
+                        print()
+                        print("Saliendo del tablero kanban...")
+                        break
+                    case _:
+                        print()
+                        print("Digite una opcion valida")
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
