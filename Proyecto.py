@@ -115,6 +115,26 @@ def mostrar_tablero_kanban():
     if tablero_kanban == []:
         return "No hay empleados dentro del tablero kanban"  #Si lo esta se indica imprimiendo un mensaje
 
+# Definir función para asignar una nueva tarea a un empleado en el tablero Kanban
+def asignar_tarea(numero_de_id):  # Se define la función con el parámetro que se solicitará al usuario
+    if not numero_de_id.isdigit():
+        return "El numero de id solo debe contener numeros"    # Se valida si el número de identificación ingresado contiene solo numeros
+    else:
+        numero_de_id = int(numero_de_id) 
+    for empleado in tablero_kanban:  # Se recorre la lista del tablero Kanban
+        if numero_de_id == empleado["numero_identificacion"]: # Se compara el número de identificación con el de cada empleado
+            print("Empleado encontrado exitosamente: \n")  # Se indica que se ha encontrado el empleado y se imprime informacion
+            print("Nombre: ", empleado["nombre"])
+            print("Numero de identificacion: ", empleado["numero_identificacion"])
+            print("Tarea actual: ", empleado["tarea_actual"])
+            print()
+            nueva_tarea = input("Digite la nueva tarea a desempeñar: ")  # Se solicita la nueva tarea a desempeñar
+            empleado["tarea_actual"] = nueva_tarea  # Se reemplaza el valor dentro del diccionario con la nueva tarea
+            empleado["estado"] = "ToDo"  # Se asigna autoamticamente a ToDo
+            return "Cambio exitoso"  #Retora un mensaje indicando que el cambio ha sido exitoso
+    else:
+        return "No existe el empleado" #Si no se encuentra el numero de identificacion se imprime un mensaje indicandolo
+
 
 #Crear funcion para mostrar a todos los empleados
 def mostrar_empleados():
@@ -862,6 +882,11 @@ while True:
                     case 1:
                         print()
                         print(mostrar_tablero_kanban())
+                    case 2:
+                        print()
+                        numero_de_id = input("Digite el numero de identificacion del empleado: ")
+                        print()
+                        print(asignar_tarea(numero_de_id))
                     case 0:
                         print()
                         print("Saliendo del tablero kanban...")
