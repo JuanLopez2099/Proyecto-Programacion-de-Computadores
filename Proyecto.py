@@ -203,7 +203,7 @@ def buscar_empleados(numero_de_identificacion): #Se define la funcion con los pa
 
 
 #Definir funcion para registrar nuevos empleados
-def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable): #Se define la funcion con los parametros que se solicitaran al usuario
+def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable, añadir_kanban): #Se define la funcion con los parametros que se solicitaran al usuario
     emp = []
     if not nombre.replace(" ", "").isalpha() or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == ""  or  numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
         return "las entradas deben ser validas" #En caso de que cierta informacion este vacia o no solo contenga numeros la funcion devuelve un mensaje indicandolo
@@ -235,6 +235,9 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
             return "No puede haber empleados con la misma informacion nombre/id/numero telefonico" #En caso de que la tenga la funcion retorna indicandolo
     lista_empleados.append(nuevo_empleado) #Una vez hechas todas las comprobaciones se agrega el diccionario que contiene al nuevo empleado a la lista de empleados
     emp.append(nuevo_empleado)
+    nuevo_empleado_kanban  = {"nombre": nombre, "numero_identificacion": numero_identificacion, "numero_telefonico": numero_telefonico, "cargo": cargo, "tarea_actual": "Sin tarea asignada", "estado": "Sin tarea asignada" }
+    if añadir_kanban == 1:
+        tablero_kanban.append(nuevo_empleado_kanban)
     print()
     print("El empleado se ha registrado con exito!") #Se indica que se ha añadido con exito
     print()
@@ -808,8 +811,18 @@ while True:
                 if poblacion_vulnerable == 1 or poblacion_vulnerable == 2:
                     break
                 else:
-                    print("Digite una opcoon valida")
-            print(registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable)) #Se llama a la funcion
+                    print("Digite una opcion valida")
+            while True:
+                print("""Desea añadir este empleado al tablero kanban: \n
+                      1. Si
+                      2. No
+                      """)
+                añadir_kanban = int(input("Digite una opcion 1-2: "))
+                if añadir_kanban == 1 or añadir_kanban == 2:
+                    break
+                else:
+                    print("Digite una opcion valida")
+            print(registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable, añadir_kanban)) #Se llama a la funcion
 
         case 4:
             eliminar_empleado() #llamar a la funcion eliminar empleado
@@ -958,10 +971,3 @@ while True:
             break
         case _:
             print("Digite una opcion valida")  #Si el usuario digita una opcion no contemplada se imprime mensaje de error
-    
-
-
-
-            
-
-
