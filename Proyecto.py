@@ -646,6 +646,20 @@ def filtrar_sexo(sexo): # Se crea la función con el parámetro que se pedirá a
     elif coincidencias == []:
         return "No hay empleados del sexo indicado"
     
+#Definir funcion para filtrar empleados segun tipo de contrato
+def filtrar_contrato(contrato): #se crea la función con el parámetro que se pedirá la usuario
+    opciones_contrato = {1: "Indefinido", 2:"Definido", 3:"Obra_labor", 4:"Aprendizaje"}
+    contrato = opciones_contrato[contrato] 
+    coincidencias = [] 
+    for empleado in lista_empleados: #se recorre la lista de empleados 
+        if contrato == empleado["tipo_contrato"]:
+            coincidencias.append(empleado) #si coincide, se agrega el diccionario del empleado a la lista de coincidencias 
+    if coincidencias != []: 
+        return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
+    elif coincidencias == []:
+        return "No hay empleados con este tipo de contrato"         
+            
+    
 # Definir función para filtrar empleados según si tienen hijos o no
 def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá al usuario
     opciones_hijos = {1: "Si", 2: "No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene hijos
@@ -706,14 +720,14 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 11. Filtrar por estado civil
 12. Filtrar por poblacion vulnerable
 13. Gestion de proyectos kanban
+14. Filtrar por tipo de Contrato
 0. Salir
 """)
 
 print("\n ========== Bienvenido al menu de JackDRipper Software ==========") #Se imprime el titulo del menu fuera del bucle para que no se imprima en cada vuelta
 while True:  
     menu()    #Se llama a la funcion del menu
-
-    opcion = int(input("Digite una opcion 1-4: "))  #Se solicita la opcion al usuario, se le pide en numero entero
+    opcion = int(input("Digite una opcion 1-14: "))  #Se solicita la opcion al usuario, se le pide en numero entero
     print()
 
     match opcion:
@@ -966,6 +980,16 @@ while True:
                     case _:
                         print()
                         print("Digite una opcion valida")  #Si se digita una opcion no valida se indica mediante un mensaje
+        case 14:
+            print("""Filtrar por:
+                  1. indefinido
+                  2. definido
+                  3. Obra labor
+                  4. aprendizaje""")   #Se imprime un menu con todas las opciones para filtrar
+            print()
+            contrato = int(input("Digite una opcion 1-4: "))
+            print()
+            print(filtrar_contrato(contrato))   #Se llama a la funcion 
         case 0: 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
