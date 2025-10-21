@@ -183,6 +183,36 @@ def asignar_tarea(numero_de_id):  #Se define la función con el parámetro que s
     else:
         return "No existe el empleado" #Si no se encuentra el numero de identificacion se imprime un mensaje indicandolo
 
+# Definir función para gestionar el estado de una tarea en el tablero Kanban
+def gestionar_estado_tarea(numero_de_id):  # Se define la función con el parámetro numero_de_id
+    if not numero_de_id.isdigit():  # Se valida que el número de identificación contenga solo dígitos
+        return "El numero de id solo debe contener numeros"  # Si no, se retorna un mensaje de error
+    else:
+        numero_de_id = int(numero_de_id)  # Se convierte a entero
+    for empleado in tablero_kanban:  # Se recorre la lista del tablero Kanban
+        if numero_de_id == empleado["numero_identificacion"]:  # Si el número de identificación coincide
+            print("Empleado encontrado exitosamente: \n")  # Se indica que se encontró el empleado
+            print("Nombre: ", empleado["nombre"])
+            print("Numero de identificacion: ", empleado["numero_identificacion"])
+            print("Tarea actual: ", empleado["tarea_actual"])
+            print("Estado actual: ", empleado["estado"])
+            print()
+            # Se muestra un menú con las opciones de estado disponibles
+            print("""Seleccione el nuevo estado para la tarea: \n
+                  1. ToDo
+                  2. InProgress
+                  3. Done
+                  4. Sin tarea asignada
+                  """)
+            nuevo_estado_opcion = int(input("Digite una opcion 1-4: "))  # Se solicita la opción numérica
+            opciones_estado = {1: "ToDo", 2: "InProgress", 3: "Done", 4: "Sin tarea asignada"}  # Diccionario con las opciones
+            if nuevo_estado_opcion in opciones_estado:  # Si la opción es válida
+                empleado["estado"] = opciones_estado[nuevo_estado_opcion]  # Se actualiza el estado en el diccionario
+                return "Estado de la tarea actualizado exitosamente"  # Se retorna un mensaje de éxito
+            else:
+                return "Opcion no valida"  # Si la opción no es válida, se retorna un mensaje de error
+    return "No existe el empleado en el tablero Kanban"  # Si no se encuentra el empleado, se retorna un mensaje
+
 #Definir funcion para eliminar tareas
 def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que se solicitará al usuario
     if not numero_de_id.isdigit(): #Se valida que el numero de identtificacion ingresado sea solo numerico
@@ -222,7 +252,15 @@ def filtrar_tareas_todo():
     
     return imprimir_kanban_tablas(coincidencias) #Se retorna la impresión de la lista filtrada en formato tabla
 
-#Definir funcion para filtrar las tareas ToDo
+# Definir función para filtrar tareas InProgress
+def filtrar_tareas_InProgress():
+    coincidencias = []  # Se crea una lista vacía para almacenar los empleados que cumplan la condición
+    for empleado in tablero_kanban:
+        if empleado["estado"] == "InProgress":  # Se compara si el estado de la tarea es "InProgress"
+            coincidencias.append(empleado)  # Si coincide, se agrega el empleado a la lista de coincidencias
+    return imprimir_kanban_tablas(coincidencias)  # Se retorna la impresión de la lista filtrada en formato tabla
+
+#Definir funcion para filtrar las tareas Done
 def filtrar_tareas_Done():
     coincidencias = [] #Se crea una lista vacía para almacenar los empleados que cumplan la condición
     for empleado in tablero_kanban:
@@ -1040,6 +1078,10 @@ while True:
                         numero_de_id = input("Digite el numero de identificacion del empleado: ") #Se pide el numero de identificacion del empleado
                         print()
                         print(asignar_tarea(numero_de_id)) #Se llama a la funcion para asignarle una nueva tarea
+                    case 3:
+                        print()
+                        numero_de_id = input("Digite el numero de identificacion del empleado: ").strip()  # Se pide el numero de identificacion del empleado
+                        print(gestionar_estado_tarea(numero_de_id))  # Se llama a la función para gestionar tareas
                     case 4:
                         print()
                         numero_de_id = input("Digite el numero de identificacion del empleado: ").strip() #Se solicita el numero de identificacion del empleado
@@ -1048,6 +1090,9 @@ while True:
                     case 5:
                         print()
                         print(filtrar_tareas_todo()) #Se llama a la funcion para filtrar tareas por ToDo
+                    case 6:
+                        print()
+                        print(filtrar_tareas_InProgress())  # Se llama a la función para filtrar tareas InProgress
                     case 7:
                         print()
                         print(filtrar_tareas_Done()) #Se llama a la funcion para filtrar tareas por Done
