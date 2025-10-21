@@ -147,6 +147,44 @@ Para cada empleado dentro de tablero_kanban
 
 Retornar "No existe el empleado"
 
+Definir funcion gestionar_estado_tarea(numero_de_id):
+    Si numero_de_id NO es solo dígitos:
+        retornar "El numero de id solo debe contener numeros"
+    sino:
+        convertir numero_de_id a entero
+    
+    para cada empleado EN tablero_kanban:
+        si numero_de_id == empleado["numero_identificacion"]:
+            imprimir "Empleado encontrado exitosamente: \n"
+            imprimir "Nombre: ", empleado["nombre"]
+            imprimir "Numero de identificacion: ", empleado["numero_identificacion"]
+            imprimir "Tarea actual: ", empleado["tarea_actual"]
+            imprimir "Estado actual: ", empleado["estado"]
+            imprimir vacío (salto de línea)
+            
+            imprimir menú de opciones:
+                "Seleccione el nuevo estado para la tarea: \n
+                 1. ToDo
+                 2. InProgress
+                 3. Done
+                 4. Sin tarea asignada"
+            
+            leer nuevo_estado_opcion como entero
+            
+            definir opciones_estado como diccionario:
+                1: "ToDo"
+                2: "InProgress"
+                3: "Done"
+                4: "Sin tarea asignada"
+            
+            si nuevo_estado_opcion ESTÁ EN opciones_estado:
+                ASIGNAR empleado["estado"] = opciones_estado[nuevo_estado_opcion]
+                RETORNAR "Estado de la tarea actualizado exitosamente"
+            sino:
+                RETORNAR "Opcion no valida"
+    
+    Retornar "No existe el empleado en el tablero Kanban"
+
 Definir función eliminar_tarea(numero_de_id)
 Si numero_de_id contiene caracteres que no son dígitos Entonces
     Retornar "El numero de id solo debe contener numeros"
@@ -189,6 +227,15 @@ Para cada empleado en tablero_kanban Hacer
 FinPara
 
 Retornar imprimir_kanban_tablas(coincidencias)
+
+Definir funcion filtrar_tareas_InProgress():
+    Inicializar coincidencias como lista vacía
+    
+    para cada empleado EN tablero_kanban:
+        si empleado["estado"] == "InProgress":
+            AGREGAR empleado A coincidencias
+    
+    Retornar imprimir_kanban_tablas(coincidencias)
 
 Definir función filtrar_tareas_Done()
 Definir lista coincidencias como vacía
@@ -240,9 +287,50 @@ Definir funcion registrar_empleado con parametros(nombre, numero_identificacion,
     Imprimir "El empleado se ha registrado con éxito!"
     Retornar nuevo_empleado
 
-Definir funcion para eliminar empleado
+Definir funcion eliminar_empleado()
 
+    Si lista_empleados esta vacia Entonces
+        Imprimir "no hay empleados para eliminar"
+        Retornar
+    Fin Si
 
+    numero_identificacion ← pedir al usuario "digite el número de identificación del trabajador a eliminar"
+
+    Si numero_identificacion no es un número Entonces
+        Imprimir "el número de identificación debe contener solo dígitos"
+        Retornar
+    Fin Si
+
+    Convertir numero_identificacion a entero
+
+    Definir empleado_encontrado como nulo
+    Definir posicion ← -1
+
+    Para cada i, empleado en lista_empleados con índice
+        Si empleado["numero_identificacion"] = numero_identificacion Entonces
+            empleado_encontrado ← empleado
+            posicion ← i
+            Romper bucle
+        Fin Si
+    Fin Para
+
+    Si empleado_encontrado no es nulo Entonces
+        Imprimir "empleado encontrado"
+        Imprimir nombre, número de identificación y cargo del empleado_encontrado
+        Imprimir "¿está seguro que desea eliminar este empleado? 1. si  2. no"
+        confirmacion ← pedir al usuario "digite una opción 1-2"
+
+        Si confirmacion = 1 Entonces
+            Eliminar de lista_empleados el elemento en la posicion
+            Imprimir "empleado eliminado exitosamente"
+        Sino Si confirmacion = 2 Entonces
+            Imprimir "eliminación cancelada"
+        Sino
+            Imprimir "opción inválida. eliminación cancelada"
+        Fin Si
+    Sino
+        Imprimir "no se encontró un empleado con ese número de identificación"
+    Fin Si
 
 Definir funcion modificar_empleado(numero_identificacion)
 
@@ -583,6 +671,27 @@ Definir funcion filtrar_hijos(opcion_hijos)
     Sino
         Retornar "No hay empleados que cumplan la condición de hijos"
 
+Definir funcion filtrar_contrato(contrato)
+
+    Definir diccionario opciones_contrato con valores {1: "indefinido", 2: "definido", 3: "obra labor", 4: "aprendizaje"}
+
+    contrato = opciones_contrato[contrato]
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si contrato = empleado["tipo_contrato"] Entonces
+            Agregar empleado a coincidencias
+        Fin Si
+    Fin Para
+
+    Si coincidencias no esta vacia Entonces
+        Retornar imprimir_tablas(coincidencias)
+    Sino
+        Retornar "no hay empleados con este tipo de contrato"
+    Fin Si
+
+
 Definir diccionario opciones_RH con valores {1: "A+", 2: "A-", 3: "B+", 4: "B-", 5: "AB+", 6: "AB-", 7: "O+", 8: "O-"}
 
 RH = opciones_RH[opcion_RH]
@@ -616,6 +725,28 @@ Definir funcion filtrar_estado_civil(opcion_estado_civil)
         Retornar coincidencias
     Sino
         Retornar "No existen empleados con el estado civil indicado"
+
+Definir funcion filtrar_discapacidad(discapacidad)
+
+    Definir diccionario opciones_discapacidad con valores {1: "si", 2: "no"}
+
+    discapacidad = opciones_discapacidad[discapacidad]
+
+    Definir lista coincidencias como vacia
+
+    Para cada empleado dentro de lista_empleados
+        Si discapacidad = empleado["discapacidad"] Entonces
+            Agregar empleado a coincidencias
+        Fin Si
+    Fin Para
+
+    Si coincidencias no esta vacia Entonces
+        Retornar imprimir_tablas(coincidencias)
+    Sino
+        Retornar "no hay empleados con esta condición de discapacidad"
+    Fin Si
+
+Fin Funcion
 
 Definir funcion filtrar_poblacion_vulnerable(opcion_poblacion_vulnerable)
 
