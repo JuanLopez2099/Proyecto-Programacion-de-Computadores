@@ -766,8 +766,275 @@ Definir funcion filtrar_poblacion_vulnerable(opcion_poblacion_vulnerable)
     Sino
         Retornar "No existen empleados en la poblacion vulnerable indicada"  
 
-Definir funcion de menu
-    imprimir opcion 1 lista de empleados
-             opcion 2 buscar empleado
-             opcion 3 registrar empleado
-             opcion 0 salir
+Definir menu
+
+    IMPRIMIR "========== Bienvenido al menu de JackDRipper Software =========="
+
+    MIENTRAS VERDADERO HACER
+        IMPRIMIR """
+        1. Mostrar lista de todos los empleados
+        2. Buscar empleado
+        3. Registrar empleado
+        4. Eliminar empleado
+        5. Modificar informacion de empleado
+        6. Filtrar empleados por edad
+        7. Filtrar empleados por fecha de ingreso
+        8. Filtrar empleados por sexo
+        9. Filtrar por hijos Si/No
+        10. Filtrar por RH
+        11. Filtrar por estado civil
+        12. Filtrar por poblacion vulnerable
+        13. Filtrar por tipo de Contrato
+        14. Filtrar por discapacidad
+        15. Gestion Proyecto Kanban
+        0. Salir
+        """
+
+        LEER opcion
+
+        SEGÚN opcion HACER
+            CASO 1:
+                LLAMAR mostrar_empleados()
+            
+            CASO 2:
+                IMPRIMIR "Digite el numero de identificacion del empleado:"
+                LEER numero_de_identificacion
+                IMPRIMIR buscar_empleados(numero_de_identificacion)
+
+            CASO 3:
+                IMPRIMIR "Digite el nombre del nuevo empleado:"
+                LEER nombre
+                IMPRIMIR "Digite el numero de identificacion del nuevo empleado:"
+                LEER numero_identificacion
+                IMPRIMIR "Digite la fecha de nacimiento Dia/Mes/Año:"
+                LEER fecha_nacimiento
+
+                // Selección de sexo
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Indique el sexo del empleado: 1. Hombre 2. Mujer 3. Otro"
+                    LEER sexo
+                    SI sexo == 1 O sexo == 2 O sexo == 3 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                IMPRIMIR "Digite el numero telefonico del nuevo empleado:"
+                LEER numero_telefonico
+                IMPRIMIR "Digite el cargo del nuevo empleado:"
+                LEER cargo
+                IMPRIMIR "Digite la fecha de ingreso Dia/Mes/Año:"
+                LEER fecha_ingreso
+
+                // Tiene hijos
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Tiene hijos? 1. Si 2. No"
+                    LEER tiene_hijos
+                    SI tiene_hijos == 1 O tiene_hijos == 2 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                // Tipo de contrato
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Tipo de contrato: 1. Definido 2. Indefinido 3. Obra labor 4. Aprendizaje"
+                    LEER tipo_contrato
+                    SI tipo_contrato >= 1 Y tipo_contrato <= 4 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                // Tipo de RH
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Tipo de RH: 1. A+ 2. A- 3. B+ 4. B- 5. AB+ 6. AB- 7. O+ 8. O-"
+                    LEER RH
+                    SI RH >= 1 Y RH <= 8 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                // Estado civil
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Indique estado civil: 1. Soltero 2. Casado 3. Union libre 4. Divorciado 5. Viudo"
+                    LEER estado_civil
+                    SI estado_civil >= 1 Y estado_civil <= 5 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                // Discapacidad
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "El empleado cuenta con alguna discapacidad? 1. Si 2. No"
+                    LEER discapacidad
+                    SI discapacidad == 1 O discapacidad == 2 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                // Población vulnerable
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "El empleado pertenece a alguna poblacion vulnerable? 1. Si 2. No"
+                    LEER poblacion_vulnerable
+                    SI poblacion_vulnerable == 1 O poblacion_vulnerable == 2 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                // Añadir al tablero Kanban
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Desea añadir este empleado al tablero kanban? 1. Si 2. No"
+                    LEER añadir_kanban
+                    SI añadir_kanban == 1 O añadir_kanban == 2 ENTONCES
+                        SALIR DEL BUCLE
+                    SINO
+                        IMPRIMIR "Digite una opcion valida"
+                    FIN SI
+                FIN MIENTRAS
+
+                LLAMAR registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable, añadir_kanban)
+
+            CASO 4:
+                LLAMAR eliminar_empleado()
+
+            CASO 5:
+                IMPRIMIR "Digite el numero de identificacion del empleado a modificar:"
+                LEER numero_identificacion
+                LLAMAR modificar_empleado(numero_identificacion)
+
+            CASO 6:
+                IMPRIMIR "Filtrar edad por: 1. Edad especifica 2. Rango de edad"
+                LEER opcion
+                SEGÚN opcion HACER
+                    CASO 1:
+                        IMPRIMIR "Digite la edad:"
+                        LEER edad
+                        LLAMAR filtrar_edad_especifica(edad)
+                    CASO 2:
+                        IMPRIMIR "Digite edad minima:"
+                        LEER edad_min
+                        IMPRIMIR "Digite edad maxima:"
+                        LEER edad_max
+                        LLAMAR filtrar_edad_rango(edad_min, edad_max)
+                    DE OTRO MODO:
+                        IMPRIMIR "Digite una opcion valida"
+                FIN SEGÚN
+
+            CASO 7:
+                IMPRIMIR "Filtrar fecha de ingreso: 1. Fecha especifica 2. Dia 3. Mes 4. Año"
+                LEER opcion
+                SEGÚN opcion HACER
+                    CASO 1:
+                        LEER fecha_ingreso
+                        LLAMAR filtrar_fecha_ingreso_especifica(fecha_ingreso)
+                    CASO 2:
+                        LEER dia
+                        LLAMAR filtrar_fecha_ingreso_dia(dia)
+                    CASO 3:
+                        LEER mes
+                        LLAMAR filtrar_fecha_ingreso_mes(mes)
+                    CASO 4:
+                        LEER año
+                        LLAMAR filtrar_fecha_ingreso_año(año)
+                    DE OTRO MODO:
+                        IMPRIMIR "Digite una opcion valida"
+                FIN SEGÚN
+
+            CASO 8:
+                IMPRIMIR "Filtrar por sexo: 1. Hombre 2. Mujer 3. Otro"
+                LEER sexo
+                LLAMAR filtrar_sexo(sexo)
+
+            CASO 9:
+                IMPRIMIR "Tiene hijos: 1. Si 2. No"
+                LEER hijos
+                LLAMAR filtrar_hijos(hijos)
+
+            CASO 10:
+                IMPRIMIR "Filtrar por RH: 1. A+ 2. A- 3. B+ 4. B- 5. AB+ 6. AB- 7. O+ 8. O-"
+                LEER RH
+                LLAMAR filtrar_rh(RH)
+
+            CASO 11:
+                IMPRIMIR "Filtrar por estado civil: 1. Soltero 2. Casado 3. Union libre 4. Divorciado 5. Viudo"
+                LEER estado_civil
+                LLAMAR filtrar_estado_civil(estado_civil)
+
+            CASO 12:
+                IMPRIMIR "Filtrar por poblacion vulnerable: 1. Si 2. No"
+                LEER poblacion_vulnerable
+                LLAMAR filtrar_poblacion_vulnerable(poblacion_vulnerable)
+
+            CASO 13:
+                IMPRIMIR "Filtrar por tipo de contrato: 1. Indefinido 2. Definido 3. Obra labor 4. Aprendizaje"
+                LEER contrato
+                LLAMAR filtrar_contrato(contrato)
+
+            CASO 14:
+                IMPRIMIR "Filtrar por discapacidad: 1. Si 2. No"
+                LEER discapacidad
+                LLAMAR filtrar_discapacidad(discapacidad)
+
+            CASO 15:
+                MIENTRAS VERDADERO HACER
+                    IMPRIMIR "Menu de gestion Kanban:
+                    1. Mostrar tablero
+                    2. Asignar tarea
+                    3. Gestionar estado de tarea
+                    4. Eliminar tarea
+                    5. Filtrar tareas ToDo
+                    6. Filtrar tareas InProgress
+                    7. Filtrar tareas Done
+                    0. Salir"
+
+                    LEER opcion
+                    SEGÚN opcion HACER
+                        CASO 1:
+                            LLAMAR mostrar_tablero_kanban()
+                        CASO 2:
+                            IMPRIMIR "Digite el numero de identificacion:"
+                            LEER numero_de_id
+                            LLAMAR asignar_tarea(numero_de_id)
+                        CASO 3:
+                            IMPRIMIR "Digite el numero de identificacion:"
+                            LEER numero_de_id
+                            LLAMAR gestionar_estado_tarea(numero_de_id)
+                        CASO 4:
+                            IMPRIMIR "Digite el numero de identificacion:"
+                            LEER numero_de_id
+                            LLAMAR eliminar_tarea(numero_de_id)
+                        CASO 5:
+                            LLAMAR filtrar_tareas_todo()
+                        CASO 6:
+                            LLAMAR filtrar_tareas_InProgress()
+                        CASO 7:
+                            LLAMAR filtrar_tareas_Done()
+                        CASO 0:
+                            IMPRIMIR "Saliendo del tablero kanban..."
+                            SALIR DEL BUCLE
+                        DE OTRO MODO:
+                            IMPRIMIR "Digite una opcion valida"
+                    FIN SEGÚN
+                FIN MIENTRAS
+
+            CASO 0:
+                IMPRIMIR "Tenga un buen dia!"
+                SALIR DEL BUCLE
+
+            DE OTRO MODO:
+                IMPRIMIR "Digite una opcion valida"
+        FIN SEGÚN
+    FIN MIENTRAS
+FIN PROCESO
