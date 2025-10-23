@@ -354,6 +354,11 @@ def eliminar_empleado():  # Verificar si hay empleados
             empleado_encontrado = empleado  # Si hay coincidencia guarda el empleado y su posición
             posicion = i  # Guarda el índice donde está el empleado
             break  # Salimos del bucle porque ya encontró el empleado
+    for i, empleado in enumerate(tablero_kanban):
+        if empleado["numero_identificacion"] == numero_identificacion:
+            empleado_encontrado = empleado
+            posicion = i
+            break
     
     if empleado_encontrado:  # Verifica si se encontró un empleado con ese número
         # Muestra los datos del empleado encontrado
@@ -369,6 +374,7 @@ def eliminar_empleado():  # Verificar si hay empleados
         
         if confirmacion == 1:
             lista_empleados.pop(posicion)  # Elimina el elemento en esa posición
+            tablero_kanban.pop(posicion)
             print("Empleado eliminado exitosamente")
         elif confirmacion == 2:
             print("Eliminación cancelada")
