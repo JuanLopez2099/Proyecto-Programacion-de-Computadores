@@ -418,6 +418,9 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                         nombre = input("Digite el nuevo nombre: ").strip().title() #Se pide el nuevo nombre al usuario
                         if nombre.replace(" ", "").isalpha():   #Se quitan los espacios dentro del nombre y se comprueba si solo contiene caracteres alfabeticos
                             empleado["nombre"] = nombre    #Si se valida la condicin se remplaza la clave nombre dentro del diccionario con el nuevo nombre
+                            for elemento in tablero_kanban:
+                                if elemento["numero_identificacion"] == numero_identificacion:
+                                    elemento["nombre"] = empleado["nombre"]
                         else:
                             print("El nombre debe contener solo letras y no debe estar vacio")  #Si no se envia un mensaje avisando que el nombre debe contener solo letras y no se debe dejar vacio
                     case 2: #Reemplazar numero de identificacion
@@ -445,7 +448,10 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                             if not repetido:               #Si la bandera repetido es False 
                                 numero_no_repetido = True  #La bandera de numero de id no repetido se convierte a true
                         if numero_isdigit and numero_mayor_0 and numero_no_repetido:  #Si todas las banderas son True
-                            empleado["numero_identificacion"] = numero_id            #Se remplaza la clave numero de identificacion con el numero de id ingresado por el usuario
+                            empleado["numero_identificacion"] = numero_id          #Se remplaza la clave numero de identificacion con el numero de id ingresado por el usuario
+                            for elemento in tablero_kanban:
+                                if elemento["numero_identificacion"] == numero_identificacion:
+                                    elemento["numero_identificacion"] = empleado["numero_identificacion"]
                     case 3: #Remplazar fecha de nacimiento
                         fecha_nacimiento = input("Digite la nueva fecha de nacimiento Dia/Mes/Año: ").strip() #Se pide la fecha de nacimiento al usuario
                         if fecha_nacimiento.count("/") < 2 or fecha_nacimiento.count("/") > 2: #Se comprueba que el usuario siga la estructura de fechas contando el numero de /
@@ -494,12 +500,18 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                                 telefono_no_repetido = True  #Telefono no repedito se convierte a True
                         if telefono_solo_numeros and telefono_mayor_0 and telefono_no_repetido: #Si todas las validaciones anteriores son True
                             empleado["numero_telefonico"] = numero_telefonico   #El numero ingresado por el usuario remplaza al valor dentro de la clave del diccionario
+                            for elemento in tablero_kanban:
+                                if elemento["numero_identificacion"] == numero_identificacion:
+                                    elemento["numero_telefonico"] = empleado["numero_telefonico"]
                     case 6: #Reemplazar cargo
                         cargo = input("Digite el nuevo cargo: ") #Se solicita el nuevo cargo al usuario
                         if not cargo.replace(" ", "").isalpha():   #Se eliminan los espacios para comprobar si solo contiene caracteres alfabeticos
                             print("El cargo digitado debe contener solo letras")  #Si lo anterior es False se envia un mensaje indicandolo
                         else:
                             empleado["cargo"] = cargo  #En caso de que pase la comprobacion se remplaza el valor con la clave cargo dentro del diccionario del empleado
+                            for elemento in tablero_kanban:
+                                if elemento["numero_identificacion"] == numero_identificacion:
+                                    elemento["cargo"] = empleado["cargo"]
                     case 7: #Reemplazar fecha de ingreso
                         fecha_ingreso = input("Diigte la nueva fecha de ingreso Dia/Mes/Año: ") #Se solicita la nueva fecha de ingreso al usuario
                         if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:  #Se valida que siga el formato estabelcido
@@ -623,6 +635,7 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                         return imprimir_tablas(tabla)  #Retorna el diccionario del empleado modificado con todos los cambios hechos para comprobar que todo este correcto
                     case _:
                         print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
+
 
     return "El empleado buscado no existe"  #En caso de ingresar el numero de identifiacion que no exista la funcion retorna indicandolo
 
