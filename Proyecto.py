@@ -1226,7 +1226,7 @@ while True:
         case "1":
             mostrar_empleados() #Opcion numero uno, se llama a la funcion para mostrar la lista de empleados
         case "2":
-            numero_de_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Solicita al usuario el numero de identificacion como entero
+            numero_de_identificacion = input("Digite el numero de identificacion del empleado: ").strip #Solicita al usuario el numero de identificacion como entero
             print()
             print(buscar_empleados(numero_de_identificacion)) #Llama a la funcion y devuelve el resultado
         case "3":
