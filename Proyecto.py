@@ -301,19 +301,19 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
         return "La fecha de nacimiento debe estar separado por /" #Si no lo tiene se envia un mensaje indicandolo
     if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:
         return "La fecha de ingreso debe estar separado por /"
-    opciones_sexo_empleado = {1: "hombre", 2: "mujer", 3: "otro"}
+    opciones_sexo_empleado = {"1": "hombre", "2": "mujer", "3": "otro"}
     sexo = opciones_sexo_empleado[sexo]
-    opciones_tiene_hijos = {1: "Si", 2: "No"}                         #Se crean diccionarios que contengan las opciones que digite el usuario usando claves
+    opciones_tiene_hijos = {"1": "Si", "2": "No"}                         #Se crean diccionarios que contengan las opciones que digite el usuario usando claves
     tiene_hijos = opciones_tiene_hijos[tiene_hijos]                   #La variable se convierte al valor de la clave del diccionario que dijite el usuario                                        
-    opciones_tipo_contrato = {1: "Definido", 2: "Indefinido", 3: "Obra labor", 4: "Aprendizaje"}
+    opciones_tipo_contrato = {"1": "Definido", "2": "Indefinido", "3": "Obra labor", "4": "Aprendizaje"}
     tipo_contrato = opciones_tipo_contrato[tipo_contrato]
-    opciones_RH = {1: "A+", 2: "A-", 3: "B+", 4: "B-", 5: "AB+", 6: "AB-", 7: "O+", 8: "O-"}
+    opciones_RH = {"1": "A+", "2": "A-", "3": "B+", "4": "B-", "5": "AB+", "6": "AB-", "7": "O+", "8": "O-"}
     RH = opciones_RH[RH]
-    opciones_estado_civil = {1: "Soltero", 2: "Casado", 3: "Union Libre", 4: "Divorciado", 5: "Viudo"}
+    opciones_estado_civil = {"1": "Soltero", "2": "Casado", "3": "Union Libre", "4": "Divorciado", "5": "Viudo"}
     estado_civil = opciones_estado_civil[estado_civil]
-    opciones_discapacidad = {1: "Si", 2: "No"}
+    opciones_discapacidad = {"1": "Si", "2": "No"}
     discapacidad = opciones_discapacidad[discapacidad]
-    opciones_poblacion_vulnerable = {1: "Si", 2: "No"}
+    opciones_poblacion_vulnerable = {"1": "Si", "2": "No"}
     poblacion_vulnerable = opciones_poblacion_vulnerable[poblacion_vulnerable]
     nuevo_empleado = {"nombre": nombre, "numero_identificacion": numero_identificacion, "fecha_nacimiento": fecha_nacimiento, "edad": calcular_edad(fecha_nacimiento), "sexo": sexo, "numero_telefonico": numero_telefonico, "cargo": cargo, "fecha_ingreso": fecha_ingreso, "tiene_hijos": tiene_hijos, "tipo_contrato":tipo_contrato, "RH": RH, "estado_civil": estado_civil, "discapacidad": discapacidad, "poblacion_vulnerable": poblacion_vulnerable } #Una vez que se hacen las comprobaciones se guardan los valores en este diccionario con su respectiva clave
     for empleado in lista_empleados: 
@@ -322,7 +322,7 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
     lista_empleados.append(nuevo_empleado) #Una vez hechas todas las comprobaciones se agrega el diccionario que contiene al nuevo empleado a la lista de empleados
     emp.append(nuevo_empleado)
     nuevo_empleado_kanban  = {"nombre": nombre, "numero_identificacion": numero_identificacion, "numero_telefonico": numero_telefonico, "cargo": cargo, "tarea_actual": "Sin tarea asignada", "estado": "Sin tarea asignada" }
-    if añadir_kanban == 1:
+    if añadir_kanban == "1":
         tablero_kanban.append(nuevo_empleado_kanban)
     print()
     print("El empleado se ha registrado con exito!") #Se indica que se ha añadido con exito
@@ -411,10 +411,10 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                       0. Guardar y salir"""
                       )
                 print()
-                opcion = int(input("Digite una opcion 1-13: "))   #Se pide la opcion como numero entero
+                opcion = input("Digite una opcion 1-13: ")   #Se pide la opcion como numero entero
                 print()
                 match opcion:  #Mediante un switchcase
-                    case 1:  #Reemplazar nombre
+                    case "1":  #Reemplazar nombre
                         nombre = input("Digite el nuevo nombre: ").strip().title() #Se pide el nuevo nombre al usuario
                         if nombre.replace(" ", "").isalpha():   #Se quitan los espacios dentro del nombre y se comprueba si solo contiene caracteres alfabeticos
                             empleado["nombre"] = nombre    #Si se valida la condicin se remplaza la clave nombre dentro del diccionario con el nuevo nombre
@@ -423,7 +423,7 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                                     elemento["nombre"] = empleado["nombre"]
                         else:
                             print("El nombre debe contener solo letras y no debe estar vacio")  #Si no se envia un mensaje avisando que el nombre debe contener solo letras y no se debe dejar vacio
-                    case 2: #Reemplazar numero de identificacion
+                    case "2": #Reemplazar numero de identificacion
                         empleado_actual = empleado #Se guarda el empleado actual digitado por el usuario para diferenciarlo de los demas
                         numero_id = input("Digite el nuevo numero de identificacion: ").strip() #Se piede el nuevo numero de identificacion
                         numero_isdigit = False  
@@ -452,29 +452,29 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                             for elemento in tablero_kanban:
                                 if elemento["numero_identificacion"] == numero_identificacion:
                                     elemento["numero_identificacion"] = empleado["numero_identificacion"]
-                    case 3: #Remplazar fecha de nacimiento
+                    case "3": #Remplazar fecha de nacimiento
                         fecha_nacimiento = input("Digite la nueva fecha de nacimiento Dia/Mes/Año: ").strip() #Se pide la fecha de nacimiento al usuario
                         if fecha_nacimiento.count("/") < 2 or fecha_nacimiento.count("/") > 2: #Se comprueba que el usuario siga la estructura de fechas contando el numero de /
                             print("La fecha de nacimiento debe estar separada por /")  #Si no lo sigue se imprime un mensaje indicandolo
                         else:
                             empleado["fecha_nacimiento"] = fecha_nacimiento  #Si la fecha pasa las validaciones se remplaza en el diccionario
                             empleado["edad"] = calcular_edad(fecha_nacimiento) #Se recalcula la edad con la nueva fecha de nacimiento
-                    case 4: #Reemplazar sexo
+                    case "4": #Reemplazar sexo
                         print("""Escoja una opcion:  
                               1. Hombre
                               2. Mujer         
                               3. Otro """) #Se despliega un menu con las opciones disponibles
-                        sexo = int(input("Digite una opcion 1-3: "))   #Se pide la opcion como numero entero
+                        sexo = input("Digite una opcion 1-3: ")   #Se pide la opcion como numero entero
                         match sexo:  #Usando un switchcase
-                            case 1:
+                            case "1":
                                 empleado["sexo"] = "hombre"  #Caso 1 se remplaza la clave sexo con hombre
-                            case 2:
+                            case "2":
                                 empleado["sexo"] = "mujer" #Caso 2 se remplaza la clave sexo con mujer
-                            case 3:
+                            case "3":
                                 empleado["sexo"] = "otro"  #Caso 3 se remplaza la clave sexo con otro
                             case _:
                                 print("Escoja una opcion valida")  #Si el usuario coloca una opcion no contemplada se imprime un mensaje indicandolo
-                    case 5: #Reemplazar numero telefonico
+                    case "5": #Reemplazar numero telefonico
                         empleado_actual = empleado #Se guarda el empleado ingresado por el usuario en empleado actual
                         numero_telefonico = input("Digite el nuevo numero de telefono: ").strip() #Se solicita el nuevo numero telefonico
                         telefono_solo_numeros = False  
@@ -503,7 +503,7 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                             for elemento in tablero_kanban:
                                 if elemento["numero_identificacion"] == numero_identificacion:
                                     elemento["numero_telefonico"] = empleado["numero_telefonico"]
-                    case 6: #Reemplazar cargo
+                    case "6": #Reemplazar cargo
                         cargo = input("Digite el nuevo cargo: ") #Se solicita el nuevo cargo al usuario
                         if not cargo.replace(" ", "").isalpha():   #Se eliminan los espacios para comprobar si solo contiene caracteres alfabeticos
                             print("El cargo digitado debe contener solo letras")  #Si lo anterior es False se envia un mensaje indicandolo
@@ -512,44 +512,44 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                             for elemento in tablero_kanban:
                                 if elemento["numero_identificacion"] == numero_identificacion:
                                     elemento["cargo"] = empleado["cargo"]
-                    case 7: #Reemplazar fecha de ingreso
+                    case "7": #Reemplazar fecha de ingreso
                         fecha_ingreso = input("Diigte la nueva fecha de ingreso Dia/Mes/Año: ") #Se solicita la nueva fecha de ingreso al usuario
                         if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2:  #Se valida que siga el formato estabelcido
                             print("La fecha de ingreso debe estar separada por /")  #En caso de no seguir el formato se envia un mensaje indicandolo
                         else:
                             empleado["fecha_ingreso"] = fecha_ingreso   #Si pasa la validacion se reemplaza el valor de la clave fecha de ingreso con la nueva fecha de ingreso
-                    case 8: #Cambiar si tiene hijos o no
+                    case "8": #Cambiar si tiene hijos o no
                         print("""Escoja un opcion: 
                               1. Si
                               2. No""")  #Se despliega un menu con las opciones
-                        tiene_hijos = int(input("Digite una opcion 1-2: ")) #Se solicita la opcion como numero entero
+                        tiene_hijos = input("Digite una opcion 1-2: ") #Se solicita la opcion como numero entero
                         match tiene_hijos:  #Mediante un switchcase
-                            case 1:
+                            case "1":
                                 empleado["tiene_hijos"] = "Si" #Caso 1 se reemplaza el valor de tiene hijos con un Si
-                            case 2:
+                            case "2":
                                 empleado["tiene_hijos"] = "No"  #Caso 2 Se reemplaza el valor de tiene hojos con un No
                             case _:
                                 print("Escoja una opcion valida")  #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
-                    case 9:  #Cambiar tipo de contrato
+                    case "9":  #Cambiar tipo de contrato
                         print("""Tipo de contrato:
                       1. Definido
                       2. Indefinido
                       3. Obra labor
                       4. Aprendizaje""")  #Se imprimen todos los tipos de contrato
                         print()
-                        tipo_contrato = int(input("Escoja una opcion 1-4: "))  #Se solicita una opcion como numero entero
+                        tipo_contrato = input("Escoja una opcion 1-4: ")  #Se solicita una opcion como numero entero
                         match tipo_contrato:   
-                            case 1:
+                            case "1":
                                 empleado["tipo_contrato"] = "Definido"
-                            case 2:
+                            case "2":
                                 empleado["tipo_contrato"] = "Indefinido"    #Se remplaza el valor de la clave tipo de contrato dependiendo de la opcion escojida
-                            case 3: 
+                            case "3": 
                                 empleado["tipo_contrato"] = "Obra labor"
-                            case 4:
+                            case "4":
                                 empleado["tipo_contrato"] = "Aprendizaje"
                             case _:
                                 print("Escoja una opcion valida")  #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
-                    case 10: #Reemplazar tipo de RH
+                    case "10": #Reemplazar tipo de RH
                         print("""Tipo de RH:
                       1. A+
                       2. A-
@@ -560,74 +560,74 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
                       7. O+  
                       8. O-""") #Se imprime un menu con todos los tipos de RH
                         print()
-                        RH = int(input("Digite una opcion 1-8: ")) #Se solicita la opcion como numero entero
+                        RH = input("Digite una opcion 1-8: ") #Se solicita la opcion como numero entero
                         match RH:
-                            case 1:
+                            case "1":
                                 empleado["RH"] = "A+"
-                            case 2:
+                            case "2":
                                 empleado["RH"] = "A-"
-                            case 3:
+                            case "3":
                                 empleado["RH"] = "B+"
-                            case 4:
+                            case "4":
                                 empleado["RH"] = "B-"      #Se reemplaza el valor de la clave RH dependiendo de la opcion ingresada
-                            case 5:
+                            case "5":
                                 empleado["RH"] = "AB+"
-                            case 6:
+                            case "6":
                                 empleado["RH"] = "AB-"
-                            case 7:
+                            case "7":
                                 empleado["RH"] = "O+"
-                            case 8:
+                            case "8":
                                 empleado["RH"] = "O-"
                             case _:
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
-                    case 11:
+                    case "11":
                         print("""Indique estado civil:
                           1. Soltero
                           2. Casado
                           3. Union libre
                           4. Divorciado
                           5. Viudo""")  # Se imprime un menu con todas las opciones de estado civil
-                        estado_civil = int(input("Digite una opcion 1-5: "))  #Se solicita una opcion como numero entero
+                        estado_civil = input("Digite una opcion 1-5: ") #Se solicita una opcion como numero entero
                         match estado_civil:
-                            case 1:
+                            case "1":
                                 empleado["estado_civil"] = "Soltero"
-                            case 2:
+                            case "2":
                                 empleado["estado_civil"] = "Casado"
-                            case 3:                                                      #Se reemplaza el valor de la clave estado civil dependiendo de la opcion escogida
+                            case "3":                                                      #Se reemplaza el valor de la clave estado civil dependiendo de la opcion escogida
                                 empleado["estado_civil"] = "Union libre"
-                            case 4:
+                            case "4":
                                 empleado["estado_civil"] = "Divorciado"
-                            case 5:
+                            case "5":
                                 empleado["estado_civil"] = "Viudo"
                             case _:
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
-                    case 12:
+                    case "12":
                         print("""El empleado cuenta con alguna discapacidad: \n
                       1.Si
                       2.No""") # Se imprime un menu con todas las opciones de discapacidad
                         print()
-                        discapacidad = int(input("Digite una opcion 1-2: ")) #Se solicita una opcion como numero entero
+                        discapacidad = input("Digite una opcion 1-2: ") #Se solicita una opcion como numero entero
                         match discapacidad:
-                            case 1:
+                            case "1":
                                 empleado["discapacidad"] = "Si"   #Caso 1 se reemplaza el valor de la clave discapacidad con Si
-                            case 2:
+                            case "2":
                                 empleado["discapacidad"] = "No"   #Caso 2 se reemplaza el valor de la clave discapacidad con No
                             case _:
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
-                    case 13:
+                    case "13":
                         print("""El empleado pertenece a alguna poblacion vulnerable: \n
                       1. Si
                       2. No""") #Se imprime un menu con todas las opciones de poblacion vulnerable
                         print()
-                        poblacion_vulnerable = int(input("Digite una opcion 1-2: ")) #Se solicita una opcion como numero entero
+                        poblacion_vulnerable = input("Digite una opcion 1-2: ") #Se solicita una opcion como numero entero
                         match poblacion_vulnerable:
-                            case 1:
+                            case "1":
                                 empleado["poblacion_vulnerable"] = "Si" #Caso 1 se reemplaza el valor de la clave poblacion vulnerable con Si
-                            case 2:
+                            case "2":
                                 empleado["poblacion_vulnerable"] = "No" #Caso 2 se reemplaza el valor de la clave discapacidad con No
                             case _:
                                 print("Digite una opcion valida") #En caso de ingresar una opcion no contemplada se imprime un mensaje indicandolo
-                    case 0:
+                    case "0":
                         print("Los cambios se han realizado con exito")  #Una vez que los cambios se han realizado se sale del menu
                         print()
                         tabla.append(empleado)
@@ -740,20 +740,24 @@ def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que
 
 # Definir función para filtrar empleados según su sexo
 def filtrar_sexo(sexo): # Se crea la función con el parámetro que se pedirá al usuario
-    opciones_sexo = {1: "hombre", 2: "mujer", 3: "otro"} # Se define un diccionario con las opciones disponibles para sexo
+    opciones_sexo = {"1": "hombre", "2": "mujer", "3": "otro"} # Se define un diccionario con las opciones disponibles para sexo
+    if not sexo in opciones_sexo: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     sexo = opciones_sexo[sexo]
     coincidencias = []
     for empleado in lista_empleados: # Se recorre la lista de empleados
-        if sexo == empleado["sexo"]:
+         if sexo == empleado["sexo"]:
             coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
     if coincidencias != []: 
-        return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
+            return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
     elif coincidencias == []:
         return "No hay empleados del sexo indicado"
     
 #Definir funcion para filtrar empleados segun tipo de contrato
 def filtrar_contrato(contrato): #se crea la función con el parámetro que se pedirá la usuario
-    opciones_contrato = {1: "Indefinido", 2:"Definido", 3:"Obra labor", 4:"Aprendizaje"}
+    opciones_contrato = {"1": "Indefinido", "2":"Definido", "3":"Obra labor", "4":"Aprendizaje"}
+    if not contrato in opciones_contrato: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     contrato = opciones_contrato[contrato] 
     coincidencias = [] 
     for empleado in lista_empleados: #se recorre la lista de empleados 
@@ -767,7 +771,9 @@ def filtrar_contrato(contrato): #se crea la función con el parámetro que se pe
     
 # Definir función para filtrar empleados según si tienen hijos o no
 def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá al usuario
-    opciones_hijos = {1: "Si", 2: "No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene hijos
+    opciones_hijos = {"1": "Si", "2": "No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene hijos
+    if not hijos in opciones_hijos: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     hijos = opciones_hijos[hijos] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
     coincidencias = []
     for empleado in lista_empleados:
@@ -778,7 +784,9 @@ def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá
 
 #Definir función para filtrar empleados según si tienen discapacidades o no 
 def filtrar_discapacidad(discapacidad): #se crea la función con el parámetro que se pedirá que se pedirá al usuario
-    opciones__discapacidad = {1:"Si", 2:"No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene discapacidades
+    opciones__discapacidad = {"1":"Si", "2":"No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene discapacidades
+    if not discapacidad in opciones__discapacidad: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     discapacidad = opciones__discapacidad[discapacidad] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
     coincidencias = []
     for empleado in lista_empleados:
@@ -789,7 +797,9 @@ def filtrar_discapacidad(discapacidad): #se crea la función con el parámetro q
         
 # Definir función para filtrar empleados según su tipo de sangre
 def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará al usuario
-    opciones_RH = {1: "A+", 2: "A-", 3: "B+", 4: "B-", 5: "AB+", 6: "AB-", 7: "O+", 8: "O-"} # Se crea un diccionario con las opciones disponibles para el tipo de sangre
+    opciones_RH = {"1": "A+", "2": "A-", "3": "B+", "4": "B-", "5": "AB+", "6": "AB-", "7": "O+", "8": "O-"} # Se crea un diccionario con las opciones disponibles para el tipo de sangre
+    if not RH in opciones_RH: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     RH = opciones_RH[RH] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
     coincidencias = []
     for empleado in lista_empleados:
@@ -800,7 +810,9 @@ def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará
 
 # Definir función para filtrar empleados según su estado civil
 def filtrar_estado_civil(estado_civil): # Se define la función con el parámetro que se solicitará al usuario
-    opciones_estado_civil = {1: "Soltero", 2: "Casado", 3: "Union libre", 4: "Divorciado", 5: "Viudo"} # Se crea un diccionario con las opciones disponibles para estado civil
+    opciones_estado_civil = {"1": "Soltero", "2": "Casado", "3": "Union libre", "4": "Divorciado", "5": "Viudo"} # Se crea un diccionario con las opciones disponibles para estado civil
+    if not estado_civil in opciones_estado_civil: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     estado_civil = opciones_estado_civil[estado_civil] # Se convierte la opción numérica ingresada por el usuario al valor correspondiente en texto
     coincidencias = []
     for empleado in lista_empleados:
@@ -812,7 +824,9 @@ def filtrar_estado_civil(estado_civil): # Se define la función con el parámetr
 
 # Definir función para filtrar empleados según si pertenecen o no a una población vulnerable
 def filtrar_poblacion_vulnerable(poblacion_vulnerable): # Se define la función con el parámetro que se solicitará al usuario
-    opciones_poblacion_vulnerable = {1: "Si", 2: "No"}   # Se crea un diccionario con las opciones disponibles: Sí o No
+    opciones_poblacion_vulnerable = {"1": "Si", "2": "No"}   # Se crea un diccionario con las opciones disponibles: Sí o No
+    if not poblacion_vulnerable in opciones_poblacion_vulnerable: #Se valida que la opcion ingresada este dentro del diccionario 
+        return "Ingrese una opcion valida"
     poblacion_vulnerable = opciones_poblacion_vulnerable[poblacion_vulnerable] # Se convierte la opción numérica ingresada por el usuario a su valor correspondiente en texto
     coincidencias = []
     for empleado in lista_empleados:
@@ -844,17 +858,17 @@ def menu():  #Se define el menu dentru de una funcion para reutilizarlo
 print("\n ========== Bienvenido al menu de JackDRipper Software ==========") #Se imprime el titulo del menu fuera del bucle para que no se imprima en cada vuelta
 while True:  
     menu()    #Se llama a la funcion del menu
-    opcion = int(input("Digite una opcion 1-15: "))  #Se solicita la opcion al usuario, se le pide en numero entero
+    opcion = input("Digite una opcion 1-15: ")  #Se solicita la opcion al usuario, se le pide en numero entero
     print()
 
     match opcion:
-        case 1:
+        case "1":
             mostrar_empleados() #Opcion numero uno, se llama a la funcion para mostrar la lista de empleados
-        case 2:
+        case "2":
             numero_de_identificacion = int(input("Digite el numero de identificacion del empleado: ")) #Solicita al usuario el numero de identificacion como entero
             print()
             print(buscar_empleados(numero_de_identificacion)) #Llama a la funcion y devuelve el resultado
-        case 3:
+        case "3":
             nombre = input("Digite el nombre del nuevo empleado: ").title().strip() #Se solicita al usuario el nombre del nuevo empleado, se eliminan espacios y se ponen las iniciales en mayusculas
             numero_identificacion = input("Digite el numero de identificacion del nuevo empleado: ") #Se pide el id como cadena
             fecha_nacimiento = input("Digite la fecha de nacimiento Dia/Mes/Año: ") #Se pide la fecha de nacimiento 
@@ -864,8 +878,8 @@ while True:
                  2. Mujer  
                  3. Otro""")
                 print()
-                sexo = int(input("Digite una opcion 1-3: "))  #Se le solicita al usuario elegir una opcion numerica
-                if sexo == 1 or sexo == 2 or sexo == 3:
+                sexo = input("Digite una opcion 1-3: ")  #Se le solicita al usuario elegir una opcion numerica
+                if sexo == "1" or sexo == "2" or sexo == "3":
                     break     #Si las opcion es valida se rompe el bulce y se pasa al siguiente parametro
                 else:
                     print("Digite una opcion valida")  #Si no se indica y se repite el bucle hasta que elija una opcion valida
@@ -877,8 +891,8 @@ while True:
                       1. Si
                       2. No
                       """)
-                tiene_hijos = int(input("Escoja una opcion 1-2: "))  #Se le solicita al usuario que digite una opcion numerica
-                if tiene_hijos == 1 or tiene_hijos == 2:
+                tiene_hijos = input("Escoja una opcion 1-2: ")  #Se le solicita al usuario que digite una opcion numerica
+                if tiene_hijos == "1" or tiene_hijos == "2":
                     break    #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                 else:
                     print("Digite una opcion valida")   #Si no se indica y el bucle se repite hasta escojer una opcion valida
@@ -889,8 +903,8 @@ while True:
                       3. Obra labor
                       4. Aprendizaje""")
                 print()
-                tipo_contrato = int(input("Digite una opcion 1-4: "))  #Se le solicita al usuario que digite una opcion numerica
-                if tipo_contrato == 1 or tipo_contrato == 2 or tipo_contrato == 3 or tipo_contrato == 4: 
+                tipo_contrato = input("Digite una opcion 1-4: ")  #Se le solicita al usuario que digite una opcion numerica
+                if tipo_contrato == "1" or tipo_contrato == "2" or tipo_contrato == "3" or tipo_contrato == "4": 
                     break    #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                 else:
                     print("Digite una opcion valida")  #Si no se indica y el bucle se repite hasta escojer una opcion valida
@@ -905,8 +919,8 @@ while True:
                       7. O+
                       8. O-""")
                 print()
-                RH = int(input("Digite una opcion 1-8: "))
-                if RH == 1 or RH == 2 or RH == 3 or RH == 4 or RH == 5 or RH == 6 or RH == 7 or RH == 8: #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
+                RH = input("Digite una opcion 1-8: ")
+                if RH == "1" or RH == "2" or RH == "3" or RH == "4" or RH == "5" or RH == "6" or RH == "7" or RH == "8": #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                     break
                 else:
                     print("Digite una opcion valida")  #Si no se indica y el bucle se repite hasta escojer una opcion valida
@@ -918,8 +932,8 @@ while True:
                           4. Divorciado
                           5. Viudo""")
                     print()
-                    estado_civil = int(input("Escoja una opcion 1-5: ")) #Se le solicita al usuario que digite una opcion numerica
-                    if estado_civil == 1 or estado_civil == 2 or estado_civil == 3 or estado_civil == 4 or estado_civil == 5: 
+                    estado_civil = input("Escoja una opcion 1-5: ") #Se le solicita al usuario que digite una opcion numerica
+                    if estado_civil == "1" or estado_civil == "2" or estado_civil == "3" or estado_civil == "4" or estado_civil == "5": 
                         break #Si la opcion es valida se rompe el bucle y se va al siguiente parametro
                     else:
                         print("Digite una opcion valida") #Si no se indica y el bucle se repite hasta escojer una opcion valida
@@ -928,8 +942,8 @@ while True:
                       1. Si
                       2. No""")
                 print()
-                discapacidad = int(input("Digite una opcion 1-2: "))
-                if discapacidad == 1 or discapacidad == 2:
+                discapacidad = input("Digite una opcion 1-2: ")
+                if discapacidad == "1" or discapacidad == "2":
                     break
                 else:
                     print("Digite una opcion valida")
@@ -938,8 +952,8 @@ while True:
                       1. Si
                       2. No""")
                 print()
-                poblacion_vulnerable = int(input("Digite una opcion 1-2: "))
-                if poblacion_vulnerable == 1 or poblacion_vulnerable == 2:
+                poblacion_vulnerable = input("Digite una opcion 1-2: ")
+                if poblacion_vulnerable == "1" or poblacion_vulnerable == "2":
                     break
                 else:
                     print("Digite una opcion valida")
@@ -948,82 +962,82 @@ while True:
                       1. Si
                       2. No
                       """)
-                añadir_kanban = int(input("Digite una opcion 1-2: "))
-                if añadir_kanban == 1 or añadir_kanban == 2:
+                añadir_kanban = input("Digite una opcion 1-2: ")
+                if añadir_kanban == "1" or añadir_kanban == "2":
                     break
                 else:
                     print("Digite una opcion valida")
             print(registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable, añadir_kanban)) #Se llama a la funcion
 
-        case 4:
+        case "4":
             eliminar_empleado() #llamar a la funcion eliminar empleado
-        case 5:
+        case "5":
             numero_identificacion = input("Digite el numero de identificacion del empleado: ") #Pedir numero de identificacion del empleado a modificar
             print()
             print(modificar_empleado(numero_identificacion))  #Se llama a la funcion modificar empleado
-        case 6:
+        case "6":
             print("""Filtrar edad por:
                   1. Edad especifica
                   2. Rango de edad       
                   """)    #Se imprime menu indicando con opciones de filtrado
-            opcion = int(input("Escoja una opcion 1-2: "))
+            opcion = input("Escoja una opcion 1-2: ")
             match opcion:
-                case 1:
+                case "1":
                     edad = input("Digite la edad del empleado en años: ") #En el primer caso se pide la edad especifica y se llama a la funcion
                     print()
                     print(filtrar_edad_especifica(edad))             
-                case 2:
+                case "2":
                     edad_min = input("Digire la edad minima: ")     #En el segundo caso se solicitan las dos edades y se llama a la funcion
                     edad_max = input("Digite la edad maxima: ")
                     print()      
                     print(filtrar_edad_rango(edad_min, edad_max))
                 case _:
                     print("Digite una opcion valida")
-        case 7:
+        case "7":
             print("""Filtrar fecha de ingreso por: \n
                   1. Fecha especifica
                   2. Dia
                   3. Mes
                   4. Año""")  #Se imprime el menu con las opciones disponibles para filtrar empleados por fecha de ingreso
             print()
-            opcion = int(input("Digite una opcion 1-4: "))
+            opcion = input("Digite una opcion 1-4: ")
             match opcion:
-                case 1:   
+                case "1":   
                     fecha_ingreso = input("Digite una fecha de ingreso: ") #Se solicita al usuario la fecha completa para filtrar
                     print()
                     print(filtrar_fecha_ingreso_especifica(fecha_ingreso)) #Se llama a la funcion para filtrar por fecha especifica y se imprime el resultado
-                case 2:
+                case "2":
                     dia = input("Digite un dia: ") #Se solicita al usuario el dia para filtrar
                     print()
                     print(filtrar_fecha_ingreso_dia(dia)) #Se llama a la funcion para filtrar por dia y se imprime el resultado
-                case 3:
+                case "3":
                     mes = input("Digite un mes: ")  #Se solicita al usuario el mes para filtrar
                     print()
                     print(filtrar_fecha_ingreso_mes(mes)) #Se llama a la funcion para filtrar por mes y se imprime el resultado
-                case 4:
+                case "4":
                     año = input("Digite un año: ") #Se solicita al usuario el año para filtrar
                     print()
                     print(filtrar_fecha_ingreso_año(año)) #Se llama a la funcion para filtrar por año y se imprime el resultado
                 case _:
                     print("Digite una opcion valida")
-        case 8:
+        case "8":
             print("""Filtrar por:
                   1. Hombre
                   2. Mujer
                   3. Otro""")   #Se imprime un menu con todas las opciones para filtrar
             print()
-            sexo = int(input("Digite una opcion 1-3: "))
+            sexo = input("Digite una opcion 1-3: ")
             print()
             print(filtrar_sexo(sexo))   #Se llama a la funcion
-        case 9:
+        case "9":
             print("""Tiene hijos:
                   1. Si
                   2. No""") #Se imprime un menu con todas las opciones para filtrar
             print()
-            hijos = int(input("Digite una opcion 1-2: "))
+            hijos = input("Digite una opcion 1-2: ")
             print()
             print(filtrar_hijos(hijos)) #Se llama a la funcion
-        case 10:
+        case "10":
             print("""Filtrar por RH:
                       1. A+
                       2. A-
@@ -1034,47 +1048,47 @@ while True:
                       7. O+  
                       8. O-""") #Se imprime un menu con todas las opciones para filtrar
             print()
-            RH = int(input("Digite una opcion 1-8: "))
+            RH = input("Digite una opcion 1-8: ")
             print()
             print(filtrar_rh(RH)) #Se llama a la funcion
-        case 11:
+        case "11":
             print("""Filtrar por estado civil:
                           1. Soltero
                           2. Casado
                           3. Union libre
                           4. Divorciado
                           5. Viudo""")
-            estado_civil = int(input("Digite una opcion 1-5: ")) #Se imprime un menu con todas las opciones para filtrar
+            estado_civil = input("Digite una opcion 1-5: ") #Se imprime un menu con todas las opciones para filtrar
             print()
             print(filtrar_estado_civil(estado_civil)) #Se llama a la funcion
             print()
-        case 12:
+        case "12":
             print("""Filtrar por poblacion vulnerable: \n
                           1. Si
                           2. No""")  #Se imprime un menu con todas las opciones para filtrar
             print()
-            poblacion_vulnerable = int(input("Digite una opcion 1-2: "))
+            poblacion_vulnerable = input("Digite una opcion 1-2: ")
             print() 
             print(filtrar_poblacion_vulnerable(poblacion_vulnerable)) #Se llama a la funcion
-        case 13:
+        case "13":
             print("""Filtrar por:
                   1. indefinido
                   2. definido
                   3. Obra labor
                   4. aprendizaje""")   #Se imprime un menu con todas las opciones para filtrar
             print()
-            contrato = int(input("Digite una opcion 1-4: "))
+            contrato = input("Digite una opcion 1-4: ")
             print()
             print(filtrar_contrato(contrato))   #Se llama a la funcion 
-        case 14: 
+        case "14": 
             print("""Filtrar por discapacidad: \n
                     1. Si
                     2. No""") # Se imrpime un menú con todas las opciones para filtrar
             print()
-            discapacidad = int(input("Digite una opcion 1-2: "))
+            discapacidad = input("Digite una opcion 1-2: ")
             print ()
             print(filtrar_discapacidad(discapacidad)) #Se llama a la función 
-        case 15:
+        case "15":
             while True:
                 print()
                 print("""Bienvenido al menu de gestion Kanban: \n
@@ -1087,42 +1101,42 @@ while True:
                       7. Filtrar tareas Done
                       0. Salir
                       """)   #Se imprime un menu con las opciones del tablero kanban
-                opcion = int(input("Escoja una opcion: ")) #Se solicita una opcion al usuario
+                opcion = input("Escoja una opcion: ") #Se solicita una opcion al usuario
                 match opcion:
-                    case 1:
+                    case "1":
                         print()
                         print(mostrar_tablero_kanban())  #Se llama a la funcion para mostrar el tablero kanban
-                    case 2:
+                    case "2":
                         print()
                         numero_de_id = input("Digite el numero de identificacion del empleado: ") #Se pide el numero de identificacion del empleado
                         print()
                         print(asignar_tarea(numero_de_id)) #Se llama a la funcion para asignarle una nueva tarea
-                    case 3:
+                    case "3":
                         print()
                         numero_de_id = input("Digite el numero de identificacion del empleado: ").strip()  # Se pide el numero de identificacion del empleado
                         print(gestionar_estado_tarea(numero_de_id))  # Se llama a la función para gestionar tareas
-                    case 4:
+                    case "4":
                         print()
                         numero_de_id = input("Digite el numero de identificacion del empleado: ").strip() #Se solicita el numero de identificacion del empleado
                         print()
                         print(eliminar_tarea(numero_de_id))  #Se llama a la funcion para quitarle una tarea
-                    case 5:
+                    case "5":
                         print()
                         print(filtrar_tareas_todo()) #Se llama a la funcion para filtrar tareas por ToDo
-                    case 6:
+                    case "6":
                         print()
                         print(filtrar_tareas_InProgress())  # Se llama a la función para filtrar tareas InProgress
-                    case 7:
+                    case "7":
                         print()
                         print(filtrar_tareas_Done()) #Se llama a la funcion para filtrar tareas por Done
-                    case 0:
+                    case "0":
                         print()
                         print("Saliendo del tablero kanban...") #Se rompe el bucle y se sale del menu imprimiendo un mensaje
                         break
                     case _:
                         print()
                         print("Digite una opcion valida")  #Si se digita una opcion no valida se indica mediante un mensaje
-        case 0: 
+        case "0": 
             print("Tenga un buen dia!")    #Mensaje de despedida y romper el bucle
             break
         case _:
