@@ -97,6 +97,17 @@ tablero_kanban = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacio
 
 # Definir función para imprimir una lista de empleados en formato de tabla
 def imprimir_tablas(lista): # Se define la función con el parámetro que se solicitará, que es la lista de empleados a mostrar
+    """
+    Construye y devuelve una representación en tabla de una lista de empleados.
+
+    Parámetros:
+        lista (list): Lista de diccionarios, donde cada diccionario representa un empleado
+                      con claves como "nombre", "numero_identificacion", "fecha_nacimiento", etc.
+
+    Retorna:
+        str: Una cadena de texto que contiene la tabla formateada con encabezados y valores
+             de cada empleado alineados según el ancho máximo de cada columna.
+    """
     anchos = {} # Se crea un diccionario vacío para almacenar el ancho máximo de cada columna
     campos = ["nombre", "numero_identificacion", "fecha_nacimiento", "edad", "sexo", 
               "numero_telefonico", "cargo", "fecha_ingreso", "tiene_hijos", "tipo_contrato",   # Se define la lista de claves que se mostrarán como columnas
@@ -129,6 +140,18 @@ def imprimir_tablas(lista): # Se define la función con el parámetro que se sol
 
 # Definir función para imprimir tabla kanban en formato de tabla
 def imprimir_kanban_tablas(lista):
+    """
+    Construye y devuelve una representación en tabla tipo Kanban de una lista de empleados.
+
+    Parámetros:
+        lista (list): Lista de diccionarios, donde cada diccionario representa un empleado
+                      con claves como "nombre", "numero_identificacion", "numero_telefonico",
+                      "cargo", "tarea_actual" y "estado".
+
+    Retorna:
+        str: Una cadena de texto que contiene la tabla formateada con encabezados y valores
+             de cada empleado alineados según el ancho máximo de cada columna, en formato Kanban.
+    """
     anchos = {} 
     campos = ["nombre", "numero_identificacion", "numero_telefonico", "cargo", "tarea_actual", "estado"] 
      
@@ -158,6 +181,13 @@ def imprimir_kanban_tablas(lista):
 
 #Crear funcion para mostrar a los empleados dentro del tablero kanban
 def mostrar_tablero_kanban():
+    """
+    Muestra todos los empleados dentro del tablero Kanban en formato de tabla.
+
+    Retorna:
+        str: Una cadena con la tabla formateada del tablero Kanban si hay empleados,
+             o un mensaje indicando que el tablero está vacío en caso contrario.
+    """
     if tablero_kanban != []:  #Si el la lista no esta vacia
         return imprimir_kanban_tablas(tablero_kanban)  #Se llama a la funcion para imprimir la lista como tabla
     if tablero_kanban == []:
@@ -165,6 +195,17 @@ def mostrar_tablero_kanban():
 
 # Definir función para asignar una nueva tarea a un empleado en el tablero Kanban
 def asignar_tarea(numero_de_id):  #Se define la función con el parámetro que se solicitará al usuario
+    """
+    Asigna una nueva tarea a un empleado específico dentro del tablero Kanban
+    y establece su estado como 'ToDo'.
+
+    Parámetros:
+        numero_de_id (str): El número de identificación del empleado al que se le asignará la tarea.
+
+    Retorna:
+        str: Mensaje indicando si la tarea fue asignada exitosamente o si el empleado no existe,
+             o si el número de identificación ingresado no es válido.
+    """
     if not numero_de_id.isdigit():
         return "El numero de id solo debe contener numeros"    #Se valida si el número de identificación ingresado contiene solo numeros
     else:
@@ -185,6 +226,17 @@ def asignar_tarea(numero_de_id):  #Se define la función con el parámetro que s
 
 # Definir función para gestionar el estado de una tarea en el tablero Kanban
 def gestionar_estado_tarea(numero_de_id):  # Se define la función con el parámetro numero_de_id
+    """
+    Permite actualizar el estado de la tarea de un empleado específico dentro del tablero Kanban.
+
+    Parámetros:
+        numero_de_id (str): El número de identificación del empleado cuyo estado de tarea se desea modificar.
+
+    Retorna:
+        str: Mensaje indicando si el estado de la tarea se actualizó exitosamente, 
+             si la opción de estado ingresada no es válida, 
+             o si el empleado no existe en el tablero Kanban.
+    """
     if not numero_de_id.isdigit():  # Se valida que el número de identificación contenga solo dígitos
         return "El numero de id solo debe contener numeros"  # Si no, se retorna un mensaje de error
     else:
@@ -215,6 +267,19 @@ def gestionar_estado_tarea(numero_de_id):  # Se define la función con el parám
 
 #Definir funcion para eliminar tareas
 def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que se solicitará al usuario
+    """
+    Permite eliminar la tarea actual de un empleado específico en el tablero Kanban,
+    reemplazándola por "Tarea sin asignar" y actualizando su estado.
+
+    Parámetros:
+        numero_de_id (str): El número de identificación del empleado cuya tarea se desea eliminar.
+
+    Retorna:
+        str: Mensaje indicando si la tarea fue eliminada exitosamente,
+             si se decidió no eliminarla,
+             si la opción ingresada no es válida,
+             o si el empleado no existe en el tablero Kanban.
+    """
     if not numero_de_id.isdigit(): #Se valida que el numero de identtificacion ingresado sea solo numerico
         return "El numero de id solo debe contener numeros"   
     else:
@@ -245,6 +310,15 @@ def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que s
 
 #Definir funcion para filtrar las tareas ToDo
 def filtrar_tareas_todo():
+    """
+    Filtra y muestra todos los empleados del tablero Kanban cuya tarea se encuentra en estado "ToDo".
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        str: Tabla en formato de texto con los empleados que tienen tareas en estado "ToDo".
+    """
     coincidencias = [] # Se crea una lista vacía para almacenar los empleados que cumplan la condición
     for empleado in tablero_kanban:
         if empleado["estado"] == "ToDo": #Se compara si el estado de la tarea es "ToDo"
@@ -254,14 +328,33 @@ def filtrar_tareas_todo():
 
 # Definir función para filtrar tareas InProgress
 def filtrar_tareas_InProgress():
+    """
+    Filtra y muestra todos los empleados del tablero Kanban cuya tarea se encuentra en estado "InProgress".
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        str: Tabla en formato de texto con los empleados que tienen tareas en estado "InProgress".
+    """
     coincidencias = []  # Se crea una lista vacía para almacenar los empleados que cumplan la condición
     for empleado in tablero_kanban:
         if empleado["estado"] == "InProgress":  # Se compara si el estado de la tarea es "InProgress"
             coincidencias.append(empleado)  # Si coincide, se agrega el empleado a la lista de coincidencias
     return imprimir_kanban_tablas(coincidencias)  # Se retorna la impresión de la lista filtrada en formato tabla
 
+
 #Definir funcion para filtrar las tareas Done
 def filtrar_tareas_Done():
+    """
+    Filtra y muestra todos los empleados del tablero Kanban cuya tarea se encuentra en estado "Done".
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        str: Tabla en formato de texto con los empleados que tienen tareas en estado "Done".
+    """
     coincidencias = [] #Se crea una lista vacía para almacenar los empleados que cumplan la condición
     for empleado in tablero_kanban:
         if empleado["estado"] == "Done": #Se compara si el estado de la tarea es "Done"
@@ -272,6 +365,15 @@ def filtrar_tareas_Done():
 
 #Definir funcion para mostrar a todos los empleados
 def mostrar_empleados():
+    """
+    Muestra en pantalla todos los empleados registrados en la lista de empleados.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        None: Imprime en pantalla la tabla con todos los empleados o un mensaje si la lista está vacía.
+    """
     if lista_empleados != []:  #Si el la lista no esta vacia
         print(imprimir_tablas(lista_empleados)) #Se llama a la funcion para imprimir la lista como tabla
     if lista_empleados == []:
@@ -280,6 +382,17 @@ def mostrar_empleados():
 
 #Definir funcion para buscar empleados
 def buscar_empleados(numero_de_identificacion): #Se define la funcion con los parametros que se solicitaran para la busqueda
+    """
+    Busca un empleado en la lista de empleados según su número de identificación
+    y muestra su información en formato de tabla.
+
+    Parámetros:
+        numero_de_identificacion (int): Número de identificación del empleado a buscar.
+
+    Retorna:
+        str: Tabla con la información del empleado si se encuentra, 
+             o un mensaje indicando que el empleado no existe.
+    """
     emp = []
     for empleado in lista_empleados:
         if numero_de_identificacion == empleado["numero_identificacion"]:  #Se compara si el numero de identificacion ingresado por el usuario es esta en la clave 'numero_identificacion'
@@ -290,6 +403,32 @@ def buscar_empleados(numero_de_identificacion): #Se define la funcion con los pa
 
 #Definir funcion para registrar nuevos empleados
 def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, numero_telefonico, cargo, fecha_ingreso, tiene_hijos, tipo_contrato, RH, estado_civil, discapacidad, poblacion_vulnerable, añadir_kanban): #Se define la funcion con los parametros que se solicitaran al usuario
+    """
+    Registra un nuevo empleado en la lista de empleados y opcionalmente en el tablero Kanban.
+
+    Se realizan validaciones sobre los datos ingresados, como formato de fechas,
+    que ciertos campos sean numéricos y que no existan duplicados en nombre, identificación o teléfono.
+
+    Parámetros:
+        nombre (str): Nombre completo del empleado.
+        numero_identificacion (str): Número de identificación del empleado.
+        fecha_nacimiento (str): Fecha de nacimiento en formato DD/MM/AAAA.
+        sexo (str): Opción numérica para el sexo (1: hombre, 2: mujer, 3: otro).
+        numero_telefonico (str): Número de teléfono del empleado.
+        cargo (str): Cargo del empleado en la empresa.
+        fecha_ingreso (str): Fecha de ingreso del empleado en formato DD/MM/AAAA.
+        tiene_hijos (str): Opción numérica si tiene hijos (1: Sí, 2: No).
+        tipo_contrato (str): Opción numérica del tipo de contrato (1-4).
+        RH (str): Opción numérica del tipo de RH (1-8).
+        estado_civil (str): Opción numérica del estado civil (1-5).
+        discapacidad (str): Opción numérica si tiene discapacidad (1: Sí, 2: No).
+        poblacion_vulnerable (str): Opción numérica si pertenece a población vulnerable (1: Sí, 2: No).
+        añadir_kanban (str): Opción numérica para añadir al tablero Kanban (1: Sí).
+
+    Retorna:
+        str: Tabla con la información del nuevo empleado si se registró correctamente,
+             o un mensaje indicando el error en los datos ingresados.
+    """
     emp = []
     if not nombre.replace(" ", "").isalpha() or numero_identificacion == "" or not numero_identificacion.isdigit() or fecha_nacimiento == ""  or  numero_telefonico == "" or not numero_telefonico.isdigit() or cargo == "" or fecha_ingreso == "": #Mediante un if se comprueba si las cadenas estan vacias y si las cadenas de ciertos valores son unicamente numeros
         return "las entradas deben ser validas" #En caso de que cierta informacion este vacia o no solo contenga numeros la funcion devuelve un mensaje indicandolo
@@ -331,6 +470,20 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
 
 
 def eliminar_empleado():  # Verificar si hay empleados
+    """
+    Elimina un empleado de la lista de empleados y del tablero Kanban.
+
+    La función solicita al usuario el número de identificación del empleado a eliminar,
+    valida que sea un número, busca el empleado en las listas correspondientes y pide
+    confirmación antes de eliminarlo.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        None: La función imprime mensajes informativos sobre el proceso de eliminación
+              y los resultados, pero no retorna valores.
+    """
     if lista_empleados == []:  # Verificar si la lista está vacía
         print("No hay empleados para eliminar")
         return  # Sale de la función si no hay empleados
@@ -385,6 +538,22 @@ def eliminar_empleado():  # Verificar si hay empleados
 
 #Definir funcion para modificar informacion de los empleados:
 def modificar_empleado(numero_identificacion): #Se crea la funcion con el parametro que se le pedira al usuario
+    """
+    Modifica la información de un empleado en la lista de empleados y actualiza los datos correspondientes en el tablero Kanban.
+
+    La función solicita al usuario el número de identificación del empleado que desea modificar,
+    valida que sea un número, y despliega un menú con todas las opciones de datos que pueden modificarse:
+    nombre, número de identificación, fecha de nacimiento, sexo, número telefónico, cargo, fecha de ingreso,
+    hijos, tipo de contrato, RH, estado civil, discapacidad y población vulnerable. Cada cambio se valida 
+    y se refleja automáticamente en la lista de empleados y en el tablero Kanban.
+
+    Parámetros:
+        numero_identificacion (str): Número de identificación del empleado a modificar.
+
+    Retorna:
+        str o None: Retorna un mensaje si el empleado no existe o un mensaje de validación de datos.
+                    Al finalizar la modificación, imprime la información actualizada del empleado.
+    """
     tabla = []
     if not numero_identificacion.isdigit():    #Se valida que el numero de identificacion solo contenga numeros
         return "El numero de id solo debe contener numeros"   
@@ -641,6 +810,21 @@ def modificar_empleado(numero_identificacion): #Se crea la funcion con el parame
 
 #Funcion para filtrar empleados por edad especifica
 def filtrar_edad_especifica(edad): #Se crea la funcion con el parametro solicitado 
+    """
+    Filtra y muestra los empleados que tienen una edad específica.
+
+    La función recibe como parámetro una edad, valida que sea un número entero mayor a 0,
+    recorre la lista de empleados y agrega a una lista las coincidencias con la edad ingresada.
+    Finalmente, imprime la lista de empleados que coinciden o un mensaje indicando que no hay coincidencias.
+
+    Parámetros:
+        edad (str): Edad a filtrar en la lista de empleados.
+
+    Retorna:
+        str o None: Si la edad ingresada contiene letras o es menor o igual a 0, retorna un mensaje de error.
+                    Si existen empleados con la edad ingresada, imprime la tabla con sus datos.
+                    Si no hay empleados con esa edad, retorna un mensaje indicando que no existen coincidencias.
+    """
     if edad.isdigit():
         edad = int(edad)
     else:
@@ -655,8 +839,26 @@ def filtrar_edad_especifica(edad): #Se crea la funcion con el parametro solicita
         return imprimir_tablas(coincidencias)   
     elif coincidencias == []:
         return"No existen empleados con la edad ingresada"  #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
+    
+
 #Funcion para filtrar empleados por rango de edad
 def filtrar_edad_rango(edad_min, edad_max):   #Se crea la funcion con los parametros solicitados
+    """
+    Filtra y muestra los empleados cuya edad esté dentro de un rango específico.
+
+    La función recibe como parámetros la edad mínima y máxima, valida que sean números enteros mayores a 0,
+    y que la edad máxima sea mayor a la mínima. Recorre la lista de empleados y agrega a una lista
+    las coincidencias dentro del rango, incluyendo los límites.
+
+    Parámetros:
+        edad_min (str): Edad mínima del rango.
+        edad_max (str): Edad máxima del rango.
+
+    Retorna:
+        str o None: Mensaje de error si las edades no son válidas o están mal ingresadas.
+                    Si existen empleados dentro del rango, imprime la tabla con sus datos.
+                    Si no hay coincidencias, retorna un mensaje indicando que no existen empleados en ese rango.
+    """
     if edad_min.isdigit() and edad_max.isdigit():
         edad_min = int(edad_min)
         edad_max = int(edad_max)                         
@@ -676,9 +878,24 @@ def filtrar_edad_rango(edad_min, edad_max):   #Se crea la funcion con los parame
         return imprimir_tablas(coincidencias)  #Si la lista de coincidencias no esta vacia se imprime
     elif coincidencias == []:
         return "No existen empleados en los rangos de edad ingresados" #Si esta vacia se imprime un mensaje indicando que no existe ningun empleado de la edad ingresada
-    
+
+
 #Definir funcion para filtrar empleados por una fecha de ingreso especifica
 def filtrar_fecha_ingreso_especifica(fecha_ingreso): #Se define la funcion con el parametro que se solicitara al usuario
+    """
+    Filtra y muestra los empleados que ingresaron en una fecha específica.
+
+    La función valida que la fecha siga el formato Dia/Mes/Año (con '/'), 
+    recorre la lista de empleados y guarda aquellos cuya fecha de ingreso coincida exactamente.
+
+    Parámetros:
+        fecha_ingreso (str): Fecha de ingreso a buscar en formato Dia/Mes/Año.
+
+    Retorna:
+        str o None: Mensaje de error si el formato es incorrecto.
+                    Si existen coincidencias, imprime la tabla con los datos de los empleados.
+                    Si no hay coincidencias, retorna un mensaje indicando que no existen empleados con esa fecha.
+    """
     if fecha_ingreso.count("/") < 2 or fecha_ingreso.count("/") > 2: #Se valida que la fecha siga el formato Dia/Mes/Año contando el numero de "/"
         return "La fecha ingresada debe seguir el formato indicado" #Si no sigue el formato se retorna un mensaje indicandolo
     coincidencias = [] #Se crea una lista vacia para guardar los empleados que coincidan con la fecha de ingreso
@@ -692,6 +909,17 @@ def filtrar_fecha_ingreso_especifica(fecha_ingreso): #Se define la funcion con e
     
 #Definir funcion para filtrar empleados por el dia de su fecha de ingreso    
 def filtrar_fecha_ingreso_dia(dia):  #Se define la funcion con el parametro que se solicitara al usuario
+    """
+    Filtra y muestra empleados que ingresaron en un día específico de cualquier mes/año.
+
+    Parámetros:
+        dia (str): Día a buscar (1-31).
+
+    Retorna:
+        str o None: Mensaje de error si el día no es válido.
+                    Si hay coincidencias, imprime la tabla con los datos de los empleados.
+                    Si no hay coincidencias, retorna un mensaje indicando que no existen empleados.
+    """
     if not dia.isdigit(): #Se valida que el dia ingresado contenga solo numeros
         return "Los parametros ingresados deben contener unicamente numeros"
     else:
@@ -708,6 +936,17 @@ def filtrar_fecha_ingreso_dia(dia):  #Se define la funcion con el parametro que 
     
 #Definir funcion para filtrar empleados por el mes de su fecha de ingreso
 def filtrar_fecha_ingreso_mes(mes): #Se define la funcion con el parametro que se solicitara al usuario
+    """
+    Filtra y muestra empleados que ingresaron en un mes específico (cualquier año).
+
+    Parámetros:
+        mes (str): Mes a buscar (1-12).
+
+    Retorna:
+        str o None: Mensaje de error si el mes no es válido.
+                    Si hay coincidencias, imprime la tabla con los datos de los empleados.
+                    Si no hay coincidencias, retorna un mensaje indicando que no existen empleados.
+    """
     if not mes.isdigit(): #Se valida que el mes ingresado contenga solo numeros
         return "Los parametros ingresados deben contener unicamente numeros"
     else:
@@ -724,6 +963,17 @@ def filtrar_fecha_ingreso_mes(mes): #Se define la funcion con el parametro que s
 
 #Definir funcion para filtrar empleados por el año de su fecha de ingreso
 def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que se solicitara al usuario
+    """
+    Filtra y muestra empleados que ingresaron en un año específico.
+
+    Parámetros:
+        año (str): Año a buscar (solo números).
+
+    Retorna:
+        str o None: Mensaje de error si el año no es válido.
+                    Si hay coincidencias, imprime la tabla con los datos de los empleados.
+                    Si no hay coincidencias, retorna un mensaje indicando que no existen empleados.
+    """
     if not año.isdigit():  #Se valida que el año ingresado contenga solo numeros
         return "Los parametros ingresados deben contener unicamente numeros" 
     else:
@@ -740,6 +990,17 @@ def filtrar_fecha_ingreso_año(año): #Se define la funcion con el parametro que
 
 # Definir función para filtrar empleados según su sexo
 def filtrar_sexo(sexo): # Se crea la función con el parámetro que se pedirá al usuario
+    """
+    Filtra empleados según su sexo.
+
+    Parámetros:
+        sexo (str): Opción de sexo como número ('1', '2', '3').
+
+    Retorna:
+        str o None: Mensaje de error si la opción no es válida.
+                    Si hay coincidencias, imprime la tabla con los empleados.
+                    Si no hay coincidencias, retorna mensaje indicando que no existen empleados con ese sexo.
+    """
     opciones_sexo = {"1": "hombre", "2": "mujer", "3": "otro"} # Se define un diccionario con las opciones disponibles para sexo
     if not sexo in opciones_sexo: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -755,6 +1016,17 @@ def filtrar_sexo(sexo): # Se crea la función con el parámetro que se pedirá a
     
 #Definir funcion para filtrar empleados segun tipo de contrato
 def filtrar_contrato(contrato): #se crea la función con el parámetro que se pedirá la usuario
+    """
+    Filtra empleados según su tipo de contrato.
+
+    Parámetros:
+        contrato (str): Opción de contrato como número ('1', '2', '3', '4').
+
+    Retorna:
+        str o None: Mensaje de error si la opción no es válida.
+                    Si hay coincidencias, imprime la tabla con los empleados.
+                    Si no hay coincidencias, retorna mensaje indicando que no existen empleados con ese tipo de contrato.
+    """
     opciones_contrato = {"1": "Indefinido", "2":"Definido", "3":"Obra labor", "4":"Aprendizaje"}
     if not contrato in opciones_contrato: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -771,6 +1043,17 @@ def filtrar_contrato(contrato): #se crea la función con el parámetro que se pe
     
 # Definir función para filtrar empleados según si tienen hijos o no
 def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá al usuario
+    """
+    Filtra empleados según si tienen hijos o no.
+
+    Parámetros:
+        hijos (str): Opción ingresada por el usuario ('1' para Sí, '2' para No).
+
+    Retorna:
+        str o None: Mensaje de error si la opción no es válida.
+                    Si hay coincidencias, imprime la tabla con los empleados.
+                    Si no hay coincidencias, retorna mensaje indicando que no existen empleados que cumplan la condición.
+    """
     opciones_hijos = {"1": "Si", "2": "No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene hijos
     if not hijos in opciones_hijos: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -782,8 +1065,20 @@ def filtrar_hijos(hijos): # Se crea la función con el parámetro que se pedirá
     if coincidencias != []:
         return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
 
+
 #Definir función para filtrar empleados según si tienen discapacidades o no 
 def filtrar_discapacidad(discapacidad): #se crea la función con el parámetro que se pedirá que se pedirá al usuario
+    """
+    Filtra empleados según si tienen discapacidad o no.
+
+    Parámetros:
+        discapacidad (str): Opción ingresada por el usuario ('1' para Sí, '2' para No).
+
+    Retorna:
+        str o None: Mensaje de error si la opción no es válida.
+                    Si hay coincidencias, imprime la tabla con los empleados.
+                    Si no hay coincidencias, retorna mensaje indicando que no existen empleados que cumplan la condición.
+    """
     opciones__discapacidad = {"1":"Si", "2":"No"} # Se define un diccionario con las opciones disponibles para indicar si el empleado tiene discapacidades
     if not discapacidad in opciones__discapacidad: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -794,9 +1089,21 @@ def filtrar_discapacidad(discapacidad): #se crea la función con el parámetro q
             coincidencias.append(empleado)# Si coincide se agrega al diccionario del empleado a la lista de coincidencias
     if coincidencias != []:
         return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
-        
+
+
 # Definir función para filtrar empleados según su tipo de sangre
 def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará al usuario
+    """
+    Filtra empleados según su tipo de sangre (RH).
+
+    Parámetros:
+        RH (str): Opción ingresada por el usuario (1-8).
+
+    Retorna:
+        str o None: Mensaje de error si la opción no es válida.
+                    Si hay coincidencias, imprime la tabla con los empleados.
+                    Si no hay coincidencias, retorna mensaje indicando que no existen empleados con ese RH.
+    """
     opciones_RH = {"1": "A+", "2": "A-", "3": "B+", "4": "B-", "5": "AB+", "6": "AB-", "7": "O+", "8": "O-"} # Se crea un diccionario con las opciones disponibles para el tipo de sangre
     if not RH in opciones_RH: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -808,8 +1115,20 @@ def filtrar_rh(RH): # Se define la función con el parámetro que se solicitará
     if coincidencias != []:
         return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
 
+
 # Definir función para filtrar empleados según su estado civil
 def filtrar_estado_civil(estado_civil): # Se define la función con el parámetro que se solicitará al usuario
+    """
+    Filtra empleados según su estado civil.
+
+    Parámetros:
+        estado_civil (str): Opción ingresada por el usuario (1-5).
+
+    Retorna:
+        str o None: Mensaje de error si la opción no es válida.
+                    Si hay coincidencias, imprime la tabla con los empleados.
+                    Si no hay coincidencias, retorna mensaje indicando que no existen empleados con ese estado civil.
+    """
     opciones_estado_civil = {"1": "Soltero", "2": "Casado", "3": "Union libre", "4": "Divorciado", "5": "Viudo"} # Se crea un diccionario con las opciones disponibles para estado civil
     if not estado_civil in opciones_estado_civil: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -822,8 +1141,26 @@ def filtrar_estado_civil(estado_civil): # Se define la función con el parámetr
     if coincidencias != []:
         return imprimir_tablas(coincidencias)  #Se retorna la lista con los empleados que cumplen la condición
 
+
 # Definir función para filtrar empleados según si pertenecen o no a una población vulnerable
 def filtrar_poblacion_vulnerable(poblacion_vulnerable): # Se define la función con el parámetro que se solicitará al usuario
+    """
+    Filtra la lista de empleados según si pertenecen o no a una población vulnerable.
+
+    Parámetros:
+    ----------
+    poblacion_vulnerable : str
+        Opción ingresada por el usuario como cadena:
+        "1" para empleados que sí pertenecen a población vulnerable,
+        "2" para empleados que no pertenecen a población vulnerable.
+
+    Retorna:
+    -------
+    str
+        Devuelve la tabla con los empleados que cumplen la condición usando
+        la función imprimir_tablas(coincidencias), o un mensaje indicando que
+        no hay empleados que cumplan con el filtro o que la opción es inválida.
+    """
     opciones_poblacion_vulnerable = {"1": "Si", "2": "No"}   # Se crea un diccionario con las opciones disponibles: Sí o No
     if not poblacion_vulnerable in opciones_poblacion_vulnerable: #Se valida que la opcion ingresada este dentro del diccionario 
         return "Ingrese una opcion valida"
@@ -834,8 +1171,32 @@ def filtrar_poblacion_vulnerable(poblacion_vulnerable): # Se define la función 
             coincidencias.append(empleado) # Si coincide, se agrega el diccionario del empleado a la lista de coincidencias
     if coincidencias != []:
         return imprimir_tablas(coincidencias) # Se retorna la lista con los empleados que cumplen la condición
+    
 
 def menu():  #Se define el menu dentru de una funcion para reutilizarlo
+    """
+    Muestra en pantalla el menú principal del sistema de gestión de empleados.
+
+    Opciones disponibles:
+    1. Mostrar lista de todos los empleados
+    2. Buscar empleado
+    3. Registrar empleado
+    4. Eliminar empleado
+    5. Modificar información de empleado
+    6. Filtrar empleados por edad
+    7. Filtrar empleados por fecha de ingreso
+    8. Filtrar empleados por sexo
+    9. Filtrar por hijos (Sí/No)
+    10. Filtrar por RH
+    11. Filtrar por estado civil
+    12. Filtrar por población vulnerable
+    13. Filtrar por tipo de contrato
+    14. Filtrar por discapacidad
+    15. Gestión Proyecto Kanban
+    0. Salir
+
+    Esta función solo imprime el menú en pantalla, no retorna ningún valor.
+    """
     print("""
 1. Mostrar lista de todos los empleados
 2. Buscar empleado
