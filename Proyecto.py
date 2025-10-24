@@ -374,7 +374,7 @@ def mostrar_empleados():
     Retorna:
         None: Imprime en pantalla la tabla con todos los empleados o un mensaje si la lista está vacía.
     """
-    if lista_empleados != []:  #Si el la lista no esta vacia
+    if  lista_empleados != []:  #Si el la lista no esta vacia
         print(imprimir_tablas(lista_empleados)) #Se llama a la funcion para imprimir la lista como tabla
     if lista_empleados == []:
         print("No hay empleados")  #Si lo esta se indica imprimiendo un mensaje
@@ -393,12 +393,17 @@ def buscar_empleados(numero_de_identificacion): #Se define la funcion con los pa
         str: Tabla con la información del empleado si se encuentra, 
              o un mensaje indicando que el empleado no existe.
     """
+    if numero_de_identificacion.isdigit():
+        numero_de_identificacion = int(numero_de_identificacion)
+    else:
+        return "El numero de identificacion no puede contener letras"
+    
     emp = []
     for empleado in lista_empleados:
         if numero_de_identificacion == empleado["numero_identificacion"]:  #Se compara si el numero de identificacion ingresado por el usuario es esta en la clave 'numero_identificacion'
             emp.append(empleado)
-            return imprimir_tablas(emp)  #Si lo esta retorna el diccionario con toda la informacion del emplead
-    return "El empleado no existe" #Si no retorna mensaje de señalando que el empleado buscado no existe
+            return imprimir_tablas(emp)  #Si lo esta retorna el diccionario con toda la informacion del emplead #Si no retorna mensaje de señalando que el empleado buscado no existe
+    return "El empleado no existe"
 
 
 #Definir funcion para registrar nuevos empleados
@@ -1226,7 +1231,7 @@ while True:
         case "1":
             mostrar_empleados() #Opcion numero uno, se llama a la funcion para mostrar la lista de empleados
         case "2":
-            numero_de_identificacion = input("Digite el numero de identificacion del empleado: ").strip #Solicita al usuario el numero de identificacion como entero
+            numero_de_identificacion = input("Digite el numero de identificacion del empleado: ").strip() #Solicita al usuario el numero de identificacion como entero
             print()
             print(buscar_empleados(numero_de_identificacion)) #Llama a la funcion y devuelve el resultado
         case "3":
