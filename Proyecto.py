@@ -13,7 +13,7 @@ def calcular_edad(fecha_nacimiento):  #Se define la funcion con el parametro que
 #Definir lista de empleados
 lista_empleados = [{"nombre": "Juan Camilo Lopez Gonzalez", "numero_identificacion": 1110460138, "fecha_nacimiento": "20/05/2005" ,"edad": calcular_edad("20/05/2005"), "sexo": "hombre", "numero_telefonico": 1234567899, "cargo": "jefe de desarrollo", "fecha_ingreso": "29/07/2025", "tiene_hijos": "No", "tipo_contrato": "Indefinido", "RH": "O+", "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Estefania Rodriguez", "numero_identificacion": 2220242033, "fecha_nacimiento": "03/06/2007", "edad": calcular_edad("01/01/2007") , "sexo": "mujer", "numero_telefonico": 9876543211, "cargo": "jefe de analistas", "fecha_ingreso": "02/07/2025",  "tiene_hijos": "No", "tipo_contrato": "Indefinido", "RH": "B+",  "estado_civil": "Soltero", "discapacidad": "No", "poblacion_vulnerable": "No"},
-                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220222033, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 5432198767, "cargo": "psicologa", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Indefinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"},
+                   {"nombre": "Sarah Ulloque", "numero_identificacion": 2220299222, "fecha_nacimiento": "15/04/2004", "edad":calcular_edad("15/04/2004") , "sexo": "mujer", "numero_telefonico": 5432198767, "cargo": "psicologa", "fecha_ingreso": "01/07/2025", "tiene_hijos": "Si", "tipo_contrato": "Indefinido", "RH": "A-", "estado_civil": "Casado", "discapacidad": "Si", "poblacion_vulnerable": "Si"},
                    {"nombre": "Jack El Destripador", "numero_identificacion": 2223335556, "fecha_nacimiento": "01/01/2007", "edad": calcular_edad("01/01/2007") , "sexo": "hombre", "numero_telefonico": 3054637387, "cargo": "ceo", "fecha_ingreso": "01/01/2025",  "tiene_hijos": "No", "tipo_contrato": "Indefinido", "RH": "B+",  "estado_civil": "Viudo", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Alex Sandro Silva Pereira", "numero_identificacion": 1330115133, "fecha_nacimiento": "07/07/1987", "edad": calcular_edad("07/07/1987") , "sexo": "hombre", "numero_telefonico": 3105550123, "cargo": "jefe de seguridad", "fecha_ingreso": "20/07/2025",  "tiene_hijos": "Si", "tipo_contrato": "Indefinido", "RH": "AB+",  "estado_civil": "Casado", "discapacidad": "No", "poblacion_vulnerable": "No"},
                    {"nombre": "Thomas Paul Aspinall", "numero_identificacion": 4623812222, "fecha_nacimiento": "11/04/1993", "edad": calcular_edad("11/04/1993") , "sexo": "hombre", "numero_telefonico": 3012314512, "cargo": "ingeniero de telecomunicaciones", "fecha_ingreso": "13/07/2025",  "tiene_hijos": "Si", "tipo_contrato": "Definido", "RH": "O+",  "estado_civil": "Casado", "discapacidad": "No", "poblacion_vulnerable": "No"},
@@ -295,13 +295,13 @@ def eliminar_tarea(numero_de_id): #Se define la función con el parámetro que s
                   1. Si
                   2. No
                   """)  #Se imprime un mensaje para validar que el usuario esta seguro de eliminar la tarea
-            eliminar_tarea = int(input("Digite una opcion 1-2: "))
+            eliminar_tarea = input("Digite una opcion 1-2: ")
             match eliminar_tarea:
-                case 1:
+                case "1":
                     empleado["tarea_actual"] = "Tarea sin asignar"   #Si digita que si se reemplaza la tarea actual por una sin asignar de igual forma el estado
                     empleado["estado"] = "Tarea sin asignar"
                     return "Tarea eliminada exitosamente"
-                case 2:
+                case "2":
                     return "Saliendo..."  #Si digita no sale del menu y queda intacto
                 case _:
                     return "Ingrese una opcion valida"
@@ -471,18 +471,20 @@ def registrar_empleado(nombre, numero_identificacion, fecha_nacimiento, sexo, nu
 
 def eliminar_empleado():  # Verificar si hay empleados
     """
-    Elimina un empleado de la lista de empleados y del tablero Kanban.
+    Elimina un empleado de la lista de empleados y, si corresponde, del tablero Kanban.
 
-    La función solicita al usuario el número de identificación del empleado a eliminar,
-    valida que sea un número, busca el empleado en las listas correspondientes y pide
-    confirmación antes de eliminarlo.
+    La función solicita al usuario el número de identificación del empleado que desea eliminar,
+    valida que sea un número, busca al empleado en la lista de empleados y muestra su información.
+    Luego solicita confirmación al usuario para eliminar al empleado. Si el empleado existe en el
+    tablero Kanban, también se elimina de allí. Se muestran mensajes de validación en caso de error
+    o si el empleado no existe.
 
     Parámetros:
-        Ninguno.
+        Ninguno. Todos los datos se solicitan mediante inputs al usuario.
 
     Retorna:
-        None: La función imprime mensajes informativos sobre el proceso de eliminación
-              y los resultados, pero no retorna valores.
+        None: La función imprime mensajes indicando si el empleado fue eliminado,
+              si la opción ingresada es inválida o si no se encontró el empleado.
     """
     if lista_empleados == []:  # Verificar si la lista está vacía
         print("No hay empleados para eliminar")
@@ -498,43 +500,43 @@ def eliminar_empleado():  # Verificar si hay empleados
     
     numero_identificacion = int(numero_identificacion)  # Convertir a entero
     
-    empleado_encontrado = None  # Guarda el diccionario del empleado si se encuentra
-    posicion = -1  # Guardar el índice del empleado en la lista
     
     # Recorre la lista de empleados para buscar coincidencias
     for i, empleado in enumerate(lista_empleados):
         if empleado["numero_identificacion"] == numero_identificacion:  # Compara el número ingresado
-            empleado_encontrado = empleado  # Si hay coincidencia guarda el empleado y su posición
-            posicion = i  # Guarda el índice donde está el empleado
-            break  # Salimos del bucle porque ya encontró el empleado
-    for i, empleado in enumerate(tablero_kanban):
-        if empleado["numero_identificacion"] == numero_identificacion:
-            empleado_encontrado = empleado
-            posicion = i
-            break
-    
-    if empleado_encontrado:  # Verifica si se encontró un empleado con ese número
-        # Muestra los datos del empleado encontrado
-        print(f"\nEmpleado encontrado:")
-        print(f"Nombre: {empleado_encontrado['nombre']}")
-        print(f"Cédula: {empleado_encontrado['numero_identificacion']}")
-        print(f"Cargo: {empleado_encontrado['cargo']}")
-        
-        print("""\n¿Está seguro que desea eliminar este empleado?
-              1. Si
-              2. No""")
-        confirmacion = int(input("Digite una opción 1-2: "))
-        
-        if confirmacion == 1:
-            lista_empleados.pop(posicion)  # Elimina el elemento en esa posición
-            tablero_kanban.pop(posicion)
-            print("Empleado eliminado exitosamente")
-        elif confirmacion == 2:
-            print("Eliminación cancelada")
-        else:
-            print("Opción inválida. Eliminación cancelada")
+            # Muestra los datos del empleado encontrado
+            print(f"\nEmpleado encontrado:")
+            print(f"Nombre: {empleado['nombre']}")
+            print(f"Cédula: {empleado['numero_identificacion']}")
+            print(f"Cargo: {empleado['cargo']}")
+            print()
+            print("""Desea eliminar el empleado:
+                  1. Si
+                  2. No
+                  """) # Pide confirmacion al usuario
+            opcion = input("Digite una opcion: ")
+            match opcion:  # Mediante switch case
+                case "1":  
+                    lista_empleados.pop(i) # Se elimina el empleado usando el indice
+                    for i, empleado in enumerate(tablero_kanban):
+                        if empleado["numero_identificacion"] == numero_identificacion:
+                            tablero_kanban.pop(i)
+                    print("El empleado se ha eliminado exitosamente")
+                    return
+                case "2":
+                    return  # Sale del menu sin cambios
+                case _:
+                    print("Opcion invalida")  # Se le indica al usuario que es una opcion invalida
+                    return 
     else:
-        print("No se encontró un empleado con ese número de identificación")
+        print("No existe el empleado") # Si no se encuentran coincidencias se indica
+
+    
+
+
+
+            
+
 
 #Definir funcion para modificar informacion de los empleados:
 def modificar_empleado(numero_identificacion): #Se crea la funcion con el parametro que se le pedira al usuario
