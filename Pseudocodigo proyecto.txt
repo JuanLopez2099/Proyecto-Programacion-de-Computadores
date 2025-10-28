@@ -288,49 +288,51 @@ Definir funcion registrar_empleado con parametros(nombre, numero_identificacion,
     Retornar nuevo_empleado
 
 Definir funcion eliminar_empleado()
+    Si lista_empleados está vacía entonces
+        Imprimir "No hay empleados para eliminar"
+        Salir de la función
 
-    Si lista_empleados esta vacia Entonces
-        Imprimir "no hay empleados para eliminar"
-        Retornar
-    Fin Si
+    numero_identificacion = input("Digite el número de identificación del trabajador a eliminar: ").strip()
 
-    numero_identificacion ← pedir al usuario "digite el número de identificación del trabajador a eliminar"
-
-    Si numero_identificacion no es un número Entonces
-        Imprimir "el número de identificación debe contener solo dígitos"
-        Retornar
-    Fin Si
+    Si numero_identificacion no es numérico entonces
+        Imprimir "El número de identificación debe contener solo dígitos"
+        Salir de la función
 
     Convertir numero_identificacion a entero
 
-    Definir empleado_encontrado como nulo
-    Definir posicion ← -1
+    Para cada empleado en lista_empleados con índice i hacer:
+        Si empleado["numero_identificacion"] es igual a numero_identificacion entonces
+            Imprimir "Empleado encontrado:"
+            Imprimir "Nombre: ", empleado["nombre"]
+            Imprimir "Cédula: ", empleado["numero_identificacion"]
+            Imprimir "Cargo: ", empleado["cargo"]
 
-    Para cada i, empleado en lista_empleados con índice
-        Si empleado["numero_identificacion"] = numero_identificacion Entonces
-            empleado_encontrado ← empleado
-            posicion ← i
-            Romper bucle
-        Fin Si
-    Fin Para
+            Imprimir "Desea eliminar el empleado: 
+                      1. Si
+                      2. No"
+            opcion = input("Digite una opcion: ")
 
-    Si empleado_encontrado no es nulo Entonces
-        Imprimir "empleado encontrado"
-        Imprimir nombre, número de identificación y cargo del empleado_encontrado
-        Imprimir "¿está seguro que desea eliminar este empleado? 1. si  2. no"
-        confirmacion ← pedir al usuario "digite una opción 1-2"
+            Segun opcion hacer:
+                Caso "1":
+                    Eliminar empleado de lista_empleados usando el índice i
+                    Para cada empleado en tablero_kanban con índice j hacer:
+                        Si empleado["numero_identificacion"] es igual a numero_identificacion entonces
+                            Eliminar empleado del tablero_kanban usando el índice j
+                    Imprimir "El empleado se ha eliminado exitosamente"
+                    Salir de la función
 
-        Si confirmacion = 1 Entonces
-            Eliminar de lista_empleados el elemento en la posicion
-            Imprimir "empleado eliminado exitosamente"
-        Sino Si confirmacion = 2 Entonces
-            Imprimir "eliminación cancelada"
-        Sino
-            Imprimir "opción inválida. eliminación cancelada"
-        Fin Si
-    Sino
-        Imprimir "no se encontró un empleado con ese número de identificación"
-    Fin Si
+                Caso "2":
+                    Salir de la función sin hacer cambios
+
+                Caso contrario:
+                    Imprimir "Opcion invalida"
+                    Salir de la función
+    
+
+    Imprimir "No existe el empleado"
+
+
+
 
 Definir funcion modificar_empleado(numero_identificacion)
 
